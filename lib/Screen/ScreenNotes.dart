@@ -90,8 +90,26 @@ class _ScreenNotesState extends State<ScreenNotes> {
               valueListenable: contactBox.listenable(),
               builder: (context, Box box, widget) {
                 if (box.isEmpty) {
-                  return Center(
-                    child: Text('Empty'),
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text('Write Your First Note'),
+                        ),
+                      ),
+                      Center(
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Get.to(() => ScreenAddNotes());
+                          },
+                          child: Text('ADD NEW NOTE'),
+                        ),
+                      ),
+                    ],
                   );
                 } else {
                   return ListView.builder(
@@ -110,8 +128,16 @@ class _ScreenNotesState extends State<ScreenNotes> {
                           ),
                         ),
                         child: ListTile(
-                          title: Text(personData.name),
-                          subtitle: Text(personData.country),
+                          title: Text(
+                            personData.name,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          subtitle: Text(
+                            personData.country,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                           trailing: IconButton(
                             onPressed: () => _deleteInfo(index),
                             icon: Icon(
