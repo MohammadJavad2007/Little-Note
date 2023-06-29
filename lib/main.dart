@@ -21,14 +21,16 @@ class Notes extends StatelessWidget {
       builder: (_, ThemeMode currentMode, __) {
         return GetMaterialApp(
           title: 'Notes',
-          theme: ThemeData(primarySwatch: themeColor),
+          theme: ThemeData(
+            primarySwatch: themeColor,
+          ),
           darkTheme: ThemeData.dark().copyWith(
               colorScheme: ColorScheme.dark(primary: themeColor),
               appBarTheme: AppBarTheme(backgroundColor: Colors.grey[800]),
               floatingActionButtonTheme:
                   FloatingActionButtonThemeData(backgroundColor: themeColor)),
           themeMode: currentMode,
-          home: const ScreenNotes(),
+          home: ScreenNotes(),
         );
       },
     );
