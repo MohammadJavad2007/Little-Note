@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class ScreenNotes extends StatefulWidget {
   const ScreenNotes({super.key});
 
@@ -14,6 +13,13 @@ class _ScreenNotesState extends State<ScreenNotes> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Notes'),
+      ),
+      body: const Center(
+        child: Text('Body Notes'),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: const Icon(Icons.add),
       ),
     );
   }
