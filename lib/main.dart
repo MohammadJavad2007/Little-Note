@@ -11,7 +11,7 @@ void main() async {
   Hive.registerAdapter(PersonAdapter());
   // Opening the box]
 
-  await Hive.openBox('peopleBox');
+  await Hive.openBox('NoteBox');
 
   runApp(Notes());
 }
