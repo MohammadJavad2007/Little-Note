@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:notes/main.dart';
 
 class ScreenNotes extends StatefulWidget {
@@ -13,6 +14,9 @@ class _ScreenNotesState extends State<ScreenNotes> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: Color.fromARGB(0, 0, 0, 0), // <-- SEE HERE
+        ),
         title: const Text('Notes'),
         actions: [
           Padding(
