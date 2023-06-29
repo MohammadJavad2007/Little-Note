@@ -46,7 +46,7 @@ class _UpdatePersonFormState extends State<UpdatePersonForm> {
   void initState() {
     super.initState();
     // Get reference to an already opened box
-    box = Hive.box('peopleBox');
+    box = Hive.box('NoteBox');
     _nameController = TextEditingController(text: widget.person.name);
     _countryController = TextEditingController(text: widget.person.country);
   }

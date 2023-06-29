@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -9,6 +11,12 @@ import 'package:notes/main.dart';
 class ScreenNotes extends StatefulWidget {
   ScreenNotes({super.key});
   final List<String> list = List.generate(10, (index) => "Note $index");
+
+  @override
+  State<ScreenNotes> createState() => _ScreenNotesState();
+}
+
+class _ScreenNotesState extends State<ScreenNotes> {
   late final Box contactBox;
 
   // Delete info from people box
@@ -18,19 +26,13 @@ class ScreenNotes extends StatefulWidget {
     print('Item deleted from box at index: $index');
   }
 
-
-  @override
-  State<ScreenNotes> createState() => _ScreenNotesState();
-}
-
-class _ScreenNotesState extends State<ScreenNotes> {
   bool _isGridMode = false;
 
-    @override
+  @override
   void initState() {
     super.initState();
     // Get reference to an already opened box
-    widget.contactBox = Hive.box('peopleBox');
+    contactBox = Hive.box('NoteBox');
   }
 
   @override
@@ -61,12 +63,71 @@ class _ScreenNotesState extends State<ScreenNotes> {
               },
               icon: Icon(Icons.search),
             ),
-          )
+          ),
+          if (_isGridMode)
+            IconButton(
+              icon: const Icon(Icons.grid_on),
+              onPressed: () {
+                setState(() {
+                  _isGridMode = false;
+                });
+              },
+            )
+          else
+            IconButton(
+              icon: const Icon(Icons.list),
+              onPressed: () {
+                setState(() {
+                  _isGridMode = true;
+                });
+              },
+            ),
         ],
       ),
       body: _isGridMode
-          ? GridBuilder()
-          : ListBuilder(),
+          ? Center(
+              child: Text('GridMode'),
+            )
+          : ValueListenableBuilder(
+              valueListenable: contactBox.listenable(),
+              builder: (context, Box box, widget) {
+                if (box.isEmpty) {
+                  return Center(
+                    child: Text('Empty'),
+                  );
+                } else {
+                  return ListView.builder(
+                    itemCount: box.length,
+                    itemBuilder: (context, index) {
+                      var currentBox = box;
+                      var personData = currentBox.getAt(index)!;
+
+                      return InkWell(
+                        onTap: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => ScreenUpdateNotes(
+                              index: index,
+                              person: personData,
+                            ),
+                          ),
+                        ),
+                        child: ListTile(
+                          title: Text(personData.name),
+                          subtitle: Text(personData.country),
+                          trailing: IconButton(
+                            onPressed: () => _deleteInfo(index),
+                            icon: Icon(
+                              Icons.delete,
+                              color: Colors.red,
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                }
+              },
+            ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Get.to(ScreenAddNotes());
@@ -150,78 +211,39 @@ class Search extends SearchDelegate {
 
 // body 
 
-class GridBuilder extends StatefulWidget {
+// class GridBuilder extends StatefulWidget {
 
-  @override
-  GridBuilderState createState() => GridBuilderState();
-}
+//   @override
+//   GridBuilderState createState() => GridBuilderState();
+// }
 
-class GridBuilderState extends State<GridBuilder> {
-
-
-  @override
-  Widget build(BuildContext context) {
-    return GridView.builder(
-        // itemCount: widget.selectedList.length,
-        gridDelegate:
-            const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-        itemBuilder: (_, int index) {
-          return GridTile(
-              child: Center(),
-              );
-        });
-  }
-}
-
-class ListBuilder extends StatefulWidget {
-  @override
-  State<ListBuilder> createState() => _ListBuilderState();
-}
-
-class _ListBuilderState extends State<ListBuilder> {
+// class GridBuilderState extends State<GridBuilder> {
 
 
-  @override
-  Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-        valueListenable: ScreenNotes().contactBox.listenable(),
-        builder: (context, Box box, widget) {
-          if (box.isEmpty) {
-            return Center(
-              child: Text('Empty'),
-            );
-          } else {
-            return ListView.builder(
-              itemCount: box.length,
-              itemBuilder: (context, index) {
-                var currentBox = box;
-                var personData = currentBox.getAt(index)!;
+//   @override
+//   Widget build(BuildContext context) {
+//     return GridView.builder(
+//         // itemCount: widget.selectedList.length,
+//         gridDelegate:
+//             const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+//         itemBuilder: (_, int index) {
+//           return GridTile(
+//               child: Center(),
+//               );
+//         });
+//   }
+// }
 
-                return InkWell(
-                  onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => ScreenUpdateNotes(
-                        index: index,
-                        person: personData,
-                      ),
-                    ),
-                  ),
-                  child: ListTile(
-                    title: Text(personData.name),
-                    subtitle: Text(personData.country),
-                    trailing: IconButton(
-                      onPressed: () => ScreenNotes()._deleteInfo(index),
-                      icon: Icon(
-                        Icons.delete,
-                        color: Colors.red,
-                      ),
-                    ),
-                  ),
-                );
-              },
-            );
-          }
-        },
-      );
-  }
-}
+// class ListBuilder extends StatefulWidget {
+//   @override
+//   State<ListBuilder> createState() => _ListBuilderState();
+// }
+
+// class _ListBuilderState extends State<ListBuilder> {
+
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return 
+//   }
+// }

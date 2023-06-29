@@ -39,7 +39,7 @@ class _AddPersonFormState extends State<AddPersonForm> {
   void initState() {
     super.initState();
     // Get reference to an already opened box
-    box = Hive.box('peopleBox');
+    box = Hive.box('NoteBox');
   }
 
   @override
