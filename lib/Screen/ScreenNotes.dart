@@ -22,8 +22,6 @@ class _ScreenNotesState extends State<ScreenNotes> {
   // Delete info from people box
   _deleteInfo(int index) {
     contactBox.deleteAt(index);
-
-    print('Item deleted from box at index: $index');
   }
 
   bool _isGridMode = false;
@@ -130,7 +128,7 @@ class _ScreenNotesState extends State<ScreenNotes> {
             ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Get.to(ScreenAddNotes());
+          Get.to(() => ScreenAddNotes());
         },
         child: const Icon(Icons.add),
       ),
