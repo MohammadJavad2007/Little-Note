@@ -7,9 +7,12 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:notes/Screen/ScreenAddNotes.dart';
 import 'package:notes/Screen/ScreenUpdateNotes.dart';
 import 'package:notes/main.dart';
+// import 'package:notes/models/person.dart';
 
+// ignore: must_be_immutable
 class ScreenNotes extends StatefulWidget {
   ScreenNotes({super.key});
+  bool darkmode = false;
   final List<String> list = List.generate(10, (index) => "Note $index");
 
   @override
@@ -17,6 +20,7 @@ class ScreenNotes extends StatefulWidget {
 }
 
 class _ScreenNotesState extends State<ScreenNotes> {
+
   late final Box contactBox;
 
   // Delete info from people box
@@ -47,10 +51,14 @@ class _ScreenNotesState extends State<ScreenNotes> {
                 ? Icons.dark_mode
                 : Icons.light_mode),
             onPressed: () {
-              Notes.themeNotifier.value =
-                  Notes.themeNotifier.value == ThemeMode.light
-                      ? ThemeMode.dark
-                      : ThemeMode.light;
+              if (Notes.themeNotifier.value == ThemeMode.light) {
+                Notes.themeNotifier.value = ThemeMode.dark;
+                widget.darkmode = true;
+              } else {
+                Notes.themeNotifier.value = ThemeMode.light;
+                widget.darkmode = false;
+              }
+              print(widget.darkmode);
             },
           ),
           Padding(

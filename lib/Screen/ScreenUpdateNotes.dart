@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:notes/models/person.dart';
 import 'package:hive/hive.dart';
 
+// import 'ScreenNotes.dart';
+
 class ScreenUpdateNotes extends StatefulWidget {
   final int index;
   final Person person;
