@@ -38,7 +38,6 @@ dependencies:
   get: ^4.6.5
   hive: ^2.2.3
   hive_flutter: ^1.1.0
-  localstorage: ^4.0.0+1
   shared_preferences: ^2.2.0
 
 dev_dependencies:

@@ -5,7 +5,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:notes/models/person.dart';
 
 void main() async {
-    // Initialize hive
+  // Initialize hive
   await Hive.initFlutter();
   // Registering the adapter
   Hive.registerAdapter(PersonAdapter());
@@ -27,7 +27,29 @@ class Notes extends StatefulWidget {
 }
 
 class _NotesState extends State<Notes> {
-  MaterialColor themeColor = Colors.blue;
+
+
+
+  // ignore: non_constant_identifier_names
+  Color ColorTheme2() {
+    return Color(0xFF6800DF);
+  }
+
+  MaterialColor themeColor = const MaterialColor(
+    0xFF6800DF,
+    <int, Color>{
+      50: Color(0xFF6800DF),
+      100: Color(0xFF6800DF),
+      200: Color(0xFF6800DF),
+      300: Color(0xFF6800DF),
+      400: Color(0xFF6800DF),
+      500: Color(0xFF6800DF),
+      600: Color(0xFF6800DF),
+      700: Color(0xFF6800DF),
+      800: Color(0xFF6800DF),
+      900: Color(0xFF6800DF),
+    },
+  );
 
   @override
   void dispose() {
