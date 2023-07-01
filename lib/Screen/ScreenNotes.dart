@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:localstorage/localstorage.dart';
 import 'package:notes/Screen/ScreenAddNotes.dart';
 import 'package:notes/Screen/ScreenUpdateNotes.dart';
 import 'package:notes/main.dart';
@@ -12,16 +13,34 @@ import 'package:notes/main.dart';
 // ignore: must_be_immutable
 class ScreenNotes extends StatefulWidget {
   ScreenNotes({super.key});
-  bool darkmode = false;
+  final LocalStorage storage = LocalStorage('darkmode');
   final List<String> list = List.generate(10, (index) => "Note $index");
-
   @override
   State<ScreenNotes> createState() => _ScreenNotesState();
 }
 
 class _ScreenNotesState extends State<ScreenNotes> {
-
   late final Box contactBox;
+
+  // bool darkmode = false;
+  Darkmode() {
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => setState(
+        () {
+          if (widget.storage.getItem('darkMode') == false) {
+            Notes.themeNotifier.value = ThemeMode.dark;
+            print('dark');
+            // widget.darkmode = true;
+          } else {
+            Notes.themeNotifier.value = ThemeMode.light;
+            // widget.darkmode = false;
+            print(widget.storage.getItem('darkMode'));
+          }
+        },
+      ),
+    );
+    // widget.storage.setItem('darkMode', widget.darkmode);
+  }
 
   // Delete info from people box
   _deleteInfo(int index) {
@@ -34,7 +53,9 @@ class _ScreenNotesState extends State<ScreenNotes> {
   void initState() {
     super.initState();
     // Get reference to an already opened box
+    Darkmode();
     contactBox = Hive.box('NoteBox');
+    // print(storage.getItem('darkMode'));
   }
 
   @override
@@ -51,14 +72,20 @@ class _ScreenNotesState extends State<ScreenNotes> {
                 ? Icons.dark_mode
                 : Icons.light_mode),
             onPressed: () {
-              if (Notes.themeNotifier.value == ThemeMode.light) {
-                Notes.themeNotifier.value = ThemeMode.dark;
-                widget.darkmode = true;
-              } else {
+              // widget.storage.setItem('darkMode', false);
+              if (widget.storage.getItem('darkMode') == false) {
                 Notes.themeNotifier.value = ThemeMode.light;
-                widget.darkmode = false;
+                // darkmode = true;
+                widget.storage.setItem('darkMode', true);
+              } else {
+                Notes.themeNotifier.value = ThemeMode.dark;
+                // darkmode = false;
+                widget.storage.setItem('darkMode', false);
               }
-              print(widget.darkmode);
+              // widget.storage.setItem('darkMode', widget.darkmode);
+              // print(widget.darkmode);
+            print(widget.storage.getItem('darkMode'));
+
             },
           ),
           Padding(
