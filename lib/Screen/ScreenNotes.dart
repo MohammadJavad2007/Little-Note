@@ -4,45 +4,66 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:localstorage/localstorage.dart';
+// import 'package:localstorage/localstorage.dart';
 import 'package:notes/Screen/ScreenAddNotes.dart';
 import 'package:notes/Screen/ScreenUpdateNotes.dart';
 import 'package:notes/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:notes/models/person.dart';
 
 // ignore: must_be_immutable
 class ScreenNotes extends StatefulWidget {
   ScreenNotes({super.key});
-  final LocalStorage storage = LocalStorage('darkmode');
+  // SharedPreferences prefs() async {
+  //   return await SharedPreferences.getInstance();
+  // }
+
+  // bool? darkmode = LocalStorage('darkmode.json').getItem('themedata');
   final List<String> list = List.generate(10, (index) => "Note $index");
   @override
   State<ScreenNotes> createState() => _ScreenNotesState();
 }
 
-class _ScreenNotesState extends State<ScreenNotes> {
-  late final Box contactBox;
+class _ScreenNotesState extends State<ScreenNotes>  {
 
-  // bool darkmode = false;
-  Darkmode() {
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) => setState(
-        () {
-          if (widget.storage.getItem('darkMode') == false) {
-            Notes.themeNotifier.value = ThemeMode.dark;
-            print('dark');
-            // widget.darkmode = true;
-          } else {
-            Notes.themeNotifier.value = ThemeMode.light;
-            // widget.darkmode = false;
-            print(widget.storage.getItem('darkMode'));
-          }
-        },
-      ),
-    );
-    // widget.storage.setItem('darkMode', widget.darkmode);
+  toggle() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    // await prefs.setBool('repeat', true);
+    // bool? toggleStorage = await widget.prefs.s('repeat', true);
+    if (prefs.getBool('repeat') == false) {
+      Notes.themeNotifier.value = ThemeMode.light;
+      // print(toggleStorage);
+      await prefs.setBool('repeat', true);
+      // widget.darkmode = true;
+    } else {
+      Notes.themeNotifier.value = ThemeMode.dark;
+      // widget.darkmode = false;
+      await prefs.setBool('repeat', false);
+      // print(toggleStorage);
+    }
   }
 
-  // Delete info from people box
+  late final Box contactBox;
+
+  Darkmode() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    // bool? getitem = widget.storage.getItem('themedata');
+    // // WidgetsBinding.instance.addPostFrameCallback(
+    // //   (_) => setState(
+    // //     () {
+    // //     },
+    // //   ),
+    // // );
+    // await prefs.setBool('repeat', false);
+    if (prefs.getBool('repeat') == false) {
+      Notes.themeNotifier.value = ThemeMode.dark;
+      // print('dark');
+    } else {
+      Notes.themeNotifier.value = ThemeMode.light;
+      // print(getitem);
+    }
+  }
+
   _deleteInfo(int index) {
     contactBox.deleteAt(index);
   }
@@ -71,22 +92,7 @@ class _ScreenNotesState extends State<ScreenNotes> {
             icon: Icon(Notes.themeNotifier.value == ThemeMode.light
                 ? Icons.dark_mode
                 : Icons.light_mode),
-            onPressed: () {
-              // widget.storage.setItem('darkMode', false);
-              if (widget.storage.getItem('darkMode') == false) {
-                Notes.themeNotifier.value = ThemeMode.light;
-                // darkmode = true;
-                widget.storage.setItem('darkMode', true);
-              } else {
-                Notes.themeNotifier.value = ThemeMode.dark;
-                // darkmode = false;
-                widget.storage.setItem('darkMode', false);
-              }
-              // widget.storage.setItem('darkMode', widget.darkmode);
-              // print(widget.darkmode);
-            print(widget.storage.getItem('darkMode'));
-
-            },
+            onPressed: toggle,
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
