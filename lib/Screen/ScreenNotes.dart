@@ -182,7 +182,37 @@ class _ScreenNotesState extends State<ScreenNotes> {
                             overflow: TextOverflow.ellipsis,
                           ),
                           trailing: IconButton(
-                            onPressed: () => _deleteInfo(index),
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                      // ignore: unused_label
+                                      title: Text(
+                                          'Do you really want to delete the note?'),
+                                      // content: Center(),
+                                      // ignore: unused_label
+                                      actions: <Widget>[
+                                        ElevatedButton(
+                                          child: const Text("Cancle"),
+                                          onPressed: () {
+                                            Get.back();
+                                          },
+                                        ),
+                                        ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor: Colors.red,
+                                          ),
+                                          onPressed: () {
+                                            _deleteInfo(index);
+                                            Get.back();
+                                          },
+                                          child: Text('Delete'),
+                                        ),
+                                      ]);
+                                },
+                              );
+                            },
                             icon: Icon(
                               Icons.delete,
                               color: Colors.red,
@@ -210,7 +240,7 @@ class _ScreenNotesState extends State<ScreenNotes> {
           //   ),
           // );
           // Get.put(_createRoute());
-          Get.to(ScreenAddNotes(),
+          Get.to(() => ScreenAddNotes(),
               duration: Duration(milliseconds: 250),
               transition: Transition.rightToLeftWithFade);
           // Navigator.push(
@@ -270,7 +300,8 @@ class Search extends SearchDelegate {
     return IconButton(
       icon: Icon(Icons.arrow_back),
       onPressed: () {
-        Navigator.pop(context);
+        // Navigator.pop(context);
+        Get.back();
       },
     );
   }
