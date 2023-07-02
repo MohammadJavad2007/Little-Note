@@ -24,8 +24,7 @@ class ScreenNotes extends StatefulWidget {
   State<ScreenNotes> createState() => _ScreenNotesState();
 }
 
-class _ScreenNotesState extends State<ScreenNotes>  {
-
+class _ScreenNotesState extends State<ScreenNotes> {
   toggle() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     // await prefs.setBool('repeat', true);
@@ -145,7 +144,9 @@ class _ScreenNotesState extends State<ScreenNotes>  {
                       Center(
                         child: ElevatedButton(
                           onPressed: () {
-                            Get.to(() => ScreenAddNotes());
+                            Get.to(() => ScreenAddNotes(),
+                                duration: Duration(milliseconds: 250),
+                                transition: Transition.rightToLeftWithFade);
                           },
                           child: Text('ADD NEW NOTE'),
                         ),
@@ -160,14 +161,15 @@ class _ScreenNotesState extends State<ScreenNotes>  {
                       var personData = currentBox.getAt(index)!;
 
                       return InkWell(
-                        onTap: () => Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => ScreenUpdateNotes(
-                              index: index,
-                              person: personData,
-                            ),
-                          ),
-                        ),
+                        onTap: () {
+                          Get.to(
+                              () => ScreenUpdateNotes(
+                                    index: index,
+                                    person: personData,
+                                  ),
+                              duration: Duration(milliseconds: 250),
+                              transition: Transition.rightToLeftWithFade);
+                        },
                         child: ListTile(
                           title: Text(
                             personData.name,
@@ -195,13 +197,60 @@ class _ScreenNotesState extends State<ScreenNotes>  {
             ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Get.to(() => ScreenAddNotes());
+          // Get.to(() => _createRoute());
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(builder: (context) => _createRoute()),
+          // );
+          // Navigator.of(context).push(_createRoute());
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(
+          //     builder: (_) => ScreenAddNotes(),
+          //   ),
+          // );
+          // Get.put(_createRoute());
+          Get.to(ScreenAddNotes(),
+              duration: Duration(milliseconds: 250),
+              transition: Transition.rightToLeftWithFade);
+          // Navigator.push(
+          //   context,
+          //   PageRouteBuilder(
+          //     transitionsBuilder:
+          //         (context, animation, secondaryAnimation, child) {
+          //       return ScaleTransition(
+          //         alignment: Alignment.centerRight,
+          //         scale: Tween<double>(begin: 0.1, end: 1).animate(
+          //           CurvedAnimation(
+          //             parent: animation,
+          //             curve: Curves.elasticIn,
+          //           ),
+          //         ),
+          //         child: child,
+          //       );
+          //     },
+          //     transitionDuration: Duration(seconds: 1),
+          //     pageBuilder: (BuildContext context, Animation<double> animation,
+          //         Animation<double> secondaryAnimation) {
+          //       return ScreenAddNotes();
+          //     },
+          //   ),
+          // );
         },
         child: const Icon(Icons.add),
       ),
     );
   }
 }
+
+// Route _createRoute() {
+//   return PageRouteBuilder(
+//     pageBuilder: (context, animation, secondaryAnimation) => ScreenAddNotes(),
+//     transitionsBuilder: (context, animation, secondaryAnimation, child) {
+//       return child;
+//     },
+//   );
+// }
 
 class Search extends SearchDelegate {
   @override
