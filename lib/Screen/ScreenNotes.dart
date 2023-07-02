@@ -392,3 +392,286 @@ class Search extends SearchDelegate {
 //     return 
 //   }
 // }
+
+// body 
+
+// class GridBuilder extends StatefulWidget {
+
+//   @override
+//   GridBuilderState createState() => GridBuilderState();
+// }
+
+// class GridBuilderState extends State<GridBuilder> {
+
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return GridView.builder(
+//         // itemCount: widget.selectedList.length,
+//         gridDelegate:
+//             const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+//         itemBuilder: (_, int index) {
+//           return GridTile(
+//               child: Center(),
+//               );
+//         });
+//   }
+// }
+
+// class ListBuilder extends StatefulWidget {
+//   @override
+//   State<ListBuilder> createState() => _ListBuilderState();
+// }
+
+// class _ListBuilderState extends State<ListBuilder> {
+
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return 
+//   }
+// }
+
+// body 
+
+// class GridBuilder extends StatefulWidget {
+
+//   @override
+//   GridBuilderState createState() => GridBuilderState();
+// }
+
+// class GridBuilderState extends State<GridBuilder> {
+
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return GridView.builder(
+//         // itemCount: widget.selectedList.length,
+//         gridDelegate:
+//             const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+//         itemBuilder: (_, int index) {
+//           return GridTile(
+//               child: Center(),
+//               );
+//         });
+//   }
+// }
+
+// class ListBuilder extends StatefulWidget {
+//   @override
+//   State<ListBuilder> createState() => _ListBuilderState();
+// }
+
+// class _ListBuilderState extends State<ListBuilder> {
+
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return 
+//   }
+// }
+
+// body 
+
+// class GridBuilder extends StatefulWidget {
+
+//   @override
+//   GridBuilderState createState() => GridBuilderState();
+// }
+
+// class GridBuilderState extends State<GridBuilder> {
+
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return GridView.builder(
+//         // itemCount: widget.selectedList.length,
+//         gridDelegate:
+//             const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+//         itemBuilder: (_, int index) {
+//           return GridTile(
+//               child: Center(),
+//               );
+//         });
+//   }
+// }
+
+// class ListBuilder extends StatefulWidget {
+//   @override
+//   State<ListBuilder> createState() => _ListBuilderState();
+// }
+
+// class _ListBuilderState extends State<ListBuilder> {
+
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return 
+//   }
+// }
+
+// body 
+
+// class GridBuilder extends StatefulWidget {
+
+//   @override
+//   GridBuilderState createState() => GridBuilderState();
+// }
+
+// class GridBuilderState extends State<GridBuilder> {
+
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return GridView.builder(
+//         // itemCount: widget.selectedList.length,
+//         gridDelegate:
+//             const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+//         itemBuilder: (_, int index) {
+//           return GridTile(
+//               child: Center(),
+//               );
+//         });
+//   }
+// }
+
+// class ListBuilder extends StatefulWidget {
+//   @override
+//   State<ListBuilder> createState() => _ListBuilderState();
+// }
+
+// class _ListBuilderState extends State<ListBuilder> {
+
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return 
+//   }
+// }
+
+// body 
+
+// class GridBuilder extends StatefulWidget {
+
+//   @override
+//   GridBuilderState createState() => GridBuilderState();
+// }
+
+// class GridBuilderState extends State<GridBuilder> {
+
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return GridView.builder(
+//         // itemCount: widget.selectedList.length,
+//         gridDelegate:
+//             const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+//         itemBuilder: (_, int index) {
+//           return GridTile(
+//               child: Center(),
+//               );
+//         });
+//   }
+// }
+
+// class ListBuilder extends StatefulWidget {
+//   @override
+//   State<ListBuilder> createState() => _ListBuilderState();
+// }
+
+// class _ListBuilderState extends State<ListBuilder> {
+
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return 
+//   }
+// }
+
+// body 
+
+// class GridBuilder extends StatefulWidget {
+
+//   @override
+//   GridBuilderState createState() => GridBuilderState();
+// }
+
+// class GridBuilderState extends State<GridBuilder> {
+
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return GridView.builder(
+//         // itemCount: widget.selectedList.length,
+//         gridDelegate:
+//             const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+//         itemBuilder: (_, int index) {
+//           return GridTile(
+//               child: Center(),
+//               );
+//         });
+//   }
+// }
+
+// class ListBuilder extends StatefulWidget {
+//   @override
+//   State<ListBuilder> createState() => _ListBuilderState();
+// }
+
+// class _ListBuilderState extends State<ListBuilder> {
+
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return 
+//   }
+// }
+
+// body 
+
+// class GridBuilder extends StatefulWidget {
+
+//   @override
+//   GridBuilderState createState() => GridBuilderState();
+// }
+
+// class GridBuilderState extends State<GridBuilder> {
+
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return GridView.builder(
+//         // itemCount: widget.selectedList.length,
+//         gridDelegate:
+//             const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+//         itemBuilder: (_, int index) {
+//           return GridTile(
+//               child: Center(),
+//               );
+//         });
+//   }
+// }
+
+// class ListBuilder extends StatefulWidget {
+//   @override
+//   State<ListBuilder> createState() => _ListBuilderState();
+// }
+
+// class _ListBuilderState extends State<ListBuilder> {
+
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return 
+//   }
+// }
+
+// body 
+
+// class GridBuilder extends StatefulWidget {
+
+//   @override
+//   GridBuilderState createState() => GridBuilderState();
+// }
+
+// class GridBuilderState extends State<GridBuilder> {
