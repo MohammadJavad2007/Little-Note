@@ -14,6 +14,37 @@ class _ScreenAddNotesState extends State<ScreenAddNotes> {
   final _personFormKey = GlobalKey<FormState>();
 
   late final Box box;
+  var time = DateTime.now();
+
+  String month() {
+    switch (time.month) {
+      case 1:
+        return 'January';
+      case 2:
+        return 'February';
+      case 3:
+        return 'March';
+      case 4:
+        return 'April';
+      case 5:
+        return 'May';
+      case 6:
+        return 'June';
+      case 7:
+        return 'July';
+      case 8:
+        return 'August';
+      case 9:
+        return 'September';
+      case 10:
+        return 'October';
+      case 11:
+        return 'November';
+      case 12:
+        return 'December';
+    }
+    return '';
+  }
 
   String? _fieldValidator(String? value) {
     if (value == null || value.isEmpty) {
@@ -70,7 +101,7 @@ class _ScreenAddNotesState extends State<ScreenAddNotes> {
                 Container(
                   alignment: Alignment.centerRight,
                   child: Text(
-                    DateTime.now().toString(),
+                    '${month()}, ${time.day > 9 ? time.day : '0' + time.day.toString()}, ${time.year}   ${time.hour}:${time.minute}',
                   ),
                 ),
               ],
