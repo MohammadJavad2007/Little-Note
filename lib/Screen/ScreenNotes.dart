@@ -47,20 +47,20 @@ class _ScreenNotesState extends State<ScreenNotes> {
   Darkmode() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     // bool? getitem = widget.storage.getItem('themedata');
-    // // WidgetsBinding.instance.addPostFrameCallback(
-    // //   (_) => setState(
-    // //     () {
-    // //     },
-    // //   ),
-    // // );
-    // await prefs.setBool('repeat', false);
-    if (prefs.getBool('repeat') == false) {
-      Notes.themeNotifier.value = ThemeMode.dark;
-      // print('dark');
-    } else {
-      Notes.themeNotifier.value = ThemeMode.light;
-      // print(getitem);
-    }
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => setState(
+        () {
+          // await prefs.setBool('repeat', false);
+          if (prefs.getBool('repeat') == false) {
+            Notes.themeNotifier.value = ThemeMode.dark;
+            // print('dark');
+          } else {
+            Notes.themeNotifier.value = ThemeMode.light;
+            // print(getitem);
+          }
+        },
+      ),
+    );
   }
 
   _deleteInfo(int index) {
@@ -93,6 +93,12 @@ class _ScreenNotesState extends State<ScreenNotes> {
                 : Icons.light_mode),
             onPressed: toggle,
           ),
+          // Switch(
+          //   value: Notes.,
+          //   onChanged: (value) {
+          //     box.put('darkmode', value);
+          //   },
+          // ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: IconButton(
@@ -226,7 +232,8 @@ class _ScreenNotesState extends State<ScreenNotes> {
                               alignment: Alignment.topRight,
                               padding: EdgeInsets.only(bottom: 15),
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 15),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 15),
                                 child: Text(
                                   personData.dateTime,
                                   key: UniqueKey(),

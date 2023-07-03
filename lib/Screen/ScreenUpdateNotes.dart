@@ -117,12 +117,15 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
                   controller: _countryController,
                   validator: _fieldValidator,
                 ),
-                // TextFormField(
-                //   keyboardType: TextInputType.multiline,
-                //   maxLines: null,
-                //   controller: _dateController,
-                //   validator: _fieldValidator,
-                // ),
+                SizedBox(height: 24.0),
+                Container(
+                  alignment: Alignment.centerRight,
+                  child: Text(
+                    "${_dateController.text}",
+                    key: UniqueKey(),
+                    style: TextStyle(fontSize: 15),
+                  ),
+                ),
               ],
             ),
           ),

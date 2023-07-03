@@ -13,6 +13,8 @@ void main() async {
 
   await Hive.openBox('NoteBox');
 
+  await Hive.openBox('themedata');
+
   runApp(Notes());
 }
 
@@ -27,9 +29,6 @@ class Notes extends StatefulWidget {
 }
 
 class _NotesState extends State<Notes> {
-
-
-
   // ignore: non_constant_identifier_names
   Color ColorTheme2() {
     return Color(0xFF6800DF);

@@ -110,13 +110,6 @@ class _ScreenAddNotesState extends State<ScreenAddNotes> {
                   maxLines: null,
                 ),
                 SizedBox(height: 24.0),
-                // TextFormField(
-                //   keyboardType: TextInputType.multiline,
-                //   controller: _dateController,
-                //   validator: _fieldValidator,
-                //   maxLines: null,
-                // ),
-                // SizedBox(height: 24.0),
                 Container(
                   alignment: Alignment.centerRight,
                   child: Text(
@@ -139,7 +132,7 @@ class _ScreenAddNotesState extends State<ScreenAddNotes> {
             onPressed: () {
               if (_personFormKey.currentState!.validate()) {
                 _addInfo();
-                // Navigator.of(context).pop();
+                Navigator.of(context).pop();
               }
             },
             child: Text('Save'),
