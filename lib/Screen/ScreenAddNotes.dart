@@ -11,11 +11,12 @@ class ScreenAddNotes extends StatefulWidget {
 class _ScreenAddNotesState extends State<ScreenAddNotes> {
   final _nameController = TextEditingController();
   final _countryController = TextEditingController();
+  final _dateController = TextEditingController();
   final _personFormKey = GlobalKey<FormState>();
 
   late final Box box;
-  var time = DateTime.now();
 
+  var time = DateTime.now();
   String month() {
     switch (time.month) {
       case 1:
@@ -60,18 +61,18 @@ class _ScreenAddNotesState extends State<ScreenAddNotes> {
   // Add info to people box
   _addInfo() async {
     setState(() {
-      date =
+      _dateController.text =
           '${month()}, ${time.day > 9 ? time.day : '0' + time.day.toString()}, ${time.year}   ${time.hour > 9 ? time.hour : '0' + time.hour.toString()}:${time.minute > 9 ? time.minute : '0' + time.minute.toString()}';
     });
     Person newPerson = Person(
       name: _nameController.text,
       country: _countryController.text,
+      dateTime: _dateController.text
     );
 
     box.add(newPerson);
   }
 
-  String date = '';
 
   @override
   void initState() {
@@ -109,10 +110,17 @@ class _ScreenAddNotesState extends State<ScreenAddNotes> {
                   maxLines: null,
                 ),
                 SizedBox(height: 24.0),
+                // TextFormField(
+                //   keyboardType: TextInputType.multiline,
+                //   controller: _dateController,
+                //   validator: _fieldValidator,
+                //   maxLines: null,
+                // ),
+                // SizedBox(height: 24.0),
                 Container(
                   alignment: Alignment.centerRight,
                   child: Text(
-                    "${date}",
+                    "${_dateController.text}",
                     key: UniqueKey(),
                     style: TextStyle(fontSize: 15),
                   ),
@@ -131,7 +139,7 @@ class _ScreenAddNotesState extends State<ScreenAddNotes> {
             onPressed: () {
               if (_personFormKey.currentState!.validate()) {
                 _addInfo();
-                Navigator.of(context).pop();
+                // Navigator.of(context).pop();
               }
             },
             child: Text('Save'),

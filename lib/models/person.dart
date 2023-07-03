@@ -10,8 +10,12 @@ class Person {
   @HiveField(1)
   final String country;
 
+  @HiveField(2)
+  final String dateTime;
+
   Person({
     required this.name,
     required this.country,
+    required this.dateTime,
   });
 }

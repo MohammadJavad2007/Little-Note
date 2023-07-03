@@ -167,57 +167,74 @@ class _ScreenNotesState extends State<ScreenNotes> {
                                     index: index,
                                     person: personData,
                                   ),
-                              duration: Duration(milliseconds: 250),
+                              duration: const Duration(milliseconds: 250),
                               transition: Transition.rightToLeftWithFade);
                         },
-                        child: ListTile(
-                          title: Text(
-                            personData.name,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          subtitle: Text(
-                            personData.country,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          trailing: IconButton(
-                            onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                      // ignore: unused_label
-                                      title: Text(
-                                          'Do you really want to delete the note?'),
-                                      // content: Center(),
-                                      // ignore: unused_label
-                                      actions: <Widget>[
-                                        ElevatedButton(
-                                          child: const Text("Cancle"),
-                                          onPressed: () {
-                                            Get.back();
-                                          },
-                                        ),
-                                        ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                            backgroundColor: Colors.red,
-                                          ),
-                                          onPressed: () {
-                                            _deleteInfo(index);
-                                            Get.back();
-                                          },
-                                          child: Text('Delete'),
-                                        ),
-                                      ]);
+                        child: Column(
+                          children: [
+                            ListTile(
+                              title: Text(
+                                personData.name,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              subtitle: Text(
+                                personData.country,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              trailing: IconButton(
+                                onPressed: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                          // ignore: unused_label
+                                          title: Text(
+                                              'Do you really want to delete the note?'),
+                                          // content: Center(),
+                                          // ignore: unused_label
+                                          actions: <Widget>[
+                                            ElevatedButton(
+                                              child: const Text("Cancle"),
+                                              onPressed: () {
+                                                Get.back();
+                                              },
+                                            ),
+                                            ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor: Colors.red,
+                                              ),
+                                              onPressed: () {
+                                                _deleteInfo(index);
+                                                Get.back();
+                                              },
+                                              child: Text('Delete'),
+                                            ),
+                                          ]);
+                                    },
+                                  );
                                 },
-                              );
-                            },
-                            icon: Icon(
-                              Icons.delete,
-                              color: Colors.red,
+                                icon: Icon(
+                                  Icons.delete,
+                                  color: Colors.red,
+                                ),
+                              ),
                             ),
-                          ),
+                            Divider(),
+                            Container(
+                              alignment: Alignment.topRight,
+                              padding: EdgeInsets.only(bottom: 15),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 15),
+                                child: Text(
+                                  personData.dateTime,
+                                  key: UniqueKey(),
+                                  style: TextStyle(fontSize: 15),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       );
                     },

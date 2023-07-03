@@ -21,9 +21,42 @@ class ScreenUpdateNotes extends StatefulWidget {
 class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
   final _personFormKey = GlobalKey<FormState>();
 
+  late final _dateController;
   late final _nameController;
   late final _countryController;
   late final Box box;
+
+  var time = DateTime.now();
+  String month() {
+    switch (time.month) {
+      case 1:
+        return 'January';
+      case 2:
+        return 'February';
+      case 3:
+        return 'March';
+      case 4:
+        return 'April';
+      case 5:
+        return 'May';
+      case 6:
+        return 'June';
+      case 7:
+        return 'July';
+      case 8:
+        return 'August';
+      case 9:
+        return 'September';
+      case 10:
+        return 'October';
+      case 11:
+        return 'November';
+      case 12:
+        return 'December';
+    }
+    return '';
+  }
+
 
   String? _fieldValidator(String? value) {
     if (value == null || value.isEmpty) {
@@ -34,9 +67,14 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
 
   // Update info of people box
   _updateInfo() {
+    setState(() {
+      _dateController.text =
+          '${month()}, ${time.day > 9 ? time.day : '0' + time.day.toString()}, ${time.year}   ${time.hour > 9 ? time.hour : '0' + time.hour.toString()}:${time.minute > 9 ? time.minute : '0' + time.minute.toString()}';
+    });
     Person newPerson = Person(
       name: _nameController.text,
       country: _countryController.text,
+      dateTime: _dateController.text,
     );
 
     box.putAt(widget.index, newPerson);
@@ -49,6 +87,7 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
     box = Hive.box('NoteBox');
     _nameController = TextEditingController(text: widget.person.name);
     _countryController = TextEditingController(text: widget.person.country);
+    _dateController = TextEditingController(text: widget.person.dateTime);
   }
 
   @override
@@ -78,6 +117,12 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
                   controller: _countryController,
                   validator: _fieldValidator,
                 ),
+                // TextFormField(
+                //   keyboardType: TextInputType.multiline,
+                //   maxLines: null,
+                //   controller: _dateController,
+                //   validator: _fieldValidator,
+                // ),
               ],
             ),
           ),
