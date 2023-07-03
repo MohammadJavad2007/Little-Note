@@ -46,6 +46,10 @@ class _ScreenAddNotesState extends State<ScreenAddNotes> {
     return '';
   }
 
+  //  void dateTime() {
+  // return date;
+  // }
+
   String? _fieldValidator(String? value) {
     if (value == null || value.isEmpty) {
       return 'Field can\'t be empty';
@@ -55,6 +59,10 @@ class _ScreenAddNotesState extends State<ScreenAddNotes> {
 
   // Add info to people box
   _addInfo() async {
+    setState(() {
+      date =
+          '${month()}, ${time.day > 9 ? time.day : '0' + time.day.toString()}, ${time.year}   ${time.hour > 9 ? time.hour : '0' + time.hour.toString()}:${time.minute > 9 ? time.minute : '0' + time.minute.toString()}';
+    });
     Person newPerson = Person(
       name: _nameController.text,
       country: _countryController.text,
@@ -63,11 +71,14 @@ class _ScreenAddNotesState extends State<ScreenAddNotes> {
     box.add(newPerson);
   }
 
+  String date = '';
+
   @override
   void initState() {
     super.initState();
     // Get reference to an already opened box
     box = Hive.box('NoteBox');
+    // date.text;
   }
 
   @override
@@ -101,7 +112,9 @@ class _ScreenAddNotesState extends State<ScreenAddNotes> {
                 Container(
                   alignment: Alignment.centerRight,
                   child: Text(
-                    '${month()}, ${time.day > 9 ? time.day : '0' + time.day.toString()}, ${time.year}   ${time.hour}:${time.minute}',
+                    "${date}",
+                    key: UniqueKey(),
+                    style: TextStyle(fontSize: 15),
                   ),
                 ),
               ],
