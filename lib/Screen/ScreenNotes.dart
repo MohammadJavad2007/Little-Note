@@ -311,6 +311,7 @@ class Search extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
+    // ignore: avoid_unnecessary_containers
     return Container(
       child: Center(
         child: Text(selectedResult),
@@ -340,7 +341,7 @@ class Search extends SearchDelegate {
           title: Text(
             suggestionList[index],
           ),
-          leading: query.isEmpty ? Icon(Icons.access_time) : SizedBox(),
+          leading: query.isEmpty ? const Icon(Icons.access_time) : SizedBox(),
           onTap: () {
             selectedResult = suggestionList[index];
             showResults(context);

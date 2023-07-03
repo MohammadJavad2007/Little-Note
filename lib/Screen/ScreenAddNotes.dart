@@ -13,7 +13,6 @@ class _ScreenAddNotesState extends State<ScreenAddNotes> {
   final _countryController = TextEditingController();
   final _personFormKey = GlobalKey<FormState>();
 
-  
   late final Box box;
 
   String? _fieldValidator(String? value) {
@@ -40,7 +39,6 @@ class _ScreenAddNotesState extends State<ScreenAddNotes> {
     box = Hive.box('NoteBox');
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,28 +48,35 @@ class _ScreenAddNotesState extends State<ScreenAddNotes> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
-      key: _personFormKey,
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Title'),
-            TextFormField(
-              controller: _nameController,
-              validator: _fieldValidator,
+          key: _personFormKey,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Title'),
+                TextFormField(
+                  controller: _nameController,
+                  validator: _fieldValidator,
+                ),
+                SizedBox(height: 24.0),
+                Text('Description'),
+                TextFormField(
+                  keyboardType: TextInputType.multiline,
+                  controller: _countryController,
+                  validator: _fieldValidator,
+                  maxLines: null,
+                ),
+                SizedBox(height: 24.0),
+                Container(
+                  alignment: Alignment.centerRight,
+                  child: Text(
+                    DateTime.now().toString(),
+                  ),
+                ),
+              ],
             ),
-            SizedBox(height: 24.0),
-            Text('Description'),
-            TextFormField(
-              keyboardType: TextInputType.multiline,
-              controller: _countryController,
-              validator: _fieldValidator,
-              maxLines: null,
-            ),
-          ],
+          ),
         ),
-      ),
-    ),
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 24.0),
