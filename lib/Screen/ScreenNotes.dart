@@ -240,6 +240,7 @@ class _ScreenNotesState extends State<ScreenNotes> {
           //   ),
           // );
           // Get.put(_createRoute());
+          // print(DateTime.now().toString());
           Get.to(() => ScreenAddNotes(),
               duration: Duration(milliseconds: 250),
               transition: Transition.rightToLeftWithFade);
