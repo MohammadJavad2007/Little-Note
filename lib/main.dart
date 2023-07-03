@@ -13,8 +13,6 @@ void main() async {
 
   await Hive.openBox('NoteBox');
 
-  await Hive.openBox('themedata');
-
   runApp(Notes());
 }
 
