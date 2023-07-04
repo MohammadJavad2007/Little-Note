@@ -3,6 +3,30 @@ import 'package:notes/Screen/ScreenNotes.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:notes/models/person.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+
+
+int colorTheme = 0xFF263799;
+Color color = Color(colorTheme);
+MaterialColor themeColor = MaterialColor(
+  colorTheme,
+  <int, Color>{
+    50: color,
+    100: color,
+    200: color,
+    300: color,
+    400: color,
+    500: color,
+    600: color,
+    700: color,
+    800: color,
+    900: color,
+  },
+);
+
+
+
 
 void main() async {
   // Initialize hive
@@ -16,43 +40,47 @@ void main() async {
   runApp(Notes());
 }
 
+
+
 // ignore: must_be_immutable
 class Notes extends StatefulWidget {
   Notes({super.key});
   static final ValueNotifier<ThemeMode> themeNotifier =
-      ValueNotifier(ThemeMode.light);
+      ValueNotifier(ThemeMode.dark);
 
   @override
   State<Notes> createState() => _NotesState();
 }
 
 class _NotesState extends State<Notes> {
-  // ignore: non_constant_identifier_names
-  Color ColorTheme2() {
-    return Color(0xFF6800DF);
+  Darkmode() async {
+
+
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+
+    if (prefs.getBool('repeat') == false) {
+      Notes.themeNotifier.value = ThemeMode.dark;
+      // print('dark');
+    } else {
+      Notes.themeNotifier.value = ThemeMode.light;
+      // print(getitem);
+    }
+
+    // ignore: unused_local_variable
   }
-
-  MaterialColor themeColor = const MaterialColor(
-    0xFF6800DF,
-    <int, Color>{
-      50: Color(0xFF6800DF),
-      100: Color(0xFF6800DF),
-      200: Color(0xFF6800DF),
-      300: Color(0xFF6800DF),
-      400: Color(0xFF6800DF),
-      500: Color(0xFF6800DF),
-      600: Color(0xFF6800DF),
-      700: Color(0xFF6800DF),
-      800: Color(0xFF6800DF),
-      900: Color(0xFF6800DF),
-    },
-  );
-
   @override
   void dispose() {
     // Closes all Hive boxes
     Hive.close();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    Darkmode();
+    super.initState();
   }
 
   // This widget is the root of your application.
@@ -68,7 +96,7 @@ class _NotesState extends State<Notes> {
           ),
           darkTheme: ThemeData.dark().copyWith(
               colorScheme: ColorScheme.dark(primary: themeColor),
-              appBarTheme: AppBarTheme(backgroundColor: Colors.grey[800]),
+              appBarTheme: AppBarTheme(backgroundColor: Color.fromARGB(255, 58, 58, 58)),
               floatingActionButtonTheme:
                   FloatingActionButtonThemeData(backgroundColor: themeColor)),
           themeMode: currentMode,
