@@ -10,7 +10,6 @@ import 'package:notes/Screen/ScreenUpdateNotes.dart';
 import 'package:notes/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:notes/models/person.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 
 // ignore: must_be_immutable
 class ScreenNotes extends StatefulWidget {
