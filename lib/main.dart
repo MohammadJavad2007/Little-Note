@@ -53,6 +53,9 @@ class Notes extends StatefulWidget {
 }
 
 class _NotesState extends State<Notes> {
+
+
+  // dark mode
   Darkmode() async {
 
 
@@ -69,12 +72,16 @@ class _NotesState extends State<Notes> {
 
     // ignore: unused_local_variable
   }
+
+
   @override
   void dispose() {
     // Closes all Hive boxes
     Hive.close();
     super.dispose();
   }
+
+
 
   @override
   void initState() {
@@ -84,6 +91,9 @@ class _NotesState extends State<Notes> {
   }
 
   // This widget is the root of your application.
+
+
+
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<ThemeMode>(
