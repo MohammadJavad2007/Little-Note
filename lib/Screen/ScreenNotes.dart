@@ -94,12 +94,6 @@ class _ScreenNotesState extends State<ScreenNotes> {
                 : Icons.light_mode),
             onPressed: toggle,
           ),
-          // Switch(
-          //   value: Notes.,
-          //   onChanged: (value) {
-          //     box.put('darkmode', value);
-          //   },
-          // ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: IconButton(
@@ -400,46 +394,9 @@ class _ScreenNotesState extends State<ScreenNotes> {
             ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Get.to(() => _createRoute());
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(builder: (context) => _createRoute()),
-          // );
-          // Navigator.of(context).push(_createRoute());
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(
-          //     builder: (_) => ScreenAddNotes(),
-          //   ),
-          // );
-          // Get.put(_createRoute());
-          // print(DateTime.now().toString());
           Get.to(() => ScreenAddNotes(),
               duration: Duration(milliseconds: 250),
               transition: Transition.rightToLeftWithFade);
-          // Navigator.push(
-          //   context,
-          //   PageRouteBuilder(
-          //     transitionsBuilder:
-          //         (context, animation, secondaryAnimation, child) {
-          //       return ScaleTransition(
-          //         alignment: Alignment.centerRight,
-          //         scale: Tween<double>(begin: 0.1, end: 1).animate(
-          //           CurvedAnimation(
-          //             parent: animation,
-          //             curve: Curves.elasticIn,
-          //           ),
-          //         ),
-          //         child: child,
-          //       );
-          //     },
-          //     transitionDuration: Duration(seconds: 1),
-          //     pageBuilder: (BuildContext context, Animation<double> animation,
-          //         Animation<double> secondaryAnimation) {
-          //       return ScreenAddNotes();
-          //     },
-          //   ),
-          // );
         },
         child: const Icon(Icons.add),
       ),
