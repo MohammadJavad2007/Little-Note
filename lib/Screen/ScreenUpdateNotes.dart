@@ -26,6 +26,8 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
   late final _countryController;
   late final Box box;
 
+
+// month data time 
   var time = DateTime.now();
   String month() {
     switch (time.month) {
@@ -58,12 +60,15 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
   }
 
 
+
   String? _fieldValidator(String? value) {
     if (value == null || value.isEmpty) {
       return 'Field can\'t be empty';
     }
     return null;
   }
+
+
 
   // Update info of people box
   _updateInfo() {
@@ -89,6 +94,8 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
     _countryController = TextEditingController(text: widget.person.country);
     _dateController = TextEditingController(text: widget.person.dateTime);
   }
+
+
 
   @override
   Widget build(BuildContext context) {

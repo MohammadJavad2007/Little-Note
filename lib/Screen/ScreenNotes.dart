@@ -67,7 +67,11 @@ class _ScreenNotesState extends State<ScreenNotes> {
     contactBox.deleteAt(index);
   }
 
+
+
   bool _isGridMode = false;
+
+
 
   @override
   void initState() {
@@ -123,6 +127,11 @@ class _ScreenNotesState extends State<ScreenNotes> {
             ),
         ],
       ),
+
+
+
+
+      // body
       body: _isGridMode
           ? ValueListenableBuilder(
               valueListenable: contactBox.listenable(),
@@ -783,6 +792,31 @@ class Search extends SearchDelegate {
 //         });
 //   }
 // }
+
+// class ListBuilder extends StatefulWidget {
+//   @override
+//   State<ListBuilder> createState() => _ListBuilderState();
+// }
+
+// class _ListBuilderState extends State<ListBuilder> {
+
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return 
+//   }
+// }
+
+// body 
+
+// class GridBuilder extends StatefulWidget {
+
+//   @override
+//   GridBuilderState createState() => GridBuilderState();
+// }
+
+// class GridBuilderState extends State<GridBuilder> {
+// class GridBuilderState extends State<GridBuilder> 
 
 // class ListBuilder extends StatefulWidget {
 //   @override
