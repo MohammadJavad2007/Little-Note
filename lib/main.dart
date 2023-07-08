@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:notes/Screen/ScreenNotes.dart';
 import 'package:get/get.dart';
@@ -5,9 +7,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:notes/models/person.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
-
-int colorTheme = 0xFF263799;
+int colorTheme = 0xFF213292;
 Color color = Color(colorTheme);
 MaterialColor themeColor = MaterialColor(
   colorTheme,
@@ -25,9 +25,6 @@ MaterialColor themeColor = MaterialColor(
   },
 );
 
-
-
-
 void main() async {
   // Initialize hive
   await Hive.initFlutter();
@@ -40,8 +37,6 @@ void main() async {
   runApp(Notes());
 }
 
-
-
 // ignore: must_be_immutable
 class Notes extends StatefulWidget {
   Notes({super.key});
@@ -53,14 +48,9 @@ class Notes extends StatefulWidget {
 }
 
 class _NotesState extends State<Notes> {
-
-
   // dark mode
   Darkmode() async {
-
-
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-
 
     if (prefs.getBool('repeat') == false) {
       Notes.themeNotifier.value = ThemeMode.dark;
@@ -73,6 +63,16 @@ class _NotesState extends State<Notes> {
     // ignore: unused_local_variable
   }
 
+  // internet() async {
+  //   try {
+  //     final result = await InternetAddress.lookup('google.com');
+  //     if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+  //       print('connected');
+  //     }
+  //   } on SocketException catch (_) {
+  //     print('not connected');
+  //   }
+  // }
 
   @override
   void dispose() {
@@ -81,18 +81,15 @@ class _NotesState extends State<Notes> {
     super.dispose();
   }
 
-
-
   @override
   void initState() {
     // TODO: implement initState
     Darkmode();
+    // internet();
     super.initState();
   }
 
   // This widget is the root of your application.
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +103,8 @@ class _NotesState extends State<Notes> {
           ),
           darkTheme: ThemeData.dark().copyWith(
               colorScheme: ColorScheme.dark(primary: themeColor),
-              appBarTheme: AppBarTheme(backgroundColor: Color.fromARGB(255, 58, 58, 58)),
+              appBarTheme:
+                  AppBarTheme(backgroundColor: Color.fromARGB(255, 58, 58, 58)),
               floatingActionButtonTheme:
                   FloatingActionButtonThemeData(backgroundColor: themeColor)),
           themeMode: currentMode,

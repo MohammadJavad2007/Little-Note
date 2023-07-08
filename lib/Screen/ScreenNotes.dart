@@ -69,7 +69,7 @@ class _ScreenNotesState extends State<ScreenNotes> {
 
 
 
-  bool _isGridMode = false;
+  // bool _isGridMode = false;
 
 
 
@@ -107,24 +107,24 @@ class _ScreenNotesState extends State<ScreenNotes> {
               icon: Icon(Icons.search),
             ),
           ),
-          if (_isGridMode)
-            IconButton(
-              icon: const Icon(Icons.grid_on),
-              onPressed: () {
-                setState(() {
-                  _isGridMode = false;
-                });
-              },
-            )
-          else
-            IconButton(
-              icon: const Icon(Icons.list),
-              onPressed: () {
-                setState(() {
-                  _isGridMode = true;
-                });
-              },
-            ),
+          // if (_isGridMode)
+          //   IconButton(
+          //     icon: const Icon(Icons.grid_on),
+          //     onPressed: () {
+          //       setState(() {
+          //         _isGridMode = false;
+          //       });
+          //     },
+          //   )
+          // else
+          //   IconButton(
+          //     icon: const Icon(Icons.list),
+          //     onPressed: () {
+          //       setState(() {
+          //         _isGridMode = true;
+          //       });
+          //     },
+          //   ),
         ],
       ),
 
@@ -132,159 +132,7 @@ class _ScreenNotesState extends State<ScreenNotes> {
 
 
       // body
-      body: _isGridMode
-          ? ValueListenableBuilder(
-              valueListenable: contactBox.listenable(),
-              builder: (context, Box box, widget) {
-                if (box.isEmpty) {
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Center(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text('Write Your First Note'),
-                        ),
-                      ),
-                      Center(
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Get.to(() => ScreenAddNotes(),
-                                duration: Duration(milliseconds: 250),
-                                transition: Transition.rightToLeftWithFade);
-                          },
-                          child: Text('ADD NEW NOTE'),
-                        ),
-                      ),
-                    ],
-                  );
-                } else {
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    // implement GridView.builder
-                    child: GridView.builder(
-                        itemCount: box.length,
-                        gridDelegate:
-                            const SliverGridDelegateWithMaxCrossAxisExtent(
-                          maxCrossAxisExtent: 250,
-                          childAspectRatio: 1.6,
-                          crossAxisSpacing: 20,
-                          mainAxisSpacing: 20,
-                        ),
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          var currentBox = box;
-                          var personData = currentBox.getAt(index)!;
-
-                          return InkWell(
-                            onTap: () {
-                              Get.to(
-                                () => ScreenUpdateNotes(
-                                  index: index,
-                                  person: personData,
-                                ),
-                                duration: const Duration(milliseconds: 250),
-                                transition: Transition.rightToLeftWithFade,
-                              );
-                            },
-                            child: SingleChildScrollView(
-                              child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    // Spacer(),
-                                    Container(
-                                      child: ListTile(
-                                          hoverColor: Colors.amber,
-                                          title: Text(
-                                            personData.name,
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                          subtitle: Padding(
-                                            padding:
-                                                const EdgeInsets.only(top: 5),
-                                            child: Text(
-                                              personData.country,
-                                              style: TextStyle(fontSize: 14),
-                                              maxLines: 4,
-                                              overflow: TextOverflow.ellipsis,
-                                            ),
-                                          )),
-                                    ),
-                                    // Spacer(
-                                    //   flex: 2,
-                                    // ),
-                                    SingleChildScrollView(
-                                      scrollDirection: Axis.horizontal,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          IconButton(
-                                            onPressed: () {
-                                              showDialog(
-                                                context: context,
-                                                builder:
-                                                    (BuildContext context) {
-                                                  return AlertDialog(
-                                                      // ignore: unused_label
-                                                      title: Text(
-                                                          'Do you really want to delete the note?'),
-                                                      // content: Center(),
-                                                      // ignore: unused_label
-                                                      actions: <Widget>[
-                                                        ElevatedButton(
-                                                          child: const Text(
-                                                              "Cancle"),
-                                                          onPressed: () {
-                                                            Get.back();
-                                                          },
-                                                        ),
-                                                        ElevatedButton(
-                                                          style: ElevatedButton
-                                                              .styleFrom(
-                                                            backgroundColor:
-                                                                Colors.red,
-                                                          ),
-                                                          onPressed: () {
-                                                            _deleteInfo(index);
-                                                            Get.back();
-                                                          },
-                                                          child: Text('Delete'),
-                                                        ),
-                                                      ]);
-                                                },
-                                              );
-                                            },
-                                            icon: Icon(
-                                              Icons.delete,
-                                              color: Colors.red,
-                                              size: 20,
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding:
-                                                const EdgeInsets.only(right: 0),
-                                            child: Text(
-                                              personData.dateTime,
-                                              style: TextStyle(fontSize: 11),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    )
-                                  ]),
-                            ),
-                          );
-                        }),
-                  );
-                }
-              },
-            )
-          : ValueListenableBuilder(
+      body: ValueListenableBuilder(
               valueListenable: contactBox.listenable(),
               builder: (context, Box box, widget) {
                 if (box.isEmpty) {
@@ -956,3 +804,170 @@ class Search extends SearchDelegate {
 
 // class GridBuilderState extends State<GridBuilder> {
 // class GridBuilderState extends State<GridBuilder> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// _isGridMode
+//           ? ValueListenableBuilder(
+//               valueListenable: contactBox.listenable(),
+//               builder: (context, Box box, widget) {
+//                 if (box.isEmpty) {
+//                   return Column(
+//                     mainAxisAlignment: MainAxisAlignment.center,
+//                     crossAxisAlignment: CrossAxisAlignment.stretch,
+//                     mainAxisSize: MainAxisSize.max,
+//                     children: [
+//                       Center(
+//                         child: Padding(
+//                           padding: const EdgeInsets.all(8.0),
+//                           child: Text('Write Your First Note'),
+//                         ),
+//                       ),
+//                       Center(
+//                         child: ElevatedButton(
+//                           onPressed: () {
+//                             Get.to(() => ScreenAddNotes(),
+//                                 duration: Duration(milliseconds: 250),
+//                                 transition: Transition.rightToLeftWithFade);
+//                           },
+//                           child: Text('ADD NEW NOTE'),
+//                         ),
+//                       ),
+//                     ],
+//                   );
+//                 } else {
+//                   return Padding(
+//                     padding: const EdgeInsets.all(8.0),
+//                     // implement GridView.builder
+//                     child: GridView.builder(
+//                         itemCount: box.length,
+//                         gridDelegate:
+//                             const SliverGridDelegateWithMaxCrossAxisExtent(
+//                           maxCrossAxisExtent: 250,
+//                           childAspectRatio: 1.6,
+//                           crossAxisSpacing: 20,
+//                           mainAxisSpacing: 20,
+//                         ),
+//                         shrinkWrap: true,
+//                         itemBuilder: (context, index) {
+//                           var currentBox = box;
+//                           var personData = currentBox.getAt(index)!;
+
+//                           return InkWell(
+//                             onTap: () {
+//                               Get.to(
+//                                 () => ScreenUpdateNotes(
+//                                   index: index,
+//                                   person: personData,
+//                                 ),
+//                                 duration: const Duration(milliseconds: 250),
+//                                 transition: Transition.rightToLeftWithFade,
+//                               );
+//                             },
+//                             child: SingleChildScrollView(
+//                               child: Column(
+//                                   mainAxisAlignment:
+//                                       MainAxisAlignment.spaceAround,
+//                                   children: [
+//                                     // Spacer(),
+//                                     Container(
+//                                       child: ListTile(
+//                                           hoverColor: Colors.amber,
+//                                           title: Text(
+//                                             personData.name,
+//                                             maxLines: 1,
+//                                             overflow: TextOverflow.ellipsis,
+//                                           ),
+//                                           subtitle: Padding(
+//                                             padding:
+//                                                 const EdgeInsets.only(top: 5),
+//                                             child: Text(
+//                                               personData.country,
+//                                               style: TextStyle(fontSize: 14),
+//                                               maxLines: 4,
+//                                               overflow: TextOverflow.ellipsis,
+//                                             ),
+//                                           )),
+//                                     ),
+//                                     // Spacer(
+//                                     //   flex: 2,
+//                                     // ),
+//                                     SingleChildScrollView(
+//                                       scrollDirection: Axis.horizontal,
+//                                       child: Row(
+//                                         mainAxisAlignment:
+//                                             MainAxisAlignment.spaceBetween,
+//                                         children: [
+//                                           IconButton(
+//                                             onPressed: () {
+//                                               showDialog(
+//                                                 context: context,
+//                                                 builder:
+//                                                     (BuildContext context) {
+//                                                   return AlertDialog(
+//                                                       // ignore: unused_label
+//                                                       title: Text(
+//                                                           'Do you really want to delete the note?'),
+//                                                       // content: Center(),
+//                                                       // ignore: unused_label
+//                                                       actions: <Widget>[
+//                                                         ElevatedButton(
+//                                                           child: const Text(
+//                                                               "Cancle"),
+//                                                           onPressed: () {
+//                                                             Get.back();
+//                                                           },
+//                                                         ),
+//                                                         ElevatedButton(
+//                                                           style: ElevatedButton
+//                                                               .styleFrom(
+//                                                             backgroundColor:
+//                                                                 Colors.red,
+//                                                           ),
+//                                                           onPressed: () {
+//                                                             _deleteInfo(index);
+//                                                             Get.back();
+//                                                           },
+//                                                           child: Text('Delete'),
+//                                                         ),
+//                                                       ]);
+//                                                 },
+//                                               );
+//                                             },
+//                                             icon: Icon(
+//                                               Icons.delete,
+//                                               color: Colors.red,
+//                                               size: 20,
+//                                             ),
+//                                           ),
+//                                           Padding(
+//                                             padding:
+//                                                 const EdgeInsets.only(right: 0),
+//                                             child: Text(
+//                                               personData.dateTime,
+//                                               style: TextStyle(fontSize: 11),
+//                                             ),
+//                                           ),
+//                                         ],
+//                                       ),
+//                                     )
+//                                   ]),
+//                             ),
+//                           );
+//                         }),
+//                   );
+//                 }
+//               },
+//             )
+//           : 
