@@ -1,11 +1,10 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:notes/Screen/ScreenNotes.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:notes/models/person.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 
 int colorTheme = 0xFF213292;
 Color color = Color(colorTheme);
@@ -86,6 +85,16 @@ class _NotesState extends State<Notes> {
     // TODO: implement initState
     Darkmode();
     // internet();
+    InternetConnection().onStatusChange.listen((InternetStatus status) {
+      switch (status) {
+        case InternetStatus.connected:
+          // The internet is now connected
+          break;
+        case InternetStatus.disconnected:
+          // The internet is now disconnected
+          break;
+      }
+    });
     super.initState();
   }
 
