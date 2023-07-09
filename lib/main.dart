@@ -1,10 +1,14 @@
+import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:notes/Screen/ScreenNotes.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:notes/models/person.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
+import 'package:http/http.dart' as http;
 
 int colorTheme = 0xFF213292;
 Color color = Color(colorTheme);
@@ -73,6 +77,32 @@ class _NotesState extends State<Notes> {
   //   }
   // }
 
+  final url = "http://localhost/visit/visit-post.php";
+  post() async {
+    try {
+      final hashcode = await Hive.box('NoteBox').getAt(0).hash;
+      final responde = await http.post(
+        Uri.parse(url),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(
+          <String, List>{
+            'hash': [{"visit": hashCode}]
+          },
+        ),
+      );
+      // final jsonData = jsonDecode(response.body);
+      print(responde.statusCode);
+    } on TimeoutException catch (e) {
+      print('Timeout Error: $e');
+    } on SocketException catch (e) {
+      print('Socket Error: $e');
+    } on Error catch (e) {
+      print('General Error: $e');
+    }
+  }
+
   @override
   void dispose() {
     // Closes all Hive boxes
@@ -85,16 +115,8 @@ class _NotesState extends State<Notes> {
     // TODO: implement initState
     Darkmode();
     // internet();
-    InternetConnection().onStatusChange.listen((InternetStatus status) {
-      switch (status) {
-        case InternetStatus.connected:
-          // The internet is now connected
-          break;
-        case InternetStatus.disconnected:
-          // The internet is now disconnected
-          break;
-      }
-    });
+    // ignore: unused_local_variable
+    post();
     super.initState();
   }
 

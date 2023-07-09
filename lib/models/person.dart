@@ -16,6 +16,9 @@ class Person {
   @HiveField(2)
   final String dateTime;
 
+  @HiveField(3)
+  final String hash = "0fc302b63c7fa1d0bd1f343002c5eff9";
+
   Person({
     required this.name,
     required this.country,
