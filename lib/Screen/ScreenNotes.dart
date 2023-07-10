@@ -67,12 +67,7 @@ class _ScreenNotesState extends State<ScreenNotes> {
     contactBox.deleteAt(index);
   }
 
-
-
   // bool _isGridMode = false;
-
-
-
   @override
   void initState() {
     super.initState();
@@ -128,45 +123,55 @@ class _ScreenNotesState extends State<ScreenNotes> {
         ],
       ),
 
-
-
-
       // body
-      body: ValueListenableBuilder(
-              valueListenable: contactBox.listenable(),
-              builder: (context, Box box, widget) {
-                if (box.isEmpty) {
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Center(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text('Write Your First Note'),
-                        ),
-                      ),
-                      Center(
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Get.to(() => ScreenAddNotes(),
-                                duration: Duration(milliseconds: 250),
-                                transition: Transition.rightToLeftWithFade);
-                          },
-                          child: Text('ADD NEW NOTE'),
-                        ),
-                      ),
-                    ],
-                  );
-                } else {
-                  return ListView.builder(
-                    itemCount: box.length,
-                    itemBuilder: (context, index) {
-                      var currentBox = box;
-                      var personData = currentBox.getAt(index)!;
+      body: Padding(
+        padding: const EdgeInsets.only(top: 5),
+        child: ValueListenableBuilder(
+          valueListenable: contactBox.listenable(),
+          builder: (context, Box box, widget) {
+            if (box.isEmpty) {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text('Write Your First Note'),
+                    ),
+                  ),
+                  Center(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Get.to(() => ScreenAddNotes(),
+                            duration: Duration(milliseconds: 250),
+                            transition: Transition.rightToLeftWithFade);
+                      },
+                      child: Text('ADD NEW NOTE'),
+                    ),
+                  ),
+                ],
+              );
+            } else {
+              return ListView.builder(
+                physics: BouncingScrollPhysics(),
+                itemCount: box.length,
+                itemBuilder: (context, index) {
+                  var currentBox = box;
+                  var personData = currentBox.getAt(index)!;
 
-                      return InkWell(
+                  return Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                    child: AnimatedContainer(
+                      duration: Duration(seconds: 1),
+                      curve: Curves.bounceIn,
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(54, 133, 131, 131),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: InkWell(
                         onTap: () {
                           Get.to(
                               () => ScreenUpdateNotes(
@@ -197,19 +202,21 @@ class _ScreenNotesState extends State<ScreenNotes> {
                                       return AlertDialog(
                                           // ignore: unused_label
                                           title: Text(
-                                              'Do you really want to delete the note?'),
+                                            'Do you really want to delete the note?',
+                                            style: TextStyle(fontSize: 15),
+                                          ),
                                           // content: Center(),
                                           // ignore: unused_label
                                           actions: <Widget>[
-                                            ElevatedButton(
+                                            TextButton(
                                               child: const Text("Cancle"),
                                               onPressed: () {
                                                 Get.back();
                                               },
                                             ),
-                                            ElevatedButton(
-                                              style: ElevatedButton.styleFrom(
-                                                backgroundColor: Colors.red,
+                                            TextButton(
+                                              style: TextButton.styleFrom(
+                                                foregroundColor: Colors.red,
                                               ),
                                               onPressed: () {
                                                 _deleteInfo(index);
@@ -243,12 +250,24 @@ class _ScreenNotesState extends State<ScreenNotes> {
                             ),
                           ],
                         ),
-                      );
-                    },
+                      ),
+                    ),
                   );
-                }
-              },
-            ),
+                },
+              );
+            }
+          },
+        ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        shape: CircularNotchedRectangle(),
+        notchMargin: 8,
+        color: Theme.of(context).colorScheme.primary,
+        child: Container(
+          height: 60,
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Get.to(() => ScreenAddNotes(),
@@ -338,7 +357,6 @@ class Search extends SearchDelegate {
     );
   }
 }
-
 
 // _isGridMode
 //           ? ValueListenableBuilder(
@@ -492,4 +510,4 @@ class Search extends SearchDelegate {
 //                 }
 //               },
 //             )
-//           : 
+//           :

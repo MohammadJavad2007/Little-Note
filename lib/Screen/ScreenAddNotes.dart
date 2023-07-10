@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 // import 'package:notes/Screen/ScreenNotes.dart';
 import 'package:notes/models/person.dart';
@@ -16,10 +17,7 @@ class _ScreenAddNotesState extends State<ScreenAddNotes> {
 
   late final Box box;
 
-
-
-
-  // data time 
+  // data time
   var time = DateTime.now();
   String month() {
     switch (time.month) {
@@ -69,14 +67,12 @@ class _ScreenAddNotesState extends State<ScreenAddNotes> {
           '${month()}, ${time.day > 9 ? time.day : '0' + time.day.toString()}, ${time.year}   ${time.hour > 9 ? time.hour : '0' + time.hour.toString()}:${time.minute > 9 ? time.minute : '0' + time.minute.toString()}';
     });
     Person newPerson = Person(
-      name: _nameController.text,
-      country: _countryController.text,
-      dateTime: _dateController.text
-    );
+        name: _nameController.text,
+        country: _countryController.text,
+        dateTime: _dateController.text);
 
     box.add(newPerson);
   }
-
 
   @override
   void initState() {
@@ -91,6 +87,84 @@ class _ScreenAddNotesState extends State<ScreenAddNotes> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Add a note'),
+        leading: IconButton(
+          onPressed: () {
+            if ((_countryController.text == '') &
+                (_nameController.text == '')) {
+              Get.back();
+            } else {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    // ignore: unused_label
+                    title: Text('Save your changes or discard them?',style: TextStyle(fontSize: 15),),
+                    // ignore: unused_label
+                    actions: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 4),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SizedBox(
+                              width: 60,
+                              height: 35,
+                              child: TextButton(
+                                child: const Text("Cancle"),
+                                onPressed: () {
+                                  Get.back();
+                                },
+                              ),
+                            ),
+                            Row(
+                              children: [
+                                SizedBox(
+                                  width: 65,
+                                  height: 35,
+                                  child: TextButton(
+                                    style: TextButton.styleFrom(
+                                      foregroundColor: Colors.red,
+                                    ),
+                                    onPressed: () {
+                                      Get.back();
+                                      Get.back();
+                                    },
+                                    child: Text('Discard'),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 8,
+                                ),
+                                SizedBox(
+                                  width: 60,
+                                  height: 35,
+                                  child: TextButton(
+                                    style: TextButton.styleFrom(),
+                                    onPressed: () {
+                                      if (_personFormKey.currentState!
+                                          .validate()) {
+                                        _addInfo();
+                                        Get.back();
+                                        Get.back();
+                                      }
+                                      Get.back();
+                                    },
+                                    child: Text('Save'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              );
+            }
+          },
+          icon: Icon(Icons.arrow_back),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -128,7 +202,7 @@ class _ScreenAddNotesState extends State<ScreenAddNotes> {
         ),
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 24.0),
+        padding: const EdgeInsets.fromLTRB(17.0, 0.0, 17.0, 20.0),
         child: Container(
           width: double.maxFinite,
           height: 50,
@@ -136,7 +210,7 @@ class _ScreenAddNotesState extends State<ScreenAddNotes> {
             onPressed: () {
               if (_personFormKey.currentState!.validate()) {
                 _addInfo();
-                Navigator.of(context).pop();
+                Get.back();
               }
             },
             child: Text('Save'),

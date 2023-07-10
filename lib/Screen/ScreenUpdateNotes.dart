@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'package:notes/models/person.dart';
 import 'package:hive/hive.dart';
@@ -26,8 +27,7 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
   late final _countryController;
   late final Box box;
 
-
-// month data time 
+// month data time
   var time = DateTime.now();
   String month() {
     switch (time.month) {
@@ -59,16 +59,12 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
     return '';
   }
 
-
-
   String? _fieldValidator(String? value) {
     if (value == null || value.isEmpty) {
       return 'Field can\'t be empty';
     }
     return null;
   }
-
-
 
   // Update info of people box
   _updateInfo() {
@@ -95,13 +91,93 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
     _dateController = TextEditingController(text: widget.person.dateTime);
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Update a note'),
+        leading: IconButton(
+          onPressed: () {
+            if ((_countryController.text ==
+                    Hive.box('NoteBox').getAt(widget.index).country) &
+                (_nameController.text == Hive.box('NoteBox').getAt(widget.index).name)) {
+              Get.back();
+            } else {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    // ignore: unused_label
+                    title: Text(
+                      'Save your changes or discard them?',
+                      style: TextStyle(fontSize: 15),
+                    ),
+                    // ignore: unused_label
+                    actions: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 4),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SizedBox(
+                              width: 60,
+                              height: 35,
+                              child: TextButton(
+                                child: const Text("Cancle"),
+                                onPressed: () {
+                                  Get.back();
+                                },
+                              ),
+                            ),
+                            Row(
+                              children: [
+                                SizedBox(
+                                  width: 65,
+                                  height: 35,
+                                  child: TextButton(
+                                    style: TextButton.styleFrom(
+                                      foregroundColor: Colors.red,
+                                    ),
+                                    onPressed: () {
+                                      Get.back();
+                                      Get.back();
+                                    },
+                                    child: Text('Discard'),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 8,
+                                ),
+                                SizedBox(
+                                  width: 60,
+                                  height: 35,
+                                  child: TextButton(
+                                    style: TextButton.styleFrom(),
+                                    onPressed: () {
+                                      if (_personFormKey.currentState!
+                                          .validate()) {
+                                        _updateInfo();
+                                        Get.back();
+                                        Get.back();
+                                      }
+                                      Get.back();
+                                    },
+                                    child: Text('Save'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              );
+            }
+          },
+          icon: Icon(Icons.arrow_back),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -139,7 +215,7 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
         ),
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 24.0),
+        padding: const EdgeInsets.fromLTRB(17.0, 0.0, 17.0, 20.0),
         child: Container(
           width: double.maxFinite,
           height: 50,
@@ -147,7 +223,7 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
             onPressed: () {
               if (_personFormKey.currentState!.validate()) {
                 _updateInfo();
-                Navigator.of(context).pop();
+                Get.back();
               }
             },
             child: Text('Save'),

@@ -13,7 +13,10 @@ import 'package:http/http.dart' as http;
 
 import 'models/Install.dart';
 
-int colorTheme = 0xFF213292;
+Color color_dark = Color.fromARGB(255, 172, 142, 255);
+Color color_dark_AppBer = Color.fromARGB(255, 61, 61, 61);
+
+int colorTheme = 0xFF4A148C;
 Color color = Color(colorTheme);
 MaterialColor themeColor = MaterialColor(
   colorTheme,
@@ -100,12 +103,9 @@ class _NotesState extends State<Notes> {
       );
       // final jsonData = response.body;
       print('visit = ${response.body}');
-    } on TimeoutException catch (e) {
-      print('Timeout Error: $e');
-    } on SocketException catch (e) {
-      print('Socket Error: $e');
-    } on Error catch (e) {
-      print('General Error: $e');
+    } on TimeoutException {
+    } on SocketException {
+    } on Error {
     }
   }
 
@@ -128,13 +128,11 @@ class _NotesState extends State<Notes> {
         );
         // final jsonData = response.body;
         print('install = ${response.body}');
-      } on TimeoutException catch (e) {
-        print('Timeout Error: $e');
-      } on SocketException catch (e) {
-        print('Socket Error: $e');
-      } on Error catch (e) {
-        print('General Error: $e');
+      } on TimeoutException {
+      } on SocketException {
+      } on Error {
       }
+
     }
     Hive.box('Install').putAt(0 , Install(install: true));
   }
@@ -170,11 +168,11 @@ class _NotesState extends State<Notes> {
             primarySwatch: themeColor,
           ),
           darkTheme: ThemeData.dark().copyWith(
-              colorScheme: ColorScheme.dark(primary: themeColor),
+              colorScheme: ColorScheme.dark(primary: color_dark),
               appBarTheme:
-                  AppBarTheme(backgroundColor: Color.fromARGB(255, 58, 58, 58)),
+                  AppBarTheme(backgroundColor: color_dark_AppBer),
               floatingActionButtonTheme:
-                  FloatingActionButtonThemeData(backgroundColor: themeColor)),
+                  FloatingActionButtonThemeData(backgroundColor: color_dark)),
           themeMode: currentMode,
           home: ScreenNotes(),
         );
