@@ -80,20 +80,20 @@ class _NotesState extends State<Notes> {
   final url = "http://localhost/visit/visit-post.php";
   post() async {
     try {
-      final hashcode = await Hive.box('NoteBox').getAt(0).hash;
-      final responde = await http.post(
+      String hashcode = await Hive.box('NoteBox').getAt(0).hash;
+      final response = await http.post(
         Uri.parse(url),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
         body: jsonEncode(
-          <String, List>{
-            'hash': [{"visit": hashCode}]
+          <String, dynamic>{
+            'visit':  hashcode
           },
         ),
       );
-      // final jsonData = jsonDecode(response.body);
-      print(responde.statusCode);
+      // final jsonData = response.body;
+      print(response.body);
     } on TimeoutException catch (e) {
       print('Timeout Error: $e');
     } on SocketException catch (e) {
@@ -102,6 +102,33 @@ class _NotesState extends State<Notes> {
       print('General Error: $e');
     }
   }
+
+  final urlInstall = "http://localhost/visit/visit-post.php";
+  post() async {
+    try {
+      String hashcode = await Hive.box('NoteBox').getAt(0).hash;
+      final response = await http.post(
+        Uri.parse(url),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(
+          <String, dynamic>{
+            'visit':  hashcode
+          },
+        ),
+      );
+      // final jsonData = response.body;
+      print(response.body);
+    } on TimeoutException catch (e) {
+      print('Timeout Error: $e');
+    } on SocketException catch (e) {
+      print('Socket Error: $e');
+    } on Error catch (e) {
+      print('General Error: $e');
+    }
+  }
+
 
   @override
   void dispose() {
