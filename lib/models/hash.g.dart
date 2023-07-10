@@ -1,38 +1,32 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'person.dart';
+part of 'hash.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class PersonAdapter extends TypeAdapter<Person> {
+class HashAdapter extends TypeAdapter<Hash> {
   @override
-  final int typeId = 0;
+  final int typeId = 2;
 
   @override
-  Person read(BinaryReader reader) {
+  Hash read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Person(
-      name: fields[0] as String,
-      country: fields[1] as String,
-      dateTime: fields[2] as String,
+    return Hash(
+      hash: fields[0] as String,
     );
   }
 
   @override
-  void write(BinaryWriter writer, Person obj) {
+  void write(BinaryWriter writer, Hash obj) {
     writer
-      ..writeByte(3)
-      ..writeByte(0)
-      ..write(obj.name)
       ..writeByte(1)
-      ..write(obj.country)
-      ..writeByte(2)
-      ..write(obj.dateTime);
+      ..writeByte(0)
+      ..write(obj.hash);
   }
 
   @override
@@ -41,7 +35,7 @@ class PersonAdapter extends TypeAdapter<Person> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is PersonAdapter &&
+      other is HashAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

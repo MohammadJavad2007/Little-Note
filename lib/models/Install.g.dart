@@ -1,38 +1,32 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'person.dart';
+part of 'Install.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class PersonAdapter extends TypeAdapter<Person> {
+class InstallAdapter extends TypeAdapter<Install> {
   @override
-  final int typeId = 0;
+  final int typeId = 1;
 
   @override
-  Person read(BinaryReader reader) {
+  Install read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Person(
-      name: fields[0] as String,
-      country: fields[1] as String,
-      dateTime: fields[2] as String,
+    return Install(
+      install: fields[0] as bool,
     );
   }
 
   @override
-  void write(BinaryWriter writer, Person obj) {
+  void write(BinaryWriter writer, Install obj) {
     writer
-      ..writeByte(3)
-      ..writeByte(0)
-      ..write(obj.name)
       ..writeByte(1)
-      ..write(obj.country)
-      ..writeByte(2)
-      ..write(obj.dateTime);
+      ..writeByte(0)
+      ..write(obj.install);
   }
 
   @override
@@ -41,7 +35,7 @@ class PersonAdapter extends TypeAdapter<Person> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is PersonAdapter &&
+      other is InstallAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

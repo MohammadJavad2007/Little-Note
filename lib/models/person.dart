@@ -2,7 +2,7 @@ import 'package:hive/hive.dart';
 
 part 'person.g.dart';
 
-@HiveType(typeId: 1)
+@HiveType(typeId: 0)
 class Person {
   // title notes
   @HiveField(0)
@@ -15,9 +15,6 @@ class Person {
   // data time notes
   @HiveField(2)
   final String dateTime;
-
-  @HiveField(3)
-  final String hash = "0fc302b63c7fa1d0bd1f343002c5eff9";
 
   Person({
     required this.name,

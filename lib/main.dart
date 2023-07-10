@@ -6,9 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:notes/Screen/ScreenNotes.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:notes/models/hash.dart';
 import 'package:notes/models/person.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+
+import 'models/Install.dart';
 
 int colorTheme = 0xFF213292;
 Color color = Color(colorTheme);
@@ -33,9 +36,13 @@ void main() async {
   await Hive.initFlutter();
   // Registering the adapter
   Hive.registerAdapter(PersonAdapter());
+  Hive.registerAdapter(InstallAdapter());
+  Hive.registerAdapter(HashAdapter());
   // Opening the box]
 
   await Hive.openBox('NoteBox');
+  await Hive.openBox('Install');
+  await Hive.openBox('Hash');
 
   runApp(Notes());
 }
@@ -77,23 +84,22 @@ class _NotesState extends State<Notes> {
   //   }
   // }
 
-  final url = "http://localhost/visit/visit-post.php";
-  post() async {
+  final visit = "http://localhost/visit/visit-post.php";
+  Visit() async {
+    Hive.box('Hash').add(Hash(hash: "0fc302b63c7fa1d0bd1f343002c5eff9"));
     try {
-      String hashcode = await Hive.box('NoteBox').getAt(0).hash;
+      String hashcode = await Hive.box('Hash').getAt(0).hash;
       final response = await http.post(
-        Uri.parse(url),
+        Uri.parse(visit),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
         body: jsonEncode(
-          <String, dynamic>{
-            'visit':  hashcode
-          },
+          <String, dynamic>{'visit': hashcode},
         ),
       );
       // final jsonData = response.body;
-      print(response.body);
+      print('visit = ${response.body}');
     } on TimeoutException catch (e) {
       print('Timeout Error: $e');
     } on SocketException catch (e) {
@@ -103,32 +109,35 @@ class _NotesState extends State<Notes> {
     }
   }
 
-  final urlInstall = "http://localhost/visit/visit-post.php";
-  post() async {
-    try {
-      String hashcode = await Hive.box('NoteBox').getAt(0).hash;
-      final response = await http.post(
-        Uri.parse(url),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body: jsonEncode(
-          <String, dynamic>{
-            'visit':  hashcode
-          },
-        ),
-      );
-      // final jsonData = response.body;
-      print(response.body);
-    } on TimeoutException catch (e) {
-      print('Timeout Error: $e');
-    } on SocketException catch (e) {
-      print('Socket Error: $e');
-    } on Error catch (e) {
-      print('General Error: $e');
+  final install = "http://localhost/install/install-post.php";
+  Installer() async {
+    if(Hive.box('Install').length == 0) {
+      Hive.box('Install').add(Install(install: false));
     }
+    if (Hive.box('Install').getAt(0).install == false) {
+      try {
+        String hashcode = await Hive.box('Hash').getAt(0).hash;
+        final response = await http.post(
+          Uri.parse(install),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: jsonEncode(
+            <String, dynamic>{'install': hashcode},
+          ),
+        );
+        // final jsonData = response.body;
+        print('install = ${response.body}');
+      } on TimeoutException catch (e) {
+        print('Timeout Error: $e');
+      } on SocketException catch (e) {
+        print('Socket Error: $e');
+      } on Error catch (e) {
+        print('General Error: $e');
+      }
+    }
+    Hive.box('Install').putAt(0 , Install(install: true));
   }
-
 
   @override
   void dispose() {
@@ -143,7 +152,8 @@ class _NotesState extends State<Notes> {
     Darkmode();
     // internet();
     // ignore: unused_local_variable
-    post();
+    Visit();
+    Installer();
     super.initState();
   }
 
