@@ -3,15 +3,21 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:notes/Screen/ScreenNotes.dart';
 import 'package:get/get.dart';
+import 'package:notes/Screen/ScreenNotes.dart';
+
+// import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:notes/lang/Translations.dart';
 import 'package:notes/models/hash.dart';
 import 'package:notes/models/person.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
+// ignore: depend_on_referenced_packages
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'models/Install.dart';
+
 
 Color color_dark = Color.fromARGB(255, 172, 142, 255);
 Color color_dark_AppBer = Color.fromARGB(255, 61, 61, 61);
@@ -156,13 +162,25 @@ class _NotesState extends State<Notes> {
   }
 
   // This widget is the root of your application.
-
   @override
   Widget build(BuildContext context) {
+    // var a = Translations.of(context)?.text('title');
+    // print(a);
     return ValueListenableBuilder<ThemeMode>(
       valueListenable: Notes.themeNotifier,
       builder: (_, ThemeMode currentMode, __) {
         return GetMaterialApp(
+          // localizationsDelegates: [
+          //   // AppLocalizationsDelegate(),
+          //   GlobalMaterialLocalizations.delegate,
+          //   GlobalWidgetsLocalizations.delegate,
+          //   GlobalCupertinoLocalizations.delegate,
+          // ],
+          // supportedLocales: [
+          //   Locale('fa',''),
+          //   Locale('en',''),
+          // ],
+          
           title: 'Notes',
           theme: ThemeData(
             primarySwatch: themeColor,
