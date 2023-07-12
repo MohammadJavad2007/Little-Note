@@ -18,7 +18,6 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'models/Install.dart';
 
-
 Color color_dark = Color.fromARGB(255, 172, 142, 255);
 Color color_dark_AppBer = Color.fromARGB(255, 61, 61, 61);
 
@@ -111,13 +110,12 @@ class _NotesState extends State<Notes> {
       print('visit = ${response.body}');
     } on TimeoutException {
     } on SocketException {
-    } on Error {
-    }
+    } on Error {}
   }
 
   final install = "http://localhost/install/install-post.php";
   Installer() async {
-    if(Hive.box('Install').length == 0) {
+    if (Hive.box('Install').length == 0) {
       Hive.box('Install').add(Install(install: false));
     }
     if (Hive.box('Install').getAt(0).install == false) {
@@ -136,11 +134,9 @@ class _NotesState extends State<Notes> {
         print('install = ${response.body}');
       } on TimeoutException {
       } on SocketException {
-      } on Error {
-      }
-
+      } on Error {}
     }
-    Hive.box('Install').putAt(0 , Install(install: true));
+    Hive.box('Install').putAt(0, Install(install: true));
   }
 
   @override
@@ -180,23 +176,22 @@ class _NotesState extends State<Notes> {
           //   Locale('fa',''),
           //   Locale('en',''),
           // ],
-          localizationsDelegates: [
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          // translations: Translation(),
-          locale: Locale('fa', 'IR'),
-          fallbackLocale: Locale('en', 'US'),
-          supportedLocales: [Locale('fa', 'IR'), Locale('en', 'US')],
+          // localizationsDelegates: [
+          //   GlobalMaterialLocalizations.delegate,
+          //   GlobalWidgetsLocalizations.delegate,
+          //   GlobalCupertinoLocalizations.delegate,
+          // ],
+          // // translations: Translation(),
+          // locale: Locale('fa', 'IR'),
+          // fallbackLocale: Locale('en', 'US'),
+          // supportedLocales: [Locale('fa', 'IR'), Locale('en', 'US')],
           title: 'Notes',
           theme: ThemeData(
             primarySwatch: themeColor,
           ),
           darkTheme: ThemeData.dark().copyWith(
               colorScheme: ColorScheme.dark(primary: color_dark),
-              appBarTheme:
-                  AppBarTheme(backgroundColor: color_dark_AppBer),
+              appBarTheme: AppBarTheme(backgroundColor: color_dark_AppBer),
               floatingActionButtonTheme:
                   FloatingActionButtonThemeData(backgroundColor: color_dark)),
           themeMode: currentMode,
@@ -206,3 +201,4 @@ class _NotesState extends State<Notes> {
     );
   }
 }
+

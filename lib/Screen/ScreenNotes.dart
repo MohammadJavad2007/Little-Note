@@ -1,5 +1,7 @@
 // ignore_for_file: file_names
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -10,6 +12,50 @@ import 'package:notes/Screen/ScreenUpdateNotes.dart';
 import 'package:notes/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:notes/models/person.dart';
+// import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
+
+// class MyHomePage extends GetView<MyDrawerController> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return GetBuilder<MyDrawerController>(
+//       builder: (_) => ZoomDrawer(
+//         controller: _.zoomDrawerController,
+//         style: DrawerStyle.defaultStyle,
+//         menuScreen: MenuScreen(),
+//         mainScreen: ScreenNotes(),
+//         borderRadius: 24.0,
+//         showShadow: true,
+//         angle: 0.0,
+//         drawerShadowsBackgroundColor: Color.fromARGB(69, 158, 158, 158),
+//         menuBackgroundColor: Theme.of(context).primaryColor,
+//         slideWidth: MediaQuery.of(context).size.width * .50,
+//         openCurve: Curves.linear,
+//         closeCurve: Curves.ease,
+//       ),
+//     );
+//   }
+// }
+
+// class MenuScreen extends GetView<MyDrawerController> {
+//   const MenuScreen({Key? key}) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       color: Theme.of(context).primaryColor,
+//     );
+//   }
+// }
+
+// class MyDrawerController extends GetxController {
+//   final zoomDrawerController = ZoomDrawerController();
+
+//   void toggleDrawer() {
+//     print("Toggle drawer");
+//     zoomDrawerController.toggle?.call();
+//     update();
+//   }
+// }
 
 // ignore: must_be_immutable
 class ScreenNotes extends StatefulWidget {
@@ -77,204 +123,324 @@ class _ScreenNotesState extends State<ScreenNotes> {
     // print(storage.getItem('darkMode'));
   }
 
+  double value = 0;
   // int sized = 100;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        systemOverlayStyle: const SystemUiOverlayStyle(
-          statusBarColor: Color.fromARGB(0, 0, 0, 0), // <-- SEE HERE
-        ),
-        title: const Text('Notes'),
-        actions: [
-          IconButton(
-            icon: Icon(Notes.themeNotifier.value == ThemeMode.light
-                ? Icons.dark_mode
-                : Icons.light_mode),
-            onPressed: toggle,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: IconButton(
-              onPressed: () {
-                showSearch(context: context, delegate: Search(widget.list));
-              },
-              icon: Icon(Icons.search),
+      body: Stack(
+        children: [
+          // ! Here Color Of Page Drawer !
+          Container(
+            decoration: BoxDecoration(
+              color: Theme.of(context).primaryColor
             ),
           ),
-          // if (_isGridMode)
-          //   IconButton(
-          //     icon: const Icon(Icons.grid_on),
-          //     onPressed: () {
-          //       setState(() {
-          //         _isGridMode = false;
-          //       });
-          //     },
-          //   )
-          // else
-          //   IconButton(
-          //     icon: const Icon(Icons.list),
-          //     onPressed: () {
-          //       setState(() {
-          //         _isGridMode = true;
-          //       });
-          //     },
-          //   ),
-        ],
-      ),
 
-      // body
-      body: Padding(
-        padding: const EdgeInsets.only(top: 5),
-        child: ValueListenableBuilder(
-          valueListenable: contactBox.listenable(),
-          builder: (context, Box box, widget) {
-            if (box.isEmpty) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text('Write Your First Note'),
-                    ),
-                  ),
-                  Center(
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Get.to(() => ScreenAddNotes(),
-                            duration: Duration(milliseconds: 250),
-                            transition: Transition.rightToLeftWithFade);
-                      },
-                      child: Text('ADD NEW NOTE'),
-                    ),
-                  ),
-                ],
-              );
-            } else {
-              return ListView.builder(
-                physics: BouncingScrollPhysics(),
-                itemCount: box.length,
-                itemBuilder: (context, index) {
-                  var currentBox = box;
-                  var personData = currentBox.getAt(index)!;
-
-                  return Padding(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                    child: AnimatedContainer(
-                      duration: Duration(seconds: 1),
-                      curve: Curves.bounceIn,
-                      decoration: BoxDecoration(
-                        color: Color.fromARGB(54, 133, 131, 131),
-                        borderRadius: BorderRadius.circular(10),
+          // ! simple navigation menu !
+          SafeArea(
+              child: Container(
+            width: 200,
+            // color: Colors.amberAccent,
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                DrawerHeader(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      CircleAvatar(
+                        backgroundColor: Colors.white54,
+                        radius: 45,
                       ),
-                      child: InkWell(
-                        onTap: () {
-                          Get.to(
-                              () => ScreenUpdateNotes(
-                                    index: index,
-                                    person: personData,
-                                  ),
-                              duration: const Duration(milliseconds: 250),
-                              transition: Transition.rightToLeftWithFade);
-                        },
-                        child: Column(
-                          children: [
-                            ListTile(
-                              title: Text(
-                                personData.name,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              subtitle: Text(
-                                personData.country,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              trailing: IconButton(
-                                onPressed: () {
-                                  showDialog(
+                      Padding(
+                        padding: EdgeInsets.all(10.0),
+                        child: Text("Hmida Dev's"),
+                      ),
+                    ],
+                  ),
+                ),
+                const ListTile(
+                  title: Text("Home"),
+                  leading: Icon(Icons.home),
+                ),
+                const ListTile(
+                  title: Text("Settings"),
+                  leading: Icon(Icons.settings),
+                ),
+                const ListTile(
+                  title: Text("About"),
+                  leading: Icon(Icons.help),
+                ),
+                const ListTile(
+                  title: Text("Exit"),
+                  leading: Icon(Icons.exit_to_app),
+                ),
+              ],
+            ),
+          )),
+
+          // ! : MainScreen
+          TweenAnimationBuilder(
+              // ? Here Change Animation
+              curve: Curves.easeInOut,
+              tween: Tween<double>(begin: 0, end: value),
+              // ? and here change
+              duration: const Duration(milliseconds: 600),
+              builder: (_, double val, __) {
+                return (Transform(
+                  alignment: Alignment.center,
+                  transform: Matrix4.identity()
+                    ..setEntry(3, 2, 0.001)
+                    ..setEntry(0, 3, 200 * val)
+                    ..rotateY((pi / 6) * val),
+                  child: ClipRRect(
+                    borderRadius: value == 0
+                        ? BorderRadius.circular(0)
+                        : BorderRadius.circular(15),
+                    child: Scaffold(
+                      appBar: AppBar(
+                        systemOverlayStyle: const SystemUiOverlayStyle(
+                          statusBarColor:
+                              Color.fromARGB(0, 0, 0, 0), // <-- SEE HERE
+                        ),
+                        title: const Text('Notes'),
+                        leading: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              value == 0 ? value = 1 : value = 0;
+                            });
+                          },
+                          icon: Icon(Icons.menu),
+                        ),
+                        actions: [
+                          IconButton(
+                            icon: Icon(
+                                Notes.themeNotifier.value == ThemeMode.light
+                                    ? Icons.dark_mode
+                                    : Icons.light_mode),
+                            onPressed: toggle,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: IconButton(
+                              onPressed: () {
+                                showSearch(
                                     context: context,
-                                    builder: (BuildContext context) {
-                                      return AlertDialog(
-                                          // ignore: unused_label
-                                          title: Text(
-                                            'Do you really want to delete the note?',
-                                            style: TextStyle(fontSize: 15),
-                                          ),
-                                          // content: Center(),
-                                          // ignore: unused_label
-                                          actions: <Widget>[
-                                            TextButton(
-                                              child: const Text("Cancle"),
-                                              onPressed: () {
-                                                Get.back();
-                                              },
-                                            ),
-                                            TextButton(
-                                              style: TextButton.styleFrom(
-                                                foregroundColor: Colors.red,
+                                    delegate: Search(widget.list));
+                              },
+                              icon: Icon(Icons.search),
+                            ),
+                          ),
+                          // if (_isGridMode)
+                          //   IconButton(
+                          //     icon: const Icon(Icons.grid_on),
+                          //     onPressed: () {
+                          //       setState(() {
+                          //         _isGridMode = false;
+                          //       });
+                          //     },
+                          //   )
+                          // else
+                          //   IconButton(
+                          //     icon: const Icon(Icons.list),
+                          //     onPressed: () {
+                          //       setState(() {
+                          //         _isGridMode = true;
+                          //       });
+                          //     },
+                          //   ),
+                        ],
+                      ),
+                      // body
+                      body: Padding(
+                        padding: const EdgeInsets.only(top: 5),
+                        child: ValueListenableBuilder(
+                          valueListenable: contactBox.listenable(),
+                          builder: (context, Box box, widget) {
+                            if (box.isEmpty) {
+                              return Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text('Write Your First Note'),
+                                    ),
+                                  ),
+                                  Center(
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        Get.to(() => ScreenAddNotes(),
+                                            duration:
+                                                Duration(milliseconds: 250),
+                                            transition:
+                                                Transition.rightToLeftWithFade);
+                                      },
+                                      child: Text('ADD NEW NOTE'),
+                                    ),
+                                  ),
+                                ],
+                              );
+                            } else {
+                              return ListView.builder(
+                                physics: BouncingScrollPhysics(),
+                                itemCount: box.length,
+                                itemBuilder: (context, index) {
+                                  var currentBox = box;
+                                  var personData = currentBox.getAt(index)!;
+
+                                  return Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 5, horizontal: 10),
+                                    child: AnimatedContainer(
+                                      duration: Duration(seconds: 1),
+                                      curve: Curves.bounceIn,
+                                      decoration: BoxDecoration(
+                                        color:
+                                            Color.fromARGB(54, 133, 131, 131),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: InkWell(
+                                        onTap: () {
+                                          Get.to(
+                                              () => ScreenUpdateNotes(
+                                                    index: index,
+                                                    person: personData,
+                                                  ),
+                                              duration: const Duration(
+                                                  milliseconds: 250),
+                                              transition: Transition
+                                                  .rightToLeftWithFade);
+                                        },
+                                        child: Column(
+                                          children: [
+                                            ListTile(
+                                              title: Text(
+                                                personData.name,
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
                                               ),
-                                              onPressed: () {
-                                                _deleteInfo(index);
-                                                Get.back();
-                                              },
-                                              child: Text('Delete'),
+                                              subtitle: Text(
+                                                personData.country,
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
+                                              trailing: IconButton(
+                                                onPressed: () {
+                                                  showDialog(
+                                                    context: context,
+                                                    builder:
+                                                        (BuildContext context) {
+                                                      return AlertDialog(
+                                                          // ignore: unused_label
+                                                          title: Text(
+                                                            'Do you really want to delete the note?',
+                                                            style: TextStyle(
+                                                                fontSize: 15),
+                                                          ),
+                                                          // content: Center(),
+                                                          // ignore: unused_label
+                                                          actions: <Widget>[
+                                                            TextButton(
+                                                              child: const Text(
+                                                                  "Cancle"),
+                                                              onPressed: () {
+                                                                Get.back();
+                                                              },
+                                                            ),
+                                                            TextButton(
+                                                              style: TextButton
+                                                                  .styleFrom(
+                                                                foregroundColor:
+                                                                    Colors.red,
+                                                              ),
+                                                              onPressed: () {
+                                                                _deleteInfo(
+                                                                    index);
+                                                                Get.back();
+                                                              },
+                                                              child: Text(
+                                                                  'Delete'),
+                                                            ),
+                                                          ]);
+                                                    },
+                                                  );
+                                                },
+                                                icon: Icon(
+                                                  Icons.delete,
+                                                  color: Colors.red,
+                                                ),
+                                              ),
                                             ),
-                                          ]);
-                                    },
+                                            Divider(),
+                                            Container(
+                                              alignment: Alignment.topRight,
+                                              padding:
+                                                  EdgeInsets.only(bottom: 15),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 15),
+                                                child: Text(
+                                                  personData.dateTime,
+                                                  key: UniqueKey(),
+                                                  style:
+                                                      TextStyle(fontSize: 15),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
                                   );
                                 },
-                                icon: Icon(
-                                  Icons.delete,
-                                  color: Colors.red,
-                                ),
-                              ),
-                            ),
-                            Divider(),
-                            Container(
-                              alignment: Alignment.topRight,
-                              padding: EdgeInsets.only(bottom: 15),
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 15),
-                                child: Text(
-                                  personData.dateTime,
-                                  key: UniqueKey(),
-                                  style: TextStyle(fontSize: 15),
-                                ),
-                              ),
-                            ),
-                          ],
+                              );
+                            }
+                          },
                         ),
                       ),
+                      bottomNavigationBar: BottomAppBar(
+                        shape: CircularNotchedRectangle(),
+                        notchMargin: 8,
+                        color: Theme.of(context).colorScheme.primary,
+                        child: Container(
+                          height: 60,
+                        ),
+                      ),
+                      floatingActionButtonLocation:
+                          FloatingActionButtonLocation.centerDocked,
+                      floatingActionButton: FloatingActionButton(
+                        onPressed: () {
+                          Get.to(() => ScreenAddNotes(),
+                              duration: Duration(milliseconds: 250),
+                              transition: Transition.rightToLeftWithFade);
+                        },
+                        child: const Icon(Icons.add),
+                      ),
                     ),
-                  );
-                },
-              );
-            }
-          },
-        ),
-      ),
-      bottomNavigationBar: BottomAppBar(
-        shape: CircularNotchedRectangle(),
-        notchMargin: 8,
-        color: Theme.of(context).colorScheme.primary,
-        child: Container(
-          height: 60,
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Get.to(() => ScreenAddNotes(),
-              duration: Duration(milliseconds: 250),
-              transition: Transition.rightToLeftWithFade);
-        },
-        child: const Icon(Icons.add),
+                  ),
+                ));
+              }),
+
+          //! Gesture For Slide
+          GestureDetector(
+            onHorizontalDragUpdate: (e) {
+              if (e.delta.dx > 0) {
+                setState(() {
+                  value = 1;
+                });
+              } else {
+                setState(() {
+                  value = 0;
+                });
+              }
+            },
+          )
+        ],
       ),
     );
   }
@@ -511,3 +677,346 @@ class Search extends SearchDelegate {
 //               },
 //             )
 //           :
+
+//  class MyApp2 extends StatelessWidget {
+//    const MyApp2({Key? key}) : super(key: key);
+
+//    // This widget is the root of your application.
+//    @override
+//    Widget build(BuildContext context) {
+//      return const MaterialApp(
+//        debugShowCheckedModeBanner: false,
+//        // home: SliderAnimated(),
+//        home: DrawerAnimated(),
+//      );
+//    }
+//  }
+
+//  class DrawerAnimated extends StatefulWidget {
+//    const DrawerAnimated({Key? key}) : super(key: key);
+
+//    @override
+//    _DrawerAnimatedState createState() => _DrawerAnimatedState();
+//  }
+
+//  class _DrawerAnimatedState extends State<DrawerAnimated> {
+
+//    double value = 0;
+
+//    @override
+//    Widget build(BuildContext context) {
+//      return Scaffold(
+//        body: Stack(
+//          children: [
+//            // ! Here Color Of Page Drawer !
+//            Container(
+//              decoration: const BoxDecoration(
+//                  gradient: LinearGradient(
+//                      colors: [Colors.purpleAccent, Colors.deepPurpleAccent],
+//                      begin: Alignment.bottomCenter,
+//                      end: Alignment.topCenter)),
+//            ),
+
+//            // ! simple navigation menu !
+//            SafeArea(
+//                child: Container(
+//              width: 200,
+//              // color: Colors.amberAccent,
+//              padding: const EdgeInsets.all(8.0),
+//              child: Column(
+//                children: [
+//                  DrawerHeader(
+//                    child: Column(
+//                      mainAxisAlignment: MainAxisAlignment.center,
+//                      children: const [
+//                        CircleAvatar(
+//                          radius: 45,
+//                        ),
+//                        Padding(
+//                          padding: EdgeInsets.all(10.0),
+//                          child: Text("Hmida Dev's"),
+//                        ),
+//                      ],
+//                    ),
+//                  ),
+//                  const ListTile(
+//                    title: Text("Home"),
+//                    leading: Icon(Icons.home),
+//                  ),
+//                  const ListTile(
+//                    title: Text("Settings"),
+//                    leading: Icon(Icons.settings),
+//                  ),
+//                  const ListTile(
+//                    title: Text("About"),
+//                    leading: Icon(Icons.help),
+//                  ),
+//                  const ListTile(
+//                    title: Text("Exit"),
+//                    leading: Icon(Icons.exit_to_app),
+//                  ),
+//                ],
+//              ),
+//            )),
+
+//            // ! : MainScreen
+//            TweenAnimationBuilder(
+//                // ? Here Change Animation
+//                curve: Curves.easeInOut ,
+//                tween: Tween<double>(begin: 0, end: value),
+//                // ? and here change
+//                duration: const Duration(milliseconds: 600),
+//                builder: (_, double val, __) {
+//                  return (
+//                    Transform(
+//                    alignment: Alignment.center,
+//                    transform: Matrix4.identity()
+//                      ..setEntry(3, 2, 0.001)
+//                      ..setEntry(0, 3, 200 * val)
+//                      ..rotateY((pi / 60) * val),
+//                    child:
+//                    ClipRRect(
+//                     borderRadius: value == 0 ? BorderRadius.circular(0) : BorderRadius.circular(15),
+//                      child: Scaffold(
+//                        appBar: AppBar(),
+//                        body: Center(
+//                          child: Column(
+//                            children: [
+//                              MaterialButton(
+//                                onPressed: () {
+//                                  setState(() {
+//                                   value == 0 ? value = 1 : value = 0;
+//                                  });
+//                                },
+//                                child: const Text("Open"),
+//                              )
+//                            ],
+//                          ),
+//                        ),
+//                      ),
+//                    ),
+//                  ));
+//                }),
+
+//            //! Gesture For Slide
+//            GestureDetector(
+//              onHorizontalDragUpdate: (e) {
+//                if (e.delta.dx > 0) {
+//                  setState(() {
+//                    value = 1;
+//                  });
+//                } else {
+//                  setState(() {
+//                    value = 0;
+//                  });
+//                }
+//              },
+//            )
+//          ],
+//        ),
+//      );
+//    }
+//  }
+
+//  Scaffold(
+//       appBar: AppBar(
+//         systemOverlayStyle: const SystemUiOverlayStyle(
+//           statusBarColor: Color.fromARGB(0, 0, 0, 0), // <-- SEE HERE
+//         ),
+//         title: const Text('Notes'),
+//         leading: IconButton(
+//           onPressed: () {
+//             // ZoomDrawer.of(context)?.open();
+//           },
+//           icon: Icon(Icons.menu),
+//         ),
+//         actions: [
+//           IconButton(
+//             icon: Icon(Notes.themeNotifier.value == ThemeMode.light
+//                 ? Icons.dark_mode
+//                 : Icons.light_mode),
+//             onPressed: toggle,
+//           ),
+//           Padding(
+//             padding: const EdgeInsets.all(8.0),
+//             child: IconButton(
+//               onPressed: () {
+//                 showSearch(context: context, delegate: Search(widget.list));
+//               },
+//               icon: Icon(Icons.search),
+//             ),
+//           ),
+//           // if (_isGridMode)
+//           //   IconButton(
+//           //     icon: const Icon(Icons.grid_on),
+//           //     onPressed: () {
+//           //       setState(() {
+//           //         _isGridMode = false;
+//           //       });
+//           //     },
+//           //   )
+//           // else
+//           //   IconButton(
+//           //     icon: const Icon(Icons.list),
+//           //     onPressed: () {
+//           //       setState(() {
+//           //         _isGridMode = true;
+//           //       });
+//           //     },
+//           //   ),
+//         ],
+//       ),
+//       // body
+//       body: Padding(
+//         padding: const EdgeInsets.only(top: 5),
+//         child: ValueListenableBuilder(
+//           valueListenable: contactBox.listenable(),
+//           builder: (context, Box box, widget) {
+//             if (box.isEmpty) {
+//               return Column(
+//                 mainAxisAlignment: MainAxisAlignment.center,
+//                 crossAxisAlignment: CrossAxisAlignment.stretch,
+//                 mainAxisSize: MainAxisSize.max,
+//                 children: [
+//                   Center(
+//                     child: Padding(
+//                       padding: const EdgeInsets.all(8.0),
+//                       child: Text('Write Your First Note'),
+//                     ),
+//                   ),
+//                   Center(
+//                     child: ElevatedButton(
+//                       onPressed: () {
+//                         Get.to(() => ScreenAddNotes(),
+//                             duration: Duration(milliseconds: 250),
+//                             transition: Transition.rightToLeftWithFade);
+//                       },
+//                       child: Text('ADD NEW NOTE'),
+//                     ),
+//                   ),
+//                 ],
+//               );
+//             } else {
+//               return ListView.builder(
+//                 physics: BouncingScrollPhysics(),
+//                 itemCount: box.length,
+//                 itemBuilder: (context, index) {
+//                   var currentBox = box;
+//                   var personData = currentBox.getAt(index)!;
+
+//                   return Padding(
+//                     padding:
+//                         const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+//                     child: AnimatedContainer(
+//                       duration: Duration(seconds: 1),
+//                       curve: Curves.bounceIn,
+//                       decoration: BoxDecoration(
+//                         color: Color.fromARGB(54, 133, 131, 131),
+//                         borderRadius: BorderRadius.circular(10),
+//                       ),
+//                       child: InkWell(
+//                         onTap: () {
+//                           Get.to(
+//                               () => ScreenUpdateNotes(
+//                                     index: index,
+//                                     person: personData,
+//                                   ),
+//                               duration: const Duration(milliseconds: 250),
+//                               transition: Transition.rightToLeftWithFade);
+//                         },
+//                         child: Column(
+//                           children: [
+//                             ListTile(
+//                               title: Text(
+//                                 personData.name,
+//                                 maxLines: 1,
+//                                 overflow: TextOverflow.ellipsis,
+//                               ),
+//                               subtitle: Text(
+//                                 personData.country,
+//                                 maxLines: 2,
+//                                 overflow: TextOverflow.ellipsis,
+//                               ),
+//                               trailing: IconButton(
+//                                 onPressed: () {
+//                                   showDialog(
+//                                     context: context,
+//                                     builder: (BuildContext context) {
+//                                       return AlertDialog(
+//                                           // ignore: unused_label
+//                                           title: Text(
+//                                             'Do you really want to delete the note?',
+//                                             style: TextStyle(fontSize: 15),
+//                                           ),
+//                                           // content: Center(),
+//                                           // ignore: unused_label
+//                                           actions: <Widget>[
+//                                             TextButton(
+//                                               child: const Text("Cancle"),
+//                                               onPressed: () {
+//                                                 Get.back();
+//                                               },
+//                                             ),
+//                                             TextButton(
+//                                               style: TextButton.styleFrom(
+//                                                 foregroundColor: Colors.red,
+//                                               ),
+//                                               onPressed: () {
+//                                                 _deleteInfo(index);
+//                                                 Get.back();
+//                                               },
+//                                               child: Text('Delete'),
+//                                             ),
+//                                           ]);
+//                                     },
+//                                   );
+//                                 },
+//                                 icon: Icon(
+//                                   Icons.delete,
+//                                   color: Colors.red,
+//                                 ),
+//                               ),
+//                             ),
+//                             Divider(),
+//                             Container(
+//                               alignment: Alignment.topRight,
+//                               padding: EdgeInsets.only(bottom: 15),
+//                               child: Padding(
+//                                 padding:
+//                                     const EdgeInsets.symmetric(horizontal: 15),
+//                                 child: Text(
+//                                   personData.dateTime,
+//                                   key: UniqueKey(),
+//                                   style: TextStyle(fontSize: 15),
+//                                 ),
+//                               ),
+//                             ),
+//                           ],
+//                         ),
+//                       ),
+//                     ),
+//                   );
+//                 },
+//               );
+//             }
+//           },
+//         ),
+//       ),
+//       bottomNavigationBar: BottomAppBar(
+//         shape: CircularNotchedRectangle(),
+//         notchMargin: 8,
+//         color: Theme.of(context).colorScheme.primary,
+//         child: Container(
+//           height: 60,
+//         ),
+//       ),
+//       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+//       floatingActionButton: FloatingActionButton(
+//         onPressed: () {
+//           Get.to(() => ScreenAddNotes(),
+//               duration: Duration(milliseconds: 250),
+//               transition: Transition.rightToLeftWithFade);
+//         },
+//         child: const Icon(Icons.add),
+//       ),
+//     );
