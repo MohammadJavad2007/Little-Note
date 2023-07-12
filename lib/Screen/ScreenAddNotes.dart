@@ -98,7 +98,10 @@ class _ScreenAddNotesState extends State<ScreenAddNotes> {
                 builder: (BuildContext context) {
                   return AlertDialog(
                     // ignore: unused_label
-                    title: Text('Save your changes or discard them?',style: TextStyle(fontSize: 15),),
+                    title: Text(
+                      'Save your changes or discard them?',
+                      style: TextStyle(fontSize: 15),
+                    ),
                     // ignore: unused_label
                     actions: <Widget>[
                       Padding(
@@ -213,7 +216,10 @@ class _ScreenAddNotesState extends State<ScreenAddNotes> {
                 Get.back();
               }
             },
-            child: Text('Save'),
+            child: Text(
+              'Save',
+              style: TextStyle(color: Colors.white),
+            ),
           ),
         ),
       ),

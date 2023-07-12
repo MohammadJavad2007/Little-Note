@@ -100,7 +100,8 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
           onPressed: () {
             if ((_countryController.text ==
                     Hive.box('NoteBox').getAt(widget.index).country) &
-                (_nameController.text == Hive.box('NoteBox').getAt(widget.index).name)) {
+                (_nameController.text ==
+                    Hive.box('NoteBox').getAt(widget.index).name)) {
               Get.back();
             } else {
               showDialog(
@@ -226,7 +227,10 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
                 Get.back();
               }
             },
-            child: Text('Save'),
+            child: Text(
+              'Save',
+              style: TextStyle(color: Colors.white),
+            ),
           ),
         ),
       ),

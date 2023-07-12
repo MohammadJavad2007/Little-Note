@@ -133,7 +133,11 @@ class _ScreenNotesState extends State<ScreenNotes> {
           // ! Here Color Of Page Drawer !
 
           Container(
-            decoration: BoxDecoration(color: Theme.of(context).primaryColor),
+            decoration: BoxDecoration(
+              color: Notes.themeNotifier.value == ThemeMode.light
+                  ? color_background
+                  : color_background_dark,
+            ),
           ),
 
           // ! simple navigation menu !
@@ -177,7 +181,9 @@ class _ScreenNotesState extends State<ScreenNotes> {
                   height: 50,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Theme.of(context).primaryColor,
+                      backgroundColor: Notes.themeNotifier.value == ThemeMode.light
+                  ? color_background
+                  : color_background_dark,
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(0)),
@@ -217,7 +223,9 @@ class _ScreenNotesState extends State<ScreenNotes> {
                   height: 50,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Theme.of(context).primaryColor,
+                      backgroundColor: Notes.themeNotifier.value == ThemeMode.light
+                  ? color_background
+                  : color_background_dark,
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(0)),
@@ -257,7 +265,9 @@ class _ScreenNotesState extends State<ScreenNotes> {
                   height: 50,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Theme.of(context).primaryColor,
+                      backgroundColor: Notes.themeNotifier.value == ThemeMode.light
+                  ? color_background
+                  : color_background_dark,
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(0)),
@@ -536,7 +546,7 @@ class _ScreenNotesState extends State<ScreenNotes> {
                               duration: Duration(milliseconds: 250),
                               transition: Transition.rightToLeftWithFade);
                         },
-                        child: const Icon(Icons.add),
+                        child: const Icon(Icons.add , color: Colors.white,),
                       ),
                     ),
                   ),

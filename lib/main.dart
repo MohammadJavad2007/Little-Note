@@ -15,13 +15,17 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 // ignore: depend_on_referenced_packages
+
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'models/Install.dart';
 
-Color color_dark = Color.fromARGB(255, 172, 142, 255);
-Color color_dark_AppBer = Color.fromARGB(255, 61, 61, 61);
+Color color_dark = Color.fromRGBO(39, 9, 207, 1);
+Color color_background = Color.fromARGB(255, 26, 11, 120);
+Color color_background_dark = Color.fromARGB(255, 34, 34, 34);
+Color color_dark_AppBer = Color.fromRGBO(39, 9, 207, 1);
+// Color color_dark_AppBer = Color(0xFF3D3D3D);
 
-int colorTheme = 0xFF4A148C;
+int colorTheme = 0xFF20148C;
 Color color = Color(colorTheme);
 MaterialColor themeColor = MaterialColor(
   colorTheme,
