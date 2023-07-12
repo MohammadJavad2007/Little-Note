@@ -131,50 +131,166 @@ class _ScreenNotesState extends State<ScreenNotes> {
       body: Stack(
         children: [
           // ! Here Color Of Page Drawer !
+
           Container(
-            decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor
-            ),
+            decoration: BoxDecoration(color: Theme.of(context).primaryColor),
           ),
 
           // ! simple navigation menu !
           SafeArea(
               child: Container(
-            width: 200,
+            width: 220,
             // color: Colors.amberAccent,
-            padding: const EdgeInsets.all(8.0),
+            // padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-                DrawerHeader(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      CircleAvatar(
-                        backgroundColor: Colors.white54,
-                        radius: 45,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(10.0),
-                        child: Text("Hmida Dev's"),
-                      ),
-                    ],
+                Padding(
+                  padding: const EdgeInsets.only(top: 70, bottom: 10),
+                  child: Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CircleAvatar(
+                          backgroundColor: Colors.white,
+                          radius: 45,
+                          child: Center(
+                            child: Icon(
+                              Icons.create,
+                              size: 60,
+                              color: Theme.of(context).primaryColor,
+                            ),
+                          ),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: Text(
+                            "Note Pad",
+                            style: TextStyle(fontSize: 20, color: Colors.white),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-                const ListTile(
-                  title: Text("Home"),
-                  leading: Icon(Icons.home),
+                SizedBox(
+                  width: double.infinity,
+                  height: 50,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Theme.of(context).primaryColor,
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(0)),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        value == 0 ? value = 1 : value = 0;
+                      });
+                    },
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding:
+                              EdgeInsets.only(left: 8.0, top: 8.0, bottom: 8.0),
+                          child: Icon(
+                            Icons.translate,
+                            color: Colors.white,
+                          ),
+                        ),
+                        Text(
+                          'Languages',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                        Icon(
+                          Icons.translate,
+                          color: Colors.white,
+                        )
+                      ],
+                    ),
+                  ),
                 ),
-                const ListTile(
-                  title: Text("Settings"),
-                  leading: Icon(Icons.settings),
+                SizedBox(
+                  width: double.infinity,
+                  height: 50,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Theme.of(context).primaryColor,
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(0)),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        value == 0 ? value = 1 : value = 0;
+                      });
+                    },
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding:
+                              EdgeInsets.only(left: 8.0, top: 8.0, bottom: 8.0),
+                          child: Icon(
+                            Icons.translate,
+                            color: Colors.white,
+                          ),
+                        ),
+                        Text(
+                          'Languages',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                        Icon(
+                          Icons.translate,
+                          color: Colors.white,
+                        )
+                      ],
+                    ),
+                  ),
                 ),
-                const ListTile(
-                  title: Text("About"),
-                  leading: Icon(Icons.help),
-                ),
-                const ListTile(
-                  title: Text("Exit"),
-                  leading: Icon(Icons.exit_to_app),
+                SizedBox(
+                  width: double.infinity,
+                  height: 50,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Theme.of(context).primaryColor,
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(0)),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        value == 0 ? value = 1 : value = 0;
+                      });
+                    },
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding:
+                              EdgeInsets.only(left: 8.0, top: 8.0, bottom: 8.0),
+                          child: Icon(
+                            Icons.translate,
+                            color: Colors.white,
+                          ),
+                        ),
+                        Text(
+                          'Languages',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                        Icon(
+                          Icons.translate,
+                          color: Colors.white,
+                        )
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -186,7 +302,7 @@ class _ScreenNotesState extends State<ScreenNotes> {
               curve: Curves.easeInOut,
               tween: Tween<double>(begin: 0, end: value),
               // ? and here change
-              duration: const Duration(milliseconds: 600),
+              duration: const Duration(milliseconds: 400),
               builder: (_, double val, __) {
                 return (Transform(
                   alignment: Alignment.center,
@@ -216,9 +332,10 @@ class _ScreenNotesState extends State<ScreenNotes> {
                         actions: [
                           IconButton(
                             icon: Icon(
-                                Notes.themeNotifier.value == ThemeMode.light
-                                    ? Icons.dark_mode
-                                    : Icons.light_mode),
+                              Notes.themeNotifier.value == ThemeMode.light
+                                  ? Icons.dark_mode
+                                  : Icons.light_mode,
+                            ),
                             onPressed: toggle,
                           ),
                           Padding(
@@ -725,20 +842,20 @@ class Search extends SearchDelegate {
 //              padding: const EdgeInsets.all(8.0),
 //              child: Column(
 //                children: [
-//                  DrawerHeader(
-//                    child: Column(
-//                      mainAxisAlignment: MainAxisAlignment.center,
-//                      children: const [
-//                        CircleAvatar(
-//                          radius: 45,
-//                        ),
-//                        Padding(
-//                          padding: EdgeInsets.all(10.0),
-//                          child: Text("Hmida Dev's"),
-//                        ),
-//                      ],
-//                    ),
-//                  ),
+                //  DrawerHeader(
+                //    child: Column(
+                //      mainAxisAlignment: MainAxisAlignment.center,
+                //      children: const [
+                //        CircleAvatar(
+                //          radius: 45,
+                //        ),
+                //        Padding(
+                //          padding: EdgeInsets.all(10.0),
+                //          child: Text("Hmida Dev's"),
+                //        ),
+                //      ],
+                //    ),
+                //  ),
 //                  const ListTile(
 //                    title: Text("Home"),
 //                    leading: Icon(Icons.home),

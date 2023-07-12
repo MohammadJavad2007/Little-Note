@@ -190,10 +190,11 @@ class _NotesState extends State<Notes> {
             primarySwatch: themeColor,
           ),
           darkTheme: ThemeData.dark().copyWith(
-              colorScheme: ColorScheme.dark(primary: color_dark),
-              appBarTheme: AppBarTheme(backgroundColor: color_dark_AppBer),
-              floatingActionButtonTheme:
-                  FloatingActionButtonThemeData(backgroundColor: color_dark)),
+            colorScheme: ColorScheme.dark(primary: color_dark),
+            appBarTheme: AppBarTheme(backgroundColor: color_dark_AppBer),
+            floatingActionButtonTheme:
+                FloatingActionButtonThemeData(backgroundColor: color_dark),
+          ),
           themeMode: currentMode,
           home: ScreenNotes(),
         );
@@ -201,4 +202,3 @@ class _NotesState extends State<Notes> {
     );
   }
 }
-
