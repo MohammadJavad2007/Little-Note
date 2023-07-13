@@ -124,6 +124,8 @@ class _ScreenNotesState extends State<ScreenNotes> {
   }
 
   double value = 0;
+  int x = 0;
+
   // int sized = 100;
   @override
   Widget build(BuildContext context) {
@@ -165,10 +167,10 @@ class _ScreenNotesState extends State<ScreenNotes> {
                             ),
                           ),
                         ),
-                        const Padding(
+                        Padding(
                           padding: EdgeInsets.all(10.0),
                           child: Text(
-                            "Note Pad",
+                            'Note Pad'.tr,
                             style: TextStyle(fontSize: 20, color: Colors.white),
                           ),
                         ),
@@ -181,22 +183,23 @@ class _ScreenNotesState extends State<ScreenNotes> {
                   height: 50,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Notes.themeNotifier.value == ThemeMode.light
-                  ? color_background
-                  : color_background_dark,
+                      backgroundColor:
+                          Notes.themeNotifier.value == ThemeMode.light
+                              ? color_background
+                              : color_background_dark,
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(0)),
                     ),
                     onPressed: () {
                       setState(() {
-                        value == 0 ? value = 1 : value = 0;
+                        'Notes'.tr == 'یادداشت ها' ? Get.updateLocale(Locale('en')) : Get.updateLocale(Locale('fa'));
                       });
                     },
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Padding(
+                        const Padding(
                           padding:
                               EdgeInsets.only(left: 8.0, top: 8.0, bottom: 8.0),
                           child: Icon(
@@ -205,103 +208,105 @@ class _ScreenNotesState extends State<ScreenNotes> {
                           ),
                         ),
                         Text(
-                          'Languages',
-                          style: TextStyle(
+                          'English language'.tr,
+                          style: const TextStyle(
                             color: Colors.white,
                           ),
                         ),
-                        Icon(
-                          Icons.translate,
-                          color: Colors.white,
-                        )
+                        // const Icon(
+                        //   Icons.translate,
+                        //   color: Colors.white,
+                        // )
                       ],
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: double.infinity,
-                  height: 50,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Notes.themeNotifier.value == ThemeMode.light
-                  ? color_background
-                  : color_background_dark,
-                      elevation: 0,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(0)),
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        value == 0 ? value = 1 : value = 0;
-                      });
-                    },
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding:
-                              EdgeInsets.only(left: 8.0, top: 8.0, bottom: 8.0),
-                          child: Icon(
-                            Icons.translate,
-                            color: Colors.white,
-                          ),
-                        ),
-                        Text(
-                          'Languages',
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
-                        ),
-                        Icon(
-                          Icons.translate,
-                          color: Colors.white,
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  height: 50,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Notes.themeNotifier.value == ThemeMode.light
-                  ? color_background
-                  : color_background_dark,
-                      elevation: 0,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(0)),
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        value == 0 ? value = 1 : value = 0;
-                      });
-                    },
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding:
-                              EdgeInsets.only(left: 8.0, top: 8.0, bottom: 8.0),
-                          child: Icon(
-                            Icons.translate,
-                            color: Colors.white,
-                          ),
-                        ),
-                        Text(
-                          'Languages',
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
-                        ),
-                        Icon(
-                          Icons.translate,
-                          color: Colors.white,
-                        )
-                      ],
-                    ),
-                  ),
-                ),
+                // SizedBox(
+                //   width: double.infinity,
+                //   height: 50,
+                //   child: ElevatedButton(
+                //     style: ElevatedButton.styleFrom(
+                //       backgroundColor:
+                //           Notes.themeNotifier.value == ThemeMode.light
+                //               ? color_background
+                //               : color_background_dark,
+                //       elevation: 0,
+                //       shape: RoundedRectangleBorder(
+                //           borderRadius: BorderRadius.circular(0)),
+                //     ),
+                //     onPressed: () {
+                //       setState(() {
+                //         value == 0 ? value = 1 : value = 0;
+                //       });
+                //     },
+                //     child:  Row(
+                //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //       children: [
+                //        const Padding(
+                //           padding:
+                //               EdgeInsets.only(left: 8.0, top: 8.0, bottom: 8.0),
+                //           child: Icon(
+                //             Icons.translate,
+                //             color: Colors.white,
+                //           ),
+                //         ),
+                //         Text(
+                //           'Languages'.tr,
+                //           style:const TextStyle(
+                //             color: Colors.white,
+                //           ),
+                //         ),
+                //        const Icon(
+                //           Icons.translate,
+                //           color: Colors.white,
+                //         )
+                //       ],
+                //     ),
+                //   ),
+                // ),
+                // SizedBox(
+                //   width: double.infinity,
+                //   height: 50,
+                //   child: ElevatedButton(
+                //     style: ElevatedButton.styleFrom(
+                //       backgroundColor:
+                //           Notes.themeNotifier.value == ThemeMode.light
+                //               ? color_background
+                //               : color_background_dark,
+                //       elevation: 0,
+                //       shape: RoundedRectangleBorder(
+                //           borderRadius: BorderRadius.circular(0)),
+                //     ),
+                //     onPressed: () {
+                //       setState(() {
+                //         value == 0 ? value = 1 : value = 0;
+                //       });
+                //     },
+                //     child: Row(
+                //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //       children: [
+                //         const Padding(
+                //           padding:
+                //               EdgeInsets.only(left: 8.0, top: 8.0, bottom: 8.0),
+                //           child: Icon(
+                //             Icons.translate,
+                //             color: Colors.white,
+                //           ),
+                //         ),
+                //         Text(
+                //           'Languages'.tr,
+                //           style: const TextStyle(
+                //             color: Colors.white,
+                //           ),
+                //         ),
+                //         const Icon(
+                //           Icons.translate,
+                //           color: Colors.white,
+                //         )
+                //       ],
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           )),
@@ -317,8 +322,10 @@ class _ScreenNotesState extends State<ScreenNotes> {
                 return (Transform(
                   alignment: Alignment.center,
                   transform: Matrix4.identity()
-                    ..setEntry(3, 2, 0.001)
-                    ..setEntry(0, 3, 200 * val)
+                    ..setEntry(
+                        3, 2, 'Notes'.tr == 'یادداشت ها' ? -0.001 : 0.001)
+                    ..setEntry(0, 3,
+                        'Notes'.tr == 'یادداشت ها' ? -200 * val : 200 * val)
                     ..rotateY((pi / 6) * val),
                   child: ClipRRect(
                     borderRadius: value == 0
@@ -330,7 +337,7 @@ class _ScreenNotesState extends State<ScreenNotes> {
                           statusBarColor:
                               Color.fromARGB(0, 0, 0, 0), // <-- SEE HERE
                         ),
-                        title: const Text('Notes'),
+                        title: Text('Notes'.tr),
                         leading: IconButton(
                           onPressed: () {
                             setState(() {
@@ -340,25 +347,28 @@ class _ScreenNotesState extends State<ScreenNotes> {
                           icon: Icon(Icons.menu),
                         ),
                         actions: [
-                          IconButton(
-                            icon: Icon(
-                              Notes.themeNotifier.value == ThemeMode.light
-                                  ? Icons.dark_mode
-                                  : Icons.light_mode,
-                            ),
-                            onPressed: toggle,
-                          ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: IconButton(
-                              onPressed: () {
-                                showSearch(
-                                    context: context,
-                                    delegate: Search(widget.list));
-                              },
-                              icon: Icon(Icons.search),
+                              icon: Icon(
+                                Notes.themeNotifier.value == ThemeMode.light
+                                    ? Icons.dark_mode
+                                    : Icons.light_mode,
+                              ),
+                              onPressed: toggle,
                             ),
                           ),
+                          // Padding(
+                          //   padding: const EdgeInsets.all(8.0),
+                          //   child: IconButton(
+                          //     onPressed: () {
+                          //       showSearch(
+                          //           context: context,
+                          //           delegate: Search(widget.list));
+                          //     },
+                          //     icon: Icon(Icons.search),
+                          //   ),
+                          // ),
                           // if (_isGridMode)
                           //   IconButton(
                           //     icon: const Icon(Icons.grid_on),
@@ -392,21 +402,27 @@ class _ScreenNotesState extends State<ScreenNotes> {
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Center(
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text('Write Your First Note'),
-                                    ),
+                                    child: Icon(Icons.note_add , size: 60,),
                                   ),
                                   Center(
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        Get.to(() => ScreenAddNotes(),
-                                            duration:
-                                                Duration(milliseconds: 250),
-                                            transition:
-                                                Transition.rightToLeftWithFade);
-                                      },
-                                      child: Text('ADD NEW NOTE'),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text('Write Your First Note'.tr),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Center(
+                                      child: ElevatedButton(
+                                        onPressed: () {
+                                          Get.to(() => ScreenAddNotes(),
+                                              duration:
+                                                  Duration(milliseconds: 250),
+                                              transition:
+                                                  Transition.rightToLeftWithFade);
+                                        },
+                                        child: Text('ADD NEW NOTE'.tr , style: TextStyle(color: Colors.white),),
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -464,7 +480,8 @@ class _ScreenNotesState extends State<ScreenNotes> {
                                                       return AlertDialog(
                                                           // ignore: unused_label
                                                           title: Text(
-                                                            'Do you really want to delete the note?',
+                                                            'Do you really want to delete the note?'
+                                                                .tr,
                                                             style: TextStyle(
                                                                 fontSize: 15),
                                                           ),
@@ -472,8 +489,8 @@ class _ScreenNotesState extends State<ScreenNotes> {
                                                           // ignore: unused_label
                                                           actions: <Widget>[
                                                             TextButton(
-                                                              child: const Text(
-                                                                  "Cancle"),
+                                                              child: Text(
+                                                                  "Cancle".tr),
                                                               onPressed: () {
                                                                 Get.back();
                                                               },
@@ -490,7 +507,7 @@ class _ScreenNotesState extends State<ScreenNotes> {
                                                                 Get.back();
                                                               },
                                                               child: Text(
-                                                                  'Delete'),
+                                                                  'Delete'.tr),
                                                             ),
                                                           ]);
                                                     },
@@ -546,7 +563,10 @@ class _ScreenNotesState extends State<ScreenNotes> {
                               duration: Duration(milliseconds: 250),
                               transition: Transition.rightToLeftWithFade);
                         },
-                        child: const Icon(Icons.add , color: Colors.white,),
+                        child: const Icon(
+                          Icons.add,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),

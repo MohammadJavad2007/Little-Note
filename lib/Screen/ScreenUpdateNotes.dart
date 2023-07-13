@@ -61,7 +61,7 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
 
   String? _fieldValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Field can\'t be empty';
+      return 'Field can\'t be empty'.tr;
     }
     return null;
   }
@@ -95,7 +95,7 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Update a note'),
+        title: Text('Update a note'.tr),
         leading: IconButton(
           onPressed: () {
             if ((_countryController.text ==
@@ -110,7 +110,7 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
                   return AlertDialog(
                     // ignore: unused_label
                     title: Text(
-                      'Save your changes or discard them?',
+                      'Save your changes or discard them?'.tr,
                       style: TextStyle(fontSize: 15),
                     ),
                     // ignore: unused_label
@@ -124,7 +124,7 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
                               width: 60,
                               height: 35,
                               child: TextButton(
-                                child: const Text("Cancle"),
+                                child: Text("Cancle".tr),
                                 onPressed: () {
                                   Get.back();
                                 },
@@ -143,7 +143,7 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
                                       Get.back();
                                       Get.back();
                                     },
-                                    child: Text('Discard'),
+                                    child: Text('Discard'.tr),
                                   ),
                                 ),
                                 SizedBox(
@@ -163,7 +163,7 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
                                       }
                                       Get.back();
                                     },
-                                    child: Text('Save'),
+                                    child: Text('Save'.tr),
                                   ),
                                 ),
                               ],
@@ -188,13 +188,13 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Title'),
+                Text('Title'.tr),
                 TextFormField(
                   controller: _nameController,
                   validator: _fieldValidator,
                 ),
                 SizedBox(height: 24.0),
-                Text('Description'),
+                Text('Description'.tr),
                 TextFormField(
                   keyboardType: TextInputType.multiline,
                   maxLines: null,
@@ -228,7 +228,7 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
               }
             },
             child: Text(
-              'Save',
+              'Save'.tr,
               style: TextStyle(color: Colors.white),
             ),
           ),

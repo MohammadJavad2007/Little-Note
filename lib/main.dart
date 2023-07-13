@@ -20,9 +20,9 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'models/Install.dart';
 
 Color color_dark = Color.fromRGBO(39, 9, 207, 1);
-Color color_background = Color.fromARGB(255, 26, 11, 120);
+Color color_background = Color.fromARGB(255, 46, 22, 199);
 Color color_background_dark = Color.fromARGB(255, 34, 34, 34);
-Color color_dark_AppBer = Color.fromRGBO(39, 9, 207, 1);
+Color color_dark_AppBer = Color(0xFF3D3D3D);
 // Color color_dark_AppBer = Color(0xFF3D3D3D);
 
 int colorTheme = 0xFF20148C;
@@ -84,6 +84,20 @@ class _NotesState extends State<Notes> {
 
     // ignore: unused_local_variable
   }
+
+  // Language() async {
+  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  //   if (prefs.getBool('lang') == false) {
+  //     Get.updateLocale(const Locale('fa', 'IR'));
+  //     // print('dark');
+  //   } else {
+  //     Get.updateLocale(const Locale('en', 'US'));
+  //     // print(getitem);
+  //   }
+
+  //   // ignore: unused_local_variable
+  // }
 
   // internet() async {
   //   try {
@@ -154,10 +168,12 @@ class _NotesState extends State<Notes> {
   void initState() {
     // TODO: implement initState
     Darkmode();
+    // Language();
     // internet();
     // ignore: unused_local_variable
     Visit();
     Installer();
+    print(Get.deviceLocale);
     super.initState();
   }
 
@@ -185,10 +201,10 @@ class _NotesState extends State<Notes> {
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
-          // translations: Translation(),
-          locale: Locale('fa', 'IR'),
+          translations: Languages(),
+          locale: Get.deviceLocale,
           fallbackLocale: Locale('en', 'US'),
-          supportedLocales: [Locale('fa', 'IR'), Locale('en', 'US')],
+          // supportedLocales: [Locale('fa', 'IR'), Locale('en', 'US')],
           title: 'Notes',
           theme: ThemeData(
             primarySwatch: themeColor,
