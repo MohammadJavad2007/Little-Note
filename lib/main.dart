@@ -13,6 +13,7 @@ import 'package:notes/models/hash.dart';
 import 'package:notes/models/person.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'package:shamsi_date/shamsi_date.dart';
 
 // ignore: depend_on_referenced_packages
 
@@ -157,6 +158,9 @@ class _NotesState extends State<Notes> {
     Hive.box('Install').putAt(0, Install(install: true));
   }
 
+
+
+  Jalali j = Jalali(int.parse('1397'), 5, 6, 12, 56, 34, 585);
   @override
   void dispose() {
     // Closes all Hive boxes
@@ -173,9 +177,12 @@ class _NotesState extends State<Notes> {
     // ignore: unused_local_variable
     Visit();
     Installer();
-    print(Get.deviceLocale);
+    print(j.toGregorian().year.toString());
     super.initState();
   }
+
+
+
 
   // This widget is the root of your application.
   @override

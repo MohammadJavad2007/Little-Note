@@ -10,6 +10,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:notes/Screen/ScreenAddNotes.dart';
 import 'package:notes/Screen/ScreenUpdateNotes.dart';
 import 'package:notes/main.dart';
+import 'package:shamsi_date/shamsi_date.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:notes/models/person.dart';
 // import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
@@ -193,7 +194,9 @@ class _ScreenNotesState extends State<ScreenNotes> {
                     ),
                     onPressed: () {
                       setState(() {
-                        'Notes'.tr == 'یادداشت ها' ? Get.updateLocale(Locale('en')) : Get.updateLocale(Locale('fa'));
+                        'Notes'.tr == 'یادداشت ها'
+                            ? Get.updateLocale(Locale('en'))
+                            : Get.updateLocale(Locale('fa'));
                       });
                     },
                     child: Row(
@@ -347,6 +350,38 @@ class _ScreenNotesState extends State<ScreenNotes> {
                           icon: Icon(Icons.menu),
                         ),
                         actions: [
+                          PopupMenuButton<int>(
+                            icon: Icon(Icons.translate),
+                            tooltip: '',
+                            itemBuilder: (context) => [
+                              // PopupMenuItem 1
+                              PopupMenuItem(
+                                value: 1,
+                                // row with 2 children
+                                child: Row(
+                                  children: [Text("Persian".tr)],
+                                ),
+                              ),
+                              // PopupMenuItem 2
+                              PopupMenuItem(
+                                value: 2,
+                                // row with two children
+                                child: Row(
+                                  children: [Text("English".tr)],
+                                ),
+                              ),
+                            ],
+                            onSelected: (value) {
+                              switch (value) {
+                                case 1:
+                                  Get.updateLocale(const Locale('fa'));
+                                  break;
+                                case 2:
+                                  Get.updateLocale(const Locale('en'));
+                                  break;
+                              }
+                            },
+                          ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: IconButton(
@@ -402,7 +437,10 @@ class _ScreenNotesState extends State<ScreenNotes> {
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Center(
-                                    child: Icon(Icons.note_add , size: 60,),
+                                    child: Icon(
+                                      Icons.note_add,
+                                      size: 60,
+                                    ),
                                   ),
                                   Center(
                                     child: Padding(
@@ -418,10 +456,13 @@ class _ScreenNotesState extends State<ScreenNotes> {
                                           Get.to(() => ScreenAddNotes(),
                                               duration:
                                                   Duration(milliseconds: 250),
-                                              transition:
-                                                  Transition.rightToLeftWithFade);
+                                              transition: Transition
+                                                  .rightToLeftWithFade);
                                         },
-                                        child: Text('ADD NEW NOTE'.tr , style: TextStyle(color: Colors.white),),
+                                        child: Text(
+                                          'ADD NEW NOTE'.tr,
+                                          style: TextStyle(color: Colors.white),
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -434,7 +475,7 @@ class _ScreenNotesState extends State<ScreenNotes> {
                                 itemBuilder: (context, index) {
                                   var currentBox = box;
                                   var personData = currentBox.getAt(index)!;
-
+                                  print(DateTime(int.parse(personData.dateTime.toString().split(' ')[2])+1).toJalali());
                                   return Padding(
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 5, horizontal: 10),
@@ -449,14 +490,15 @@ class _ScreenNotesState extends State<ScreenNotes> {
                                       child: InkWell(
                                         onTap: () {
                                           Get.to(
-                                              () => ScreenUpdateNotes(
-                                                    index: index,
-                                                    person: personData,
-                                                  ),
-                                              duration: const Duration(
-                                                  milliseconds: 250),
-                                              transition: Transition
-                                                  .rightToLeftWithFade);
+                                            () => ScreenUpdateNotes(
+                                              index: index,
+                                              person: personData,
+                                            ),
+                                            duration: const Duration(
+                                                milliseconds: 250),
+                                            transition:
+                                                Transition.rightToLeftWithFade,
+                                          );
                                         },
                                         child: Column(
                                           children: [

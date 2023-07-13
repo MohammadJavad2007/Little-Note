@@ -28,6 +28,8 @@ class Languages extends Translations {
           'Delete': 'Delete',
           'Write Your First Note': 'Write Your First Note',
           'ADD NEW NOTE': 'ADD NEW NOTE',
+          'Persian': 'Persian',
+          'English': 'English',
         },
         'fa_IR': {
           'Notes': 'یادداشت ها',
@@ -36,7 +38,7 @@ class Languages extends Translations {
               'تغییرات خود را ذخیره کنید یا از آنها صرف نظر کنید؟',
           'Cancle': 'لغو',
           'Discard': 'پاک',
-          'Save': 'خیره',
+          'Save': 'ذخیره',
           'Title': 'عنوان',
           'Description': 'متن',
           'Field can\'t be empty': 'فیلد نمی تواند خالی باشد',
@@ -48,6 +50,8 @@ class Languages extends Translations {
           'Delete': 'حذف',
           'Write Your First Note': 'اولین یادداشت خود را بنویسید',
           'ADD NEW NOTE': 'یادداشت جدید',
+          'Persian': 'فارسی',
+          'English': 'انگلیسی',
         },
       };
 }

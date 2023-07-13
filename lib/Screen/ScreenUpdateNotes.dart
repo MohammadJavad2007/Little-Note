@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import 'package:notes/models/person.dart';
 import 'package:hive/hive.dart';
+import 'package:shamsi_date/shamsi_date.dart';
 
 // import 'ScreenNotes.dart';
 
@@ -28,33 +29,45 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
   late final Box box;
 
 // month data time
-  var time = DateTime.now();
+  var time = 'Notes'.tr == 'یادداشت ها' ? Jalali.now() : Jalali.now().toGregorian();
   String month() {
     switch (time.month) {
       case 1:
-        return 'January';
+        return 'Notes'.tr == 'یادداشت ها' ? 'فروردین' : 'January';
+        // return 'January';
       case 2:
-        return 'February';
+        return 'Notes'.tr == 'یادداشت ها' ? 'اردیبهشت' : 'February';
+        // return 'February';
       case 3:
-        return 'March';
+        return 'Notes'.tr == 'یادداشت ها' ? 'خرداد' : 'March';
+        // return 'March';
       case 4:
-        return 'April';
+        return 'Notes'.tr == 'یادداشت ها' ? 'تیر' : 'April';
+        // return 'April';
       case 5:
-        return 'May';
+        return 'Notes'.tr == 'یادداشت ها' ? 'مرداد' : 'May';
+        // return 'May';
       case 6:
-        return 'June';
+        return 'Notes'.tr == 'یادداشت ها' ? 'شهریور' : 'June';
+        // return 'June';
       case 7:
-        return 'July';
+        return 'Notes'.tr == 'یادداشت ها' ? 'مهر' : 'July';
+        // return 'July';
       case 8:
-        return 'August';
+        return 'Notes'.tr == 'یادداشت ها' ? 'آبان' : 'August';
+        // return 'August';
       case 9:
-        return 'September';
+        return 'Notes'.tr == 'یادداشت ها' ? 'آذر' : 'September';
+        // return 'September';
       case 10:
-        return 'October';
+        return 'Notes'.tr == 'یادداشت ها' ? 'دی' : 'October';
+        // return 'October';
       case 11:
-        return 'November';
+        return 'Notes'.tr == 'یادداشت ها' ? 'بهمن' : 'November';
+        // return 'November';
       case 12:
-        return 'December';
+        return 'Notes'.tr == 'یادداشت ها' ? 'اسفند' : 'December';
+        // return 'December';
     }
     return '';
   }
@@ -70,7 +83,7 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
   _updateInfo() {
     setState(() {
       _dateController.text =
-          '${month()}, ${time.day > 9 ? time.day : '0' + time.day.toString()}, ${time.year}   ${time.hour > 9 ? time.hour : '0' + time.hour.toString()}:${time.minute > 9 ? time.minute : '0' + time.minute.toString()}';
+          '${month()} ${time.day > 9 ? time.day : '0' + time.day.toString()} ${time.year} ${time.hour > 9 ? time.hour : '0' + time.hour.toString()} : ${time.minute > 9 ? time.minute : '0' + time.minute.toString()}';
     });
     Person newPerson = Person(
       name: _nameController.text,
