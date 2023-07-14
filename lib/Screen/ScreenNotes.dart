@@ -370,6 +370,13 @@ class _ScreenNotesState extends State<ScreenNotes> {
                                   children: [Text("English".tr)],
                                 ),
                               ),
+                              PopupMenuItem(
+                                value: 3,
+                                // row with two children
+                                child: Row(
+                                  children: [Text("Korean".tr)],
+                                ),
+                              ),
                             ],
                             onSelected: (value) {
                               switch (value) {
@@ -378,6 +385,9 @@ class _ScreenNotesState extends State<ScreenNotes> {
                                   break;
                                 case 2:
                                   Get.updateLocale(const Locale('en'));
+                                  break;
+                                case 3:
+                                  Get.updateLocale(const Locale('ko'));
                                   break;
                               }
                             },
@@ -475,7 +485,11 @@ class _ScreenNotesState extends State<ScreenNotes> {
                                 itemBuilder: (context, index) {
                                   var currentBox = box;
                                   var personData = currentBox.getAt(index)!;
-                                  print(DateTime(int.parse(personData.dateTime.toString().split(' ')[2])+1).toJalali());
+                                  print(DateTime(int.parse(personData.dateTime
+                                              .toString()
+                                              .split(' ')[2]) +
+                                          1)
+                                      .toJalali());
                                   return Padding(
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 5, horizontal: 10),

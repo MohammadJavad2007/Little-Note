@@ -29,45 +29,46 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
   late final Box box;
 
 // month data time
-  var time = 'Notes'.tr == 'یادداشت ها' ? Jalali.now() : Jalali.now().toGregorian();
+  var time =
+      'Notes'.tr == 'یادداشت ها' ? Jalali.now() : Jalali.now().toGregorian();
   String month() {
     switch (time.month) {
       case 1:
         return 'Notes'.tr == 'یادداشت ها' ? 'فروردین' : 'January';
-        // return 'January';
+      // return 'January';
       case 2:
         return 'Notes'.tr == 'یادداشت ها' ? 'اردیبهشت' : 'February';
-        // return 'February';
+      // return 'February';
       case 3:
         return 'Notes'.tr == 'یادداشت ها' ? 'خرداد' : 'March';
-        // return 'March';
+      // return 'March';
       case 4:
         return 'Notes'.tr == 'یادداشت ها' ? 'تیر' : 'April';
-        // return 'April';
+      // return 'April';
       case 5:
         return 'Notes'.tr == 'یادداشت ها' ? 'مرداد' : 'May';
-        // return 'May';
+      // return 'May';
       case 6:
         return 'Notes'.tr == 'یادداشت ها' ? 'شهریور' : 'June';
-        // return 'June';
+      // return 'June';
       case 7:
         return 'Notes'.tr == 'یادداشت ها' ? 'مهر' : 'July';
-        // return 'July';
+      // return 'July';
       case 8:
         return 'Notes'.tr == 'یادداشت ها' ? 'آبان' : 'August';
-        // return 'August';
+      // return 'August';
       case 9:
         return 'Notes'.tr == 'یادداشت ها' ? 'آذر' : 'September';
-        // return 'September';
+      // return 'September';
       case 10:
         return 'Notes'.tr == 'یادداشت ها' ? 'دی' : 'October';
-        // return 'October';
+      // return 'October';
       case 11:
         return 'Notes'.tr == 'یادداشت ها' ? 'بهمن' : 'November';
-        // return 'November';
+      // return 'November';
       case 12:
         return 'Notes'.tr == 'یادداشت ها' ? 'اسفند' : 'December';
-        // return 'December';
+      // return 'December';
     }
     return '';
   }

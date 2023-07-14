@@ -158,8 +158,6 @@ class _NotesState extends State<Notes> {
     Hive.box('Install').putAt(0, Install(install: true));
   }
 
-
-
   Jalali j = Jalali(int.parse('1397'), 5, 6, 12, 56, 34, 585);
   @override
   void dispose() {
@@ -180,9 +178,6 @@ class _NotesState extends State<Notes> {
     print(j.toGregorian().year.toString());
     super.initState();
   }
-
-
-
 
   // This widget is the root of your application.
   @override

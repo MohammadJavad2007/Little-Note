@@ -3,12 +3,29 @@ import 'package:get/get.dart';
 class Languages extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
-        // 'ko_KR': {
-        //   'greeting': '안녕하세요',
-        // },
-        // 'ja_JP': {
-        //   'greeting': 'こんにちは',
-        // },
+        'ko_KR': {
+          'Notes': '노트',
+          'Add a note': '메모 추가',
+          'Save your changes or discard them?':
+              '변경 사항을 저장하시겠습니까, 아니면 삭제하시겠습니까?',
+          'Cancle': '취소',
+          'Discard': '버리다',
+          'Save': '구하다',
+          'Title': '제목',
+          'Description': '설명',
+          'Field can\'t be empty': '입력란은 비워둘 수 없습니다.',
+          'Update a note': '메모 업데이트',
+          'Note Pad': '메모장',
+          'English language': '한국어',
+          'Do you really want to delete the note?':
+              '메모를 삭제하시겠습니까?',
+          'Delete': '삭제',
+          'Write Your First Note': '첫 메모 작성',
+          'ADD NEW NOTE': '새 메모 추가',
+          'Persian': '페르시아 인',
+          'English': '영어',
+          'Korean': '한국인'
+        },
         'en_US': {
           'Notes': 'Notes',
           'Add a note': 'Add a note',
@@ -30,6 +47,7 @@ class Languages extends Translations {
           'ADD NEW NOTE': 'ADD NEW NOTE',
           'Persian': 'Persian',
           'English': 'English',
+          'Korean': 'Korean'
         },
         'fa_IR': {
           'Notes': 'یادداشت ها',
@@ -52,67 +70,7 @@ class Languages extends Translations {
           'ADD NEW NOTE': 'یادداشت جدید',
           'Persian': 'فارسی',
           'English': 'انگلیسی',
+          'Korean': 'کره ایی'
         },
       };
 }
-
-
-
-
-
-
-
-
-
-// import 'dart:convert';
-
-// import 'package:flutter/material.dart';
-// // import 'package:flutter_localizations/flutter_localizations.dart';
-// import 'package:flutter/services.dart' show rootBundle;
-
-
-// class Translations {
-
-//   late Map localizationValues;
-
-//   Future load(Locale locale) async {
-//     String jsonContent = await rootBundle.loadString('lib/lang/${locale.languageCode}.json');
-//     localizationValues = jsonDecode(jsonContent);
-//     print(localizationValues['title']);
-//   }
-  
-//   static Translations? of(BuildContext context) {
-//     return Localizations.of(context, Translations);
-//   }
-
-//   String text(String key) {
-//     if(localizationValues['key'] == '') {
-//       return "Error $key";
-//     } else {
-//       return localizationValues['key'];
-//     }
-//   }
-// }
-
-// class AppLocalizationsDelegate extends LocalizationsDelegate<Translations> {
-//   @override
-//   bool isSupported(Locale locale) {
-//     // TODO: implement isSupported
-//     return ['fa','en'].contains(locale.languageCode);
-//   }
-
-//   @override
-//   Future<Translations> load(Locale locale) async {
-//     // TODO: implement load
-//     Translations translations = new Translations();
-//     await translations.load(locale);
-//     return translations;
-//   }
-
-//   @override
-//   bool shouldReload(covariant LocalizationsDelegate<Translations> old) {
-//     // TODO: implement shouldReload
-//     return false;
-//   }
-
-// }

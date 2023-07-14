@@ -7,7 +7,5 @@ class Install {
   @HiveField(0)
   final bool install;
 
-  Install({
-    required this.install
-  });
+  Install({required this.install});
 }

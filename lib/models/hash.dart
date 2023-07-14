@@ -7,7 +7,5 @@ class Hash {
   @HiveField(0)
   final String hash;
 
-  Hash({
-    required this.hash
-  });
+  Hash({required this.hash});
 }
