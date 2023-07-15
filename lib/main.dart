@@ -60,7 +60,7 @@ void main() async {
   await Hive.openBox('Hash');
   await Hive.openBox('Lang');
   Hive.box('Lang').add(Lang(lang: ""));
-  
+
   runApp(Notes());
 }
 
@@ -208,7 +208,9 @@ class _NotesState extends State<Notes> {
             GlobalCupertinoLocalizations.delegate,
           ],
           translations: Languages(),
-          locale: Hive.box('Lang').getAt(0).lang == ''? Get.deviceLocale : Locale(Hive.box('Lang').getAt(0).lang, ''),
+          locale: Hive.box('Lang').getAt(0).lang == ''
+              ? Get.deviceLocale
+              : Locale(Hive.box('Lang').getAt(0).lang, ''),
           fallbackLocale: Locale('en', 'US'),
           // supportedLocales: [Locale('fa', 'IR'), Locale('en', 'US')],
           title: 'Notes',
