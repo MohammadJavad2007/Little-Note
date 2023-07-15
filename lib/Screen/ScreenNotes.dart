@@ -383,16 +383,18 @@ class _ScreenNotesState extends State<ScreenNotes> {
                               switch (value) {
                                 case 1:
                                   Get.updateLocale(const Locale('fa'));
-                                  Hive.box('Lang').putAt(0, Lang(lang: 'fa'));
+                                  Hive.box('Lang').putAt(
+                                      0, Lang(lang: 'fa', country: 'IR'));
                                   break;
                                 case 2:
                                   Get.updateLocale(const Locale('en'));
-                                  Hive.box('Lang').putAt(0, Lang(lang: 'en'));
-
+                                  Hive.box('Lang').putAt(
+                                      0, Lang(lang: 'en', country: 'US'));
                                   break;
                                 case 3:
                                   Get.updateLocale(const Locale('ko'));
-                                  Hive.box('Lang').putAt(0, Lang(lang: 'ko'));
+                                  Hive.box('Lang').putAt(
+                                      0, Lang(lang: 'ko', country: 'KR'));
 
                                   break;
                               }
@@ -491,11 +493,14 @@ class _ScreenNotesState extends State<ScreenNotes> {
                                 itemBuilder: (context, index) {
                                   var currentBox = box;
                                   var personData = currentBox.getAt(index)!;
-                                  // print(DateTime(int.parse(personData.dateTime
-                                  //             .toString()
-                                  //             .split(' ')[2]))
-                                  //     );
-                                  print(personData.dateTime.toString().split(' ')[0].tr);
+                                  // print(
+                                  //   DateTime(
+                                  //     int.parse(personData.dateTime
+                                  //         .toString()
+                                  //         .split(' ')[2]),
+                                  //   ),
+                                  // );
+                                  print(personData.dateTime.toString().split(' ')[0]);
                                   return Padding(
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 5, horizontal: 10),
@@ -591,7 +596,7 @@ class _ScreenNotesState extends State<ScreenNotes> {
                                                     const EdgeInsets.symmetric(
                                                         horizontal: 15),
                                                 child: Text(
-                                                  personData.dateTime,
+                                                  '${personData.dateTime.toString().split(' ')[0].tr}, ${personData.dateTime.toString().split(' ')[1]} ${personData.dateTime.toString().split(' ')[2]}, ${personData.dateTime.toString().split(' ')[3]}:${personData.dateTime.toString().split(' ')[5]}',
                                                   key: UniqueKey(),
                                                   style:
                                                       TextStyle(fontSize: 15),

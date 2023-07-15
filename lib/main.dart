@@ -59,7 +59,7 @@ void main() async {
   await Hive.openBox('Install');
   await Hive.openBox('Hash');
   await Hive.openBox('Lang');
-  Hive.box('Lang').add(Lang(lang: ""));
+  Hive.box('Lang').add(Lang(lang: "" , country: ""));
 
   runApp(Notes());
 }

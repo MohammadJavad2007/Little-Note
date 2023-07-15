@@ -7,5 +7,8 @@ class Lang {
   @HiveField(0)
   final String lang;
 
-  Lang({required this.lang});
+  @HiveField(1)
+  final String country;
+
+  Lang({required this.lang , required this.country });
 }

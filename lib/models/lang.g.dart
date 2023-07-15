@@ -18,15 +18,18 @@ class LangAdapter extends TypeAdapter<Lang> {
     };
     return Lang(
       lang: fields[0] as String,
+      country: fields[1] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, Lang obj) {
     writer
-      ..writeByte(1)
+      ..writeByte(2)
       ..writeByte(0)
-      ..write(obj.lang);
+      ..write(obj.lang)
+      ..writeByte(1)
+      ..write(obj.country);
   }
 
   @override

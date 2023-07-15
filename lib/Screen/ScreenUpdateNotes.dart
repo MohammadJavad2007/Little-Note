@@ -30,44 +30,44 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
 
 // month data time
   var time =
-      'Notes'.tr == 'یادداشت ها' ? Jalali.now() : Jalali.now().toGregorian();
+      Jalali.now().toGregorian();
   String month() {
     switch (time.month) {
       case 1:
-        return 'January'.tr;
+        return 'January';
       // return 'January';
       case 2:
-        return 'February'.tr;
+        return 'February';
       // return 'February';
       case 3:
-        return 'March'.tr;
+        return 'March';
       // return 'March';
       case 4:
-        return 'April'.tr;
+        return 'April';
       // return 'April';
       case 5:
-        return 'May'.tr;
+        return 'May';
       // return 'May';
       case 6:
-        return 'June'.tr;
+        return 'June';
       // return 'June';
       case 7:
-        return 'July'.tr;
+        return 'July';
       // return 'July';
       case 8:
-        return 'August'.tr;
+        return 'August';
       // return 'August';
       case 9:
-        return 'September'.tr;
+        return 'September';
       // return 'September';
       case 10:
-        return 'October'.tr;
+        return 'October';
       // return 'October';
       case 11:
-        return 'November'.tr;
+        return 'November';
       // return 'November';
       case 12:
-        return 'December'.tr;
+        return 'December';
       // return 'December';
     }
     return '';
