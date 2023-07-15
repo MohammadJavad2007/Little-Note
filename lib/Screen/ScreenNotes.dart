@@ -493,14 +493,200 @@ class _ScreenNotesState extends State<ScreenNotes> {
                                 itemBuilder: (context, index) {
                                   var currentBox = box;
                                   var personData = currentBox.getAt(index)!;
-                                  // print(
-                                  //   DateTime(
-                                  //     int.parse(personData.dateTime
-                                  //         .toString()
-                                  //         .split(' ')[2]),
-                                  //   ),
-                                  // );
-                                  print(personData.dateTime.toString().split(' ')[0]);
+                                  // ignore: unused_local_variable
+                                  int month = 1;
+                                  switch (personData.dateTime
+                                      .toString()
+                                      .split(' ')[0]) {
+                                    case 'January':
+                                      month = 1;
+                                    // return 'January';
+                                    case 'February':
+                                      month = 2;
+                                    // return 'February';
+                                    case 'March':
+                                      month = 3;
+                                    // return 'March';
+                                    case 'April':
+                                      month = 4;
+                                    // return 'April';
+                                    case 'May':
+                                      month = 5;
+                                    // return 'May';
+                                    case 'June':
+                                      month = 6;
+                                    // return 'June';
+                                    case 'July':
+                                      month = 7;
+                                    // return 'July';
+                                    case 'August':
+                                      month = 8;
+                                    // return 'August';
+                                    case 'September':
+                                      month = 9;
+                                    // return 'September';
+                                    case 'October':
+                                      month = 10;
+                                    // return 'October';
+                                    case 'November':
+                                      month = 11;
+                                    // return 'November';
+                                    case 'December':
+                                      month = 12;
+                                    // return 'December';
+                                  }
+                                  // print(DateTime(
+                                  //   int.parse(personData.dateTime
+                                  //       .toString()
+                                  //       .split(' ')[2]),
+                                  //   month,
+                                  //   int.parse(personData.dateTime
+                                  //       .toString()
+                                  //       .split(' ')[1]),
+                                  //   int.parse(personData.dateTime
+                                  //       .toString()
+                                  //       .split(' ')[3]),
+                                  //   int.parse(personData.dateTime
+                                  //       .toString()
+                                  //       .split(' ')[5]),
+                                  // ).toJalali());
+                                  // ignore: unused_local_variable
+                                  final year = 'Notes'.tr == 'یادداشت ها'
+                                      ? DateTime(
+                                          int.parse(personData.dateTime
+                                              .toString()
+                                              .split(' ')[2]),
+                                          month,
+                                          int.parse(personData.dateTime
+                                              .toString()
+                                              .split(' ')[1]),
+                                          int.parse(personData.dateTime
+                                              .toString()
+                                              .split(' ')[3]),
+                                          int.parse(personData.dateTime
+                                              .toString()
+                                              .split(' ')[5]),
+                                        ).toJalali().year
+                                      : DateTime(
+                                          int.parse(personData.dateTime
+                                              .toString()
+                                              .split(' ')[2]),
+                                          month,
+                                          int.parse(personData.dateTime
+                                              .toString()
+                                              .split(' ')[1]),
+                                          int.parse(personData.dateTime
+                                              .toString()
+                                              .split(' ')[3]),
+                                          int.parse(personData.dateTime
+                                              .toString()
+                                              .split(' ')[5]),
+                                        ).year;
+                                  final day = 'Notes'.tr == 'یادداشت ها'
+                                      ? DateTime(
+                                          int.parse(personData.dateTime
+                                              .toString()
+                                              .split(' ')[2]),
+                                          month,
+                                          int.parse(personData.dateTime
+                                              .toString()
+                                              .split(' ')[1]),
+                                          int.parse(personData.dateTime
+                                              .toString()
+                                              .split(' ')[3]),
+                                          int.parse(personData.dateTime
+                                              .toString()
+                                              .split(' ')[5]),
+                                        ).toJalali().day
+                                      : DateTime(
+                                          int.parse(personData.dateTime
+                                              .toString()
+                                              .split(' ')[2]),
+                                          month,
+                                          int.parse(personData.dateTime
+                                              .toString()
+                                              .split(' ')[1]),
+                                          int.parse(personData.dateTime
+                                              .toString()
+                                              .split(' ')[3]),
+                                          int.parse(personData.dateTime
+                                              .toString()
+                                              .split(' ')[5]),
+                                        ).day;
+                                  final hour = 'Notes'.tr == 'یادداشت ها'
+                                      ? DateTime(
+                                          int.parse(personData.dateTime
+                                              .toString()
+                                              .split(' ')[2]),
+                                          month,
+                                          int.parse(personData.dateTime
+                                              .toString()
+                                              .split(' ')[1]),
+                                          int.parse(personData.dateTime
+                                              .toString()
+                                              .split(' ')[3]),
+                                          int.parse(personData.dateTime
+                                              .toString()
+                                              .split(' ')[5]),
+                                        ).toJalali().hour
+                                      : DateTime(
+                                          int.parse(personData.dateTime
+                                              .toString()
+                                              .split(' ')[2]),
+                                          month,
+                                          int.parse(personData.dateTime
+                                              .toString()
+                                              .split(' ')[1]),
+                                          int.parse(personData.dateTime
+                                              .toString()
+                                              .split(' ')[3]),
+                                          int.parse(personData.dateTime
+                                              .toString()
+                                              .split(' ')[5]),
+                                        ).hour;
+                                  final minute = 'Notes'.tr == 'یادداشت ها'
+                                      ? DateTime(
+                                          int.parse(personData.dateTime
+                                              .toString()
+                                              .split(' ')[2]),
+                                          month,
+                                          int.parse(personData.dateTime
+                                              .toString()
+                                              .split(' ')[1]),
+                                          int.parse(personData.dateTime
+                                              .toString()
+                                              .split(' ')[3]),
+                                          int.parse(personData.dateTime
+                                              .toString()
+                                              .split(' ')[5]),
+                                        ).toJalali().minute
+                                      : DateTime(
+                                          int.parse(personData.dateTime
+                                              .toString()
+                                              .split(' ')[2]),
+                                          month,
+                                          int.parse(personData.dateTime
+                                              .toString()
+                                              .split(' ')[1]),
+                                          int.parse(personData.dateTime
+                                              .toString()
+                                              .split(' ')[3]),
+                                          int.parse(personData.dateTime
+                                              .toString()
+                                              .split(' ')[5]),
+                                        ).minute;
+                                  // print(personData.dateTime
+                                  //     .toString()
+                                  //     .split(' ')[1]);
+                                  // print(personData.dateTime
+                                  //     .toString()
+                                  //     .split(' ')[2]);
+                                  // print(personData.dateTime
+                                  //     .toString()
+                                  //     .split(' ')[3]);
+                                  // print(personData.dateTime
+                                  //     .toString()
+                                  //     .split(' ')[5]);
                                   return Padding(
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 5, horizontal: 10),
@@ -596,7 +782,9 @@ class _ScreenNotesState extends State<ScreenNotes> {
                                                     const EdgeInsets.symmetric(
                                                         horizontal: 15),
                                                 child: Text(
-                                                  '${personData.dateTime.toString().split(' ')[0].tr}, ${personData.dateTime.toString().split(' ')[1]} ${personData.dateTime.toString().split(' ')[2]}, ${personData.dateTime.toString().split(' ')[3]}:${personData.dateTime.toString().split(' ')[5]}',
+                                                  'Notes'.tr == 'یادداشت ها'
+                                                      ? '${hour > 9 ? hour : '0' + hour.toString()}:${minute > 9 ? minute : '0' + minute.toString()}  ,${year}  ,${day > 9 ? day : '0' + day.toString()}  ,${personData.dateTime.toString().split(' ')[0].tr}'
+                                                      : '${personData.dateTime.toString().split(' ')[0].tr},  ${day > 9 ? day : '0' + day.toString()},  ${year},  ${hour > 9 ? hour : '0' + hour.toString()}:${minute > 9 ? minute : '0' + minute.toString()}',
                                                   key: UniqueKey(),
                                                   style:
                                                       TextStyle(fontSize: 15),

@@ -84,7 +84,7 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
   _updateInfo() {
     setState(() {
       _dateController.text =
-          '${month()} ${time.day > 9 ? time.day : '0' + time.day.toString()} ${time.year} ${time.hour > 9 ? time.hour : '0' + time.hour.toString()} : ${time.minute > 9 ? time.minute : '0' + time.minute.toString()}';
+          '${month()} ${time.day} ${time.year} ${time.hour} : ${time.minute}';
     });
     Person newPerson = Person(
       name: _nameController.text,
