@@ -34,40 +34,40 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
   String month() {
     switch (time.month) {
       case 1:
-        return 'Notes'.tr == 'یادداشت ها' ? 'فروردین' : 'January';
+        return 'January'.tr;
       // return 'January';
       case 2:
-        return 'Notes'.tr == 'یادداشت ها' ? 'اردیبهشت' : 'February';
+        return 'February'.tr;
       // return 'February';
       case 3:
-        return 'Notes'.tr == 'یادداشت ها' ? 'خرداد' : 'March';
+        return 'March'.tr;
       // return 'March';
       case 4:
-        return 'Notes'.tr == 'یادداشت ها' ? 'تیر' : 'April';
+        return 'April'.tr;
       // return 'April';
       case 5:
-        return 'Notes'.tr == 'یادداشت ها' ? 'مرداد' : 'May';
+        return 'May'.tr;
       // return 'May';
       case 6:
-        return 'Notes'.tr == 'یادداشت ها' ? 'شهریور' : 'June';
+        return 'June'.tr;
       // return 'June';
       case 7:
-        return 'Notes'.tr == 'یادداشت ها' ? 'مهر' : 'July';
+        return 'July'.tr;
       // return 'July';
       case 8:
-        return 'Notes'.tr == 'یادداشت ها' ? 'آبان' : 'August';
+        return 'August'.tr;
       // return 'August';
       case 9:
-        return 'Notes'.tr == 'یادداشت ها' ? 'آذر' : 'September';
+        return 'September'.tr;
       // return 'September';
       case 10:
-        return 'Notes'.tr == 'یادداشت ها' ? 'دی' : 'October';
+        return 'October'.tr;
       // return 'October';
       case 11:
-        return 'Notes'.tr == 'یادداشت ها' ? 'بهمن' : 'November';
+        return 'November'.tr;
       // return 'November';
       case 12:
-        return 'Notes'.tr == 'یادداشت ها' ? 'اسفند' : 'December';
+        return 'December'.tr;
       // return 'December';
     }
     return '';
@@ -236,9 +236,16 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
           height: 50,
           child: ElevatedButton(
             onPressed: () {
-              if (_personFormKey.currentState!.validate()) {
-                _updateInfo();
+              if ((_countryController.text ==
+                      Hive.box('NoteBox').getAt(widget.index).country) &
+                  (_nameController.text ==
+                      Hive.box('NoteBox').getAt(widget.index).name)) {
                 Get.back();
+              } else {
+                if (_personFormKey.currentState!.validate()) {
+                  _updateInfo();
+                  Get.back();
+                }
               }
             },
             child: Text(

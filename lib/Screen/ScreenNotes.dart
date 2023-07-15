@@ -10,6 +10,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:notes/Screen/ScreenAddNotes.dart';
 import 'package:notes/Screen/ScreenUpdateNotes.dart';
 import 'package:notes/main.dart';
+import 'package:notes/models/lang.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:notes/models/person.dart';
@@ -382,12 +383,17 @@ class _ScreenNotesState extends State<ScreenNotes> {
                               switch (value) {
                                 case 1:
                                   Get.updateLocale(const Locale('fa'));
+                                  Hive.box('Lang').putAt(0, Lang(lang: 'fa'));
                                   break;
                                 case 2:
                                   Get.updateLocale(const Locale('en'));
+                                  Hive.box('Lang').putAt(0, Lang(lang: 'en'));
+
                                   break;
                                 case 3:
                                   Get.updateLocale(const Locale('ko'));
+                                  Hive.box('Lang').putAt(0, Lang(lang: 'ko'));
+
                                   break;
                               }
                             },
@@ -485,11 +491,11 @@ class _ScreenNotesState extends State<ScreenNotes> {
                                 itemBuilder: (context, index) {
                                   var currentBox = box;
                                   var personData = currentBox.getAt(index)!;
-                                  print(DateTime(int.parse(personData.dateTime
-                                              .toString()
-                                              .split(' ')[2]) +
-                                          1)
-                                      .toJalali());
+                                  // print(DateTime(int.parse(personData.dateTime
+                                  //             .toString()
+                                  //             .split(' ')[2]))
+                                  //     );
+                                  print(personData.dateTime.toString().split(' ')[0].tr);
                                   return Padding(
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 5, horizontal: 10),

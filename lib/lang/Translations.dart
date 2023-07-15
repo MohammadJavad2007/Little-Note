@@ -17,14 +17,26 @@ class Languages extends Translations {
           'Update a note': '메모 업데이트',
           'Note Pad': '메모장',
           'English language': '한국어',
-          'Do you really want to delete the note?':
-              '메모를 삭제하시겠습니까?',
+          'Do you really want to delete the note?': '메모를 삭제하시겠습니까?',
           'Delete': '삭제',
           'Write Your First Note': '첫 메모 작성',
           'ADD NEW NOTE': '새 메모 추가',
           'Persian': '페르시아 인',
           'English': '영어',
-          'Korean': '한국인'
+          'Korean': '한국인',
+          // Date language
+          'January': '일월',
+          'February': '이월',
+          'March': '삼월',
+          'April': '사월',
+          'May': '오월',
+          'June': '유월',
+          'July': '칠월',
+          'August': '팔월',
+          'September': '구월',
+          'October': '시월',
+          'November': '십일월',
+          'December': '십이월',
         },
         'en_US': {
           'Notes': 'Notes',
@@ -47,7 +59,20 @@ class Languages extends Translations {
           'ADD NEW NOTE': 'ADD NEW NOTE',
           'Persian': 'Persian',
           'English': 'English',
-          'Korean': 'Korean'
+          'Korean': 'Korean',
+          // Date language
+          'January': 'January',
+          'February': 'February',
+          'March': 'March',
+          'April': 'April',
+          'May': 'May',
+          'June': 'June',
+          'July': 'July',
+          'August': 'August',
+          'September': 'September',
+          'October': 'October',
+          'November': 'November',
+          'December': 'December',
         },
         'fa_IR': {
           'Notes': 'یادداشت ها',
@@ -70,7 +95,20 @@ class Languages extends Translations {
           'ADD NEW NOTE': 'یادداشت جدید',
           'Persian': 'فارسی',
           'English': 'انگلیسی',
-          'Korean': 'کره ایی'
+          'Korean': 'کره ایی',
+          // Date language
+          'January': 'فروردین',
+          'February': 'اردیبهشت',
+          'March': 'خرداد',
+          'April': 'تیر',
+          'May': 'مرداد',
+          'June': 'شهریور',
+          'July': 'مهر',
+          'August': 'آبان',
+          'September': 'آذر',
+          'October': 'دی',
+          'November': 'بهمن',
+          'December': 'اسفند',
         },
       };
 }

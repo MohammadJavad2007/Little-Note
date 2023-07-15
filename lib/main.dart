@@ -19,6 +19,7 @@ import 'package:shamsi_date/shamsi_date.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'models/Install.dart';
+import 'models/lang.dart';
 
 Color color_dark = Color.fromRGBO(39, 9, 207, 1);
 Color color_background = Color.fromARGB(255, 46, 22, 199);
@@ -51,12 +52,15 @@ void main() async {
   Hive.registerAdapter(PersonAdapter());
   Hive.registerAdapter(InstallAdapter());
   Hive.registerAdapter(HashAdapter());
+  Hive.registerAdapter(LangAdapter());
   // Opening the box]
 
   await Hive.openBox('NoteBox');
   await Hive.openBox('Install');
   await Hive.openBox('Hash');
-
+  await Hive.openBox('Lang');
+  Hive.box('Lang').add(Lang(lang: ""));
+  
   runApp(Notes());
 }
 
@@ -204,7 +208,7 @@ class _NotesState extends State<Notes> {
             GlobalCupertinoLocalizations.delegate,
           ],
           translations: Languages(),
-          locale: Get.deviceLocale,
+          locale: Hive.box('Lang').getAt(0).lang == ''? Get.deviceLocale : Locale(Hive.box('Lang').getAt(0).lang, ''),
           fallbackLocale: Locale('en', 'US'),
           // supportedLocales: [Locale('fa', 'IR'), Locale('en', 'US')],
           title: 'Notes',
