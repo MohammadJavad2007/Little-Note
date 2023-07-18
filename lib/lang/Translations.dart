@@ -24,7 +24,6 @@ class Languages extends Translations {
           'Persian': '페르시아 인',
           'English': '영어',
           'Korean': '한국인',
-          // Date language
           'January': '일월',
           'February': '이월',
           'March': '삼월',
@@ -96,20 +95,6 @@ class Languages extends Translations {
           'Persian': 'فارسی',
           'English': 'انگلیسی',
           'Korean': 'کره ایی',
-          // Date language
-          // 'January': 'فروردین',
-          // 'February': 'اردیبهشت',
-          // 'March': 'خرداد',
-          // 'April': 'تیر',
-          // 'May': 'مرداد',
-          // 'June': 'شهریور',
-          // 'July': 'مهر',
-          // 'August': 'آبان',
-          // 'September': 'آذر',
-          // 'October': 'دی',
-          // 'November': 'بهمن',
-          // 'December': 'اسفند',
-
           'January': 'دی',
           'February': 'بهمن',
           'March': 'اسفند',
