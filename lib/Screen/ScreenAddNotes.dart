@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 // import 'package:notes/Screen/ScreenNotes.dart';
@@ -95,12 +96,29 @@ class _ScreenAddNotesState extends State<ScreenAddNotes> {
     box = Hive.box('NoteBox');
     // date.text;
   }
+  Icon copy = Icon(Icons.copy);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Add a note'.tr),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(left: 8 , right: 8),
+            child: IconButton(
+                onPressed: () async {
+                  await Clipboard.setData(ClipboardData(
+                      text:
+                          '${_nameController.text}\n${_countryController.text}'));
+                  setState(() {
+                    copy = Icon(Icons.task);
+                  });
+                  // copied successfully
+                },
+                icon: copy),
+          )
+        ],
         leading: IconButton(
           onPressed: () {
             if ((_countryController.text == '') &
@@ -183,6 +201,7 @@ class _ScreenAddNotesState extends State<ScreenAddNotes> {
           icon: Icon(Icons.arrow_back),
         ),
       ),
+      
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -203,15 +222,6 @@ class _ScreenAddNotesState extends State<ScreenAddNotes> {
                   controller: _countryController,
                   validator: _fieldValidator,
                   maxLines: null,
-                ),
-                SizedBox(height: 24.0),
-                Container(
-                  alignment: Alignment.centerRight,
-                  child: Text(
-                    "${_dateController.text}",
-                    key: UniqueKey(),
-                    style: TextStyle(fontSize: 15),
-                  ),
                 ),
               ],
             ),

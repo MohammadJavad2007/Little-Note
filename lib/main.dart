@@ -192,6 +192,7 @@ class _NotesState extends State<Notes> {
       valueListenable: Notes.themeNotifier,
       builder: (_, ThemeMode currentMode, __) {
         return GetMaterialApp(
+        
           // localizationsDelegates: [
           //   // AppLocalizationsDelegate(),
           //   GlobalMaterialLocalizations.delegate,
@@ -216,10 +217,12 @@ class _NotesState extends State<Notes> {
           title: 'Notes',
           theme: ThemeData(
             primarySwatch: themeColor,
+            bottomAppBarTheme: BottomAppBarTheme(color: themeColor)
           ),
           darkTheme: ThemeData.dark().copyWith(
             colorScheme: ColorScheme.dark(primary: color_dark),
             appBarTheme: AppBarTheme(backgroundColor: color_dark_AppBer),
+            bottomAppBarTheme: BottomAppBarTheme(color: color_dark),
             floatingActionButtonTheme:
                 FloatingActionButtonThemeData(backgroundColor: color_dark),
           ),

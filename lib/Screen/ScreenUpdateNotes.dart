@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import 'package:notes/models/person.dart';
@@ -29,8 +30,7 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
   late final Box box;
 
 // month data time
-  var time =
-      Jalali.now().toGregorian();
+  var time = Jalali.now().toGregorian();
   String month() {
     switch (time.month) {
       case 1:
@@ -105,11 +105,155 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
     _dateController = TextEditingController(text: widget.person.dateTime);
   }
 
+  Icon copy = Icon(Icons.copy);
   @override
   Widget build(BuildContext context) {
+    int month = 1;
+    switch (_dateController.text.toString().split(' ')[0]) {
+      case 'January':
+        month = 1;
+      // return 'January';
+      case 'February':
+        month = 2;
+      // return 'February';
+      case 'March':
+        month = 3;
+      // return 'March';
+      case 'April':
+        month = 4;
+      // return 'April';
+      case 'May':
+        month = 5;
+      // return 'May';
+      case 'June':
+        month = 6;
+      // return 'June';
+      case 'July':
+        month = 7;
+      // return 'July';
+      case 'August':
+        month = 8;
+      // return 'August';
+      case 'September':
+        month = 9;
+      // return 'September';
+      case 'October':
+        month = 10;
+      // return 'October';
+      case 'November':
+        month = 11;
+      // return 'November';
+      case 'December':
+        month = 12;
+      // return 'December';
+    }
+    // print(DateTime(
+    //   int.parse(personData.dateTime
+    //       .toString()
+    //       .split(' ')[2]),
+    //   month,
+    //   int.parse(personData.dateTime
+    //       .toString()
+    //       .split(' ')[1]),
+    //   int.parse(personData.dateTime
+    //       .toString()
+    //       .split(' ')[3]),
+    //   int.parse(personData.dateTime
+    //       .toString()
+    //       .split(' ')[5]),
+    // ).toJalali());
+    // ignore: unused_local_variable
+    final year = 'Notes'.tr == 'یادداشت ها'
+        ? DateTime(
+            int.parse(_dateController.text.toString().split(' ')[2]),
+            month,
+            int.parse(_dateController.text.toString().split(' ')[1]),
+            int.parse(_dateController.text.toString().split(' ')[3]),
+            int.parse(_dateController.text.toString().split(' ')[5]),
+          ).toJalali().year
+        : DateTime(
+            int.parse(_dateController.text.toString().split(' ')[2]),
+            month,
+            int.parse(_dateController.text.toString().split(' ')[1]),
+            int.parse(_dateController.text.toString().split(' ')[3]),
+            int.parse(_dateController.text.toString().split(' ')[5]),
+          ).year;
+    final day = 'Notes'.tr == 'یادداشت ها'
+        ? DateTime(
+            int.parse(_dateController.text.toString().split(' ')[2]),
+            month,
+            int.parse(_dateController.text.toString().split(' ')[1]),
+            int.parse(_dateController.text.toString().split(' ')[3]),
+            int.parse(_dateController.text.toString().split(' ')[5]),
+          ).toJalali().day
+        : DateTime(
+            int.parse(_dateController.text.toString().split(' ')[2]),
+            month,
+            int.parse(_dateController.text.toString().split(' ')[1]),
+            int.parse(_dateController.text.toString().split(' ')[3]),
+            int.parse(_dateController.text.toString().split(' ')[5]),
+          ).day;
+    final hour = 'Notes'.tr == 'یادداشت ها'
+        ? DateTime(
+            int.parse(_dateController.text.toString().split(' ')[2]),
+            month,
+            int.parse(_dateController.text.toString().split(' ')[1]),
+            int.parse(_dateController.text.toString().split(' ')[3]),
+            int.parse(_dateController.text.toString().split(' ')[5]),
+          ).toJalali().hour
+        : DateTime(
+            int.parse(_dateController.text.toString().split(' ')[2]),
+            month,
+            int.parse(_dateController.text.toString().split(' ')[1]),
+            int.parse(_dateController.text.toString().split(' ')[3]),
+            int.parse(_dateController.text.toString().split(' ')[5]),
+          ).hour;
+    final minute = 'Notes'.tr == 'یادداشت ها'
+        ? DateTime(
+            int.parse(_dateController.text.toString().split(' ')[2]),
+            month,
+            int.parse(_dateController.text.toString().split(' ')[1]),
+            int.parse(_dateController.text.toString().split(' ')[3]),
+            int.parse(_dateController.text.toString().split(' ')[5]),
+          ).toJalali().minute
+        : DateTime(
+            int.parse(_dateController.text.toString().split(' ')[2]),
+            month,
+            int.parse(_dateController.text.toString().split(' ')[1]),
+            int.parse(_dateController.text.toString().split(' ')[3]),
+            int.parse(_dateController.text.toString().split(' ')[5]),
+          ).minute;
+    // print(_dateController.text
+    //     .toString()
+    //     .split(' ')[1]);
+    // print(_dateController.text
+    //     .toString()
+    //     .split(' ')[2]);
+    // print(_dateController.text
+    //     .toString()
+    //     .split(' ')[3]);
+    // print(_dateController.text
+    //     .toString()
+    //     .split(' ')[5]);
     return Scaffold(
       appBar: AppBar(
         title: Text('Update a note'.tr),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(left: 8 , right: 8),
+            child: IconButton(
+              onPressed: () async {
+                await Clipboard.setData(ClipboardData(
+                    text: '${_nameController.text}\n${_countryController.text}'));
+                setState(() {
+                  copy = Icon(Icons.task);
+                });
+                // copied successfully
+              },
+              icon: copy,
+            ),
+          ),
+        ],
         leading: IconButton(
           onPressed: () {
             if ((_countryController.text ==
@@ -219,7 +363,9 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
                 Container(
                   alignment: Alignment.centerRight,
                   child: Text(
-                    "${_dateController.text}",
+                    'Notes'.tr == 'یادداشت ها'
+                                        ? '${hour > 9 ? hour : '0' + hour.toString()}:${minute > 9 ? minute : '0' + minute.toString()}  ,${year}  ,${day > 9 ? day : '0' + day.toString()}  ,${_dateController.text.toString().split(' ')[0].tr}'
+                                        : '${_dateController.text.toString().split(' ')[0].tr},  ${day > 9 ? day : '0' + day.toString()},  ${year},  ${hour > 9 ? hour : '0' + hour.toString()}:${minute > 9 ? minute : '0' + minute.toString()}',
                     key: UniqueKey(),
                     style: TextStyle(fontSize: 15),
                   ),
