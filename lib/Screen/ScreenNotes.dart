@@ -386,7 +386,7 @@ class _ScreenNotesState extends State<ScreenNotes> {
                         duration: Duration(seconds: 1),
                         curve: Curves.bounceIn,
                         decoration: BoxDecoration(
-                          color: Color.fromARGB(94, 255, 255, 255),
+                          color: Color.fromARGB(57, 187, 187, 187),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: InkWell(
