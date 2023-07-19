@@ -147,22 +147,6 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
         month = 12;
       // return 'December';
     }
-    // print(DateTime(
-    //   int.parse(personData.dateTime
-    //       .toString()
-    //       .split(' ')[2]),
-    //   month,
-    //   int.parse(personData.dateTime
-    //       .toString()
-    //       .split(' ')[1]),
-    //   int.parse(personData.dateTime
-    //       .toString()
-    //       .split(' ')[3]),
-    //   int.parse(personData.dateTime
-    //       .toString()
-    //       .split(' ')[5]),
-    // ).toJalali());
-    // ignore: unused_local_variable
     final year = 'Notes'.tr == 'یادداشت ها'
         ? DateTime(
             int.parse(_dateController.text.toString().split(' ')[2]),
@@ -223,28 +207,17 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
             int.parse(_dateController.text.toString().split(' ')[3]),
             int.parse(_dateController.text.toString().split(' ')[5]),
           ).minute;
-    // print(_dateController.text
-    //     .toString()
-    //     .split(' ')[1]);
-    // print(_dateController.text
-    //     .toString()
-    //     .split(' ')[2]);
-    // print(_dateController.text
-    //     .toString()
-    //     .split(' ')[3]);
-    // print(_dateController.text
-    //     .toString()
-    //     .split(' ')[5]);
     return Scaffold(
       appBar: AppBar(
         title: Text('Update a note'.tr),
         actions: [
           Padding(
-            padding: const EdgeInsets.only(left: 8 , right: 8),
+            padding: const EdgeInsets.only(left: 8, right: 8),
             child: IconButton(
               onPressed: () async {
                 await Clipboard.setData(ClipboardData(
-                    text: '${_nameController.text}\n${_countryController.text}'));
+                    text:
+                        '${_nameController.text}\n${_countryController.text}'));
                 setState(() {
                   copy = Icon(Icons.task);
                 });
@@ -364,8 +337,8 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
                   alignment: Alignment.centerRight,
                   child: Text(
                     'Notes'.tr == 'یادداشت ها'
-                                        ? '${hour > 9 ? hour : '0' + hour.toString()}:${minute > 9 ? minute : '0' + minute.toString()}  ,${year}  ,${day > 9 ? day : '0' + day.toString()}  ,${_dateController.text.toString().split(' ')[0].tr}'
-                                        : '${_dateController.text.toString().split(' ')[0].tr},  ${day > 9 ? day : '0' + day.toString()},  ${year},  ${hour > 9 ? hour : '0' + hour.toString()}:${minute > 9 ? minute : '0' + minute.toString()}',
+                        ? '${hour > 9 ? hour : '0' + hour.toString()}:${minute > 9 ? minute : '0' + minute.toString()}  ,${year}  ,${day > 9 ? day : '0' + day.toString()}  ,${_dateController.text.toString().split(' ')[0].tr}'
+                        : '${_dateController.text.toString().split(' ')[0].tr},  ${day > 9 ? day : '0' + day.toString()},  ${year},  ${hour > 9 ? hour : '0' + hour.toString()}:${minute > 9 ? minute : '0' + minute.toString()}',
                     key: UniqueKey(),
                     style: TextStyle(fontSize: 15),
                   ),

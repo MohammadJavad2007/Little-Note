@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
-// import 'package:notes/Screen/ScreenNotes.dart';
 import 'package:notes/models/person.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 
@@ -20,8 +19,7 @@ class _ScreenAddNotesState extends State<ScreenAddNotes> {
   late final Box box;
 
   // data time
-  var time =
-      Jalali.now().toGregorian();
+  var time = Jalali.now().toGregorian();
   String month() {
     switch (time.month) {
       case 1:
@@ -96,6 +94,7 @@ class _ScreenAddNotesState extends State<ScreenAddNotes> {
     box = Hive.box('NoteBox');
     // date.text;
   }
+
   Icon copy = Icon(Icons.copy);
 
   @override
@@ -105,7 +104,7 @@ class _ScreenAddNotesState extends State<ScreenAddNotes> {
         title: Text('Add a note'.tr),
         actions: [
           Padding(
-            padding: const EdgeInsets.only(left: 8 , right: 8),
+            padding: const EdgeInsets.only(left: 8, right: 8),
             child: IconButton(
                 onPressed: () async {
                   await Clipboard.setData(ClipboardData(
@@ -201,7 +200,6 @@ class _ScreenAddNotesState extends State<ScreenAddNotes> {
           icon: Icon(Icons.arrow_back),
         ),
       ),
-      
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(

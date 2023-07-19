@@ -59,7 +59,7 @@ void main() async {
   await Hive.openBox('Install');
   await Hive.openBox('Hash');
   await Hive.openBox('Lang');
-  Hive.box('Lang').add(Lang(lang: "" , country: ""));
+  Hive.box('Lang').add(Lang(lang: "", country: ""));
 
   runApp(Notes());
 }
@@ -89,31 +89,6 @@ class _NotesState extends State<Notes> {
 
     // ignore: unused_local_variable
   }
-
-  // Language() async {
-  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
-
-  //   if (prefs.getBool('lang') == false) {
-  //     Get.updateLocale(const Locale('fa', 'IR'));
-  //     // print('dark');
-  //   } else {
-  //     Get.updateLocale(const Locale('en', 'US'));
-  //     // print(getitem);
-  //   }
-
-  //   // ignore: unused_local_variable
-  // }
-
-  // internet() async {
-  //   try {
-  //     final result = await InternetAddress.lookup('google.com');
-  //     if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-  //       print('connected');
-  //     }
-  //   } on SocketException catch (_) {
-  //     print('not connected');
-  //   }
-  // }
 
   final visit = "http://localhost/visit/visit-post.php";
   Visit() async {
@@ -153,7 +128,6 @@ class _NotesState extends State<Notes> {
             <String, dynamic>{'install': hashcode},
           ),
         );
-        // final jsonData = response.body;
         print('install = ${response.body}');
       } on TimeoutException {
       } on SocketException {
@@ -174,8 +148,6 @@ class _NotesState extends State<Notes> {
   void initState() {
     // TODO: implement initState
     Darkmode();
-    // Language();
-    // internet();
     // ignore: unused_local_variable
     Visit();
     Installer();
@@ -183,26 +155,12 @@ class _NotesState extends State<Notes> {
     super.initState();
   }
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    // var a = Translations.of(context)?.text('title');
-    // print(a);
     return ValueListenableBuilder<ThemeMode>(
       valueListenable: Notes.themeNotifier,
       builder: (_, ThemeMode currentMode, __) {
         return GetMaterialApp(
-        
-          // localizationsDelegates: [
-          //   // AppLocalizationsDelegate(),
-          //   GlobalMaterialLocalizations.delegate,
-          //   GlobalWidgetsLocalizations.delegate,
-          //   GlobalCupertinoLocalizations.delegate,
-          // ],
-          // supportedLocales: [
-          //   Locale('fa',''),
-          //   Locale('en',''),
-          // ],
           localizationsDelegates: [
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,

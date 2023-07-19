@@ -196,35 +196,6 @@ class _ScreenNotesState extends State<ScreenNotes> {
                 onPressed: toggle,
               ),
             ),
-            // Padding(
-            //   padding: const EdgeInsets.all(8.0),
-            //   child: IconButton(
-            //     onPressed: () {
-            //       showSearch(
-            //           context: context,
-            //           delegate: Search(widget.list));
-            //     },
-            //     icon: Icon(Icons.search),
-            //   ),
-            // ),
-            // if (_isGridMode)
-            //   IconButton(
-            //     icon: const Icon(Icons.grid_on),
-            //     onPressed: () {
-            //       setState(() {
-            //         _isGridMode = false;
-            //       });
-            //     },
-            //   )
-            // else
-            //   IconButton(
-            //     icon: const Icon(Icons.list),
-            //     onPressed: () {
-            //       setState(() {
-            //         _isGridMode = true;
-            //       });
-            //     },
-            //   ),
           ],
         ),
         // body
@@ -316,22 +287,6 @@ class _ScreenNotesState extends State<ScreenNotes> {
                         month = 12;
                       // return 'December';
                     }
-                    // print(DateTime(
-                    //   int.parse(personData.dateTime
-                    //       .toString()
-                    //       .split(' ')[2]),
-                    //   month,
-                    //   int.parse(personData.dateTime
-                    //       .toString()
-                    //       .split(' ')[1]),
-                    //   int.parse(personData.dateTime
-                    //       .toString()
-                    //       .split(' ')[3]),
-                    //   int.parse(personData.dateTime
-                    //       .toString()
-                    //       .split(' ')[5]),
-                    // ).toJalali());
-                    // ignore: unused_local_variable
                     final year = 'Notes'.tr == 'یادداشت ها'
                         ? DateTime(
                             int.parse(
@@ -424,18 +379,6 @@ class _ScreenNotesState extends State<ScreenNotes> {
                             int.parse(
                                 personData.dateTime.toString().split(' ')[5]),
                           ).minute;
-                    // print(personData.dateTime
-                    //     .toString()
-                    //     .split(' ')[1]);
-                    // print(personData.dateTime
-                    //     .toString()
-                    //     .split(' ')[2]);
-                    // print(personData.dateTime
-                    //     .toString()
-                    //     .split(' ')[3]);
-                    // print(personData.dateTime
-                    //     .toString()
-                    //     .split(' ')[5]);
                     return Padding(
                       padding: const EdgeInsets.symmetric(
                           vertical: 5, horizontal: 10),
@@ -563,35 +506,8 @@ class _ScreenNotesState extends State<ScreenNotes> {
         ),
       ),
     );
-
-    //       //! Gesture For Slide
-    //       GestureDetector(
-    //         onHorizontalDragUpdate: (e) {
-    //           if (e.delta.dx > 0) {
-    //             setState(() {
-    //               value = 1;
-    //             });
-    //           } else {
-    //             setState(() {
-    //               value = 0;
-    //             });
-    //           }
-    //         },
-    //       )
-    //     ],
-    //   ),
-    // );
   }
 }
-
-// Route _createRoute() {
-//   return PageRouteBuilder(
-//     pageBuilder: (context, animation, secondaryAnimation) => ScreenAddNotes(),
-//     transitionsBuilder: (context, animation, secondaryAnimation, child) {
-//       return child;
-//     },
-//   );
-// }
 
 class Search extends SearchDelegate {
   @override
