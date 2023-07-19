@@ -1,6 +1,6 @@
 // ignore_for_file: file_names
 
-import 'dart:math';
+// import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -443,7 +443,7 @@ class _ScreenNotesState extends State<ScreenNotes> {
                         duration: Duration(seconds: 1),
                         curve: Curves.bounceIn,
                         decoration: BoxDecoration(
-                          color: Color.fromARGB(54, 133, 131, 131),
+                          color: Color.fromARGB(94, 255, 255, 255),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: InkWell(

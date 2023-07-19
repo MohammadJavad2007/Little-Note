@@ -217,7 +217,8 @@ class _NotesState extends State<Notes> {
           title: 'Notes',
           theme: ThemeData(
             primarySwatch: themeColor,
-            bottomAppBarTheme: BottomAppBarTheme(color: themeColor)
+            bottomAppBarTheme: BottomAppBarTheme(color: themeColor),
+            scaffoldBackgroundColor: Color.fromARGB(255, 236, 236, 236),
           ),
           darkTheme: ThemeData.dark().copyWith(
             colorScheme: ColorScheme.dark(primary: color_dark),
