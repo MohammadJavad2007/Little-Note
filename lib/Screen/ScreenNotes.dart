@@ -84,11 +84,21 @@ class _ScreenNotesState extends State<ScreenNotes> {
       // print(toggleStorage);
       await prefs.setBool('repeat', true);
       // widget.darkmode = true;
+      if (Platform.isAndroid) {
+        SystemChrome.setSystemUIOverlayStyle( SystemUiOverlayStyle(
+            systemNavigationBarColor: color,
+            systemNavigationBarIconBrightness: Brightness.light));
+      }
     } else {
       Notes.themeNotifier.value = ThemeMode.dark;
       // widget.darkmode = false;
       await prefs.setBool('repeat', false);
       // print(toggleStorage);
+      if (Platform.isAndroid) {
+        SystemChrome.setSystemUIOverlayStyle( SystemUiOverlayStyle(
+            systemNavigationBarColor: color_dark,
+            systemNavigationBarIconBrightness: Brightness.light));
+      }
     }
   }
 
@@ -125,8 +135,8 @@ class _ScreenNotesState extends State<ScreenNotes> {
     // Darkmode();
     contactBox = Hive.box('NoteBox');
     if (Platform.isAndroid) {
-      SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-          systemNavigationBarColor: Colors.deepOrange,
+      SystemChrome.setSystemUIOverlayStyle( SystemUiOverlayStyle(
+          systemNavigationBarColor: color,
           systemNavigationBarIconBrightness: Brightness.light));
     }
     // print(storage.getItem('darkMode'));
@@ -134,6 +144,13 @@ class _ScreenNotesState extends State<ScreenNotes> {
 
   double value = 0;
   int x = 0;
+
+  void _hide() {
+    // This will hide the bottom system navigation bar
+    // Only the status bar on the top will show up
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: [SystemUiOverlay.top]);
+  }
 
   // int sized = 100;
   @override
