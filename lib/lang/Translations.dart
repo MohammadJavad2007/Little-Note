@@ -141,7 +141,7 @@ class Languages extends Translations {
           'Notes': 'Notas',
           'Add a note': 'Agrega una nota',
           'Save your changes or discard them?':
-              'Guardar los cambios o descartarlos?',
+              '¿Guardar los cambios o descartarlos?',
           'Cancle': 'Cancelar',
           'Discard': 'Desechar',
           'Save': 'Ahorrar',

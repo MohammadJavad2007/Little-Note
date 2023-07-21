@@ -15,6 +15,7 @@ import 'package:notes/main.dart';
 import 'package:notes/models/lang.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:persian_number_utility/persian_number_utility.dart';
 // import 'package:notes/models/person.dart';
 // import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 
@@ -644,7 +645,7 @@ class _ScreenNotesState extends State<ScreenNotes> {
                                     const EdgeInsets.symmetric(horizontal: 15),
                                 child: Text(
                                   'Notes'.tr == 'یادداشت ها'
-                                      ? '${hour > 9 ? hour : '0' + hour.toString()}:${minute > 9 ? minute : '0' + minute.toString()}  ,${year}  ,${day > 9 ? day : '0' + day.toString()}  ,${personData.dateTime.toString().split(' ')[0].tr}'
+                                      ? '${hour > 9 ? hour : '0' + hour.toString()}:${minute > 9 ? minute : '0' + minute.toString()}  ,${year}  ,${day > 9 ? day : '0' + day.toString()}  ,${personData.dateTime.toString().split(' ')[0].tr}'.toPersianDigit()
                                       : '${personData.dateTime.toString().split(' ')[0].tr},  ${day > 9 ? day : '0' + day.toString()},  ${year},  ${hour > 9 ? hour : '0' + hour.toString()}:${minute > 9 ? minute : '0' + minute.toString()}',
                                   key: UniqueKey(),
                                   style: TextStyle(fontSize: 15),

@@ -42,6 +42,7 @@ dependencies:
   http: ^1.1.0
   localization: ^2.1.0
   shamsi_date: ^1.0.1
+  persian_number_utility: ^1.1.3
 
 dev_dependencies:
   flutter_test:
