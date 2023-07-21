@@ -90,9 +90,13 @@ class _ScreenNotesState extends State<ScreenNotes> {
       await prefs.setBool('repeat', true);
       // widget.darkmode = true;
       if (Platform.isAndroid) {
-        SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        SystemChrome.setSystemUIOverlayStyle(
+          SystemUiOverlayStyle(
             systemNavigationBarColor: color,
-            systemNavigationBarIconBrightness: Brightness.light));
+            systemNavigationBarIconBrightness: Brightness.light,
+            // systemNavigationBarDividerColor: null
+          ),
+        );
       }
     } else {
       Notes.themeNotifier.value = ThemeMode.dark;
@@ -100,9 +104,13 @@ class _ScreenNotesState extends State<ScreenNotes> {
       await prefs.setBool('repeat', false);
       // print(toggleStorage);
       if (Platform.isAndroid) {
-        SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        SystemChrome.setSystemUIOverlayStyle(
+          SystemUiOverlayStyle(
             systemNavigationBarColor: color_dark,
-            systemNavigationBarIconBrightness: Brightness.light));
+            systemNavigationBarIconBrightness: Brightness.dark,
+            // systemNavigationBarDividerColor: null
+          ),
+        );
       }
     }
   }
@@ -316,7 +324,7 @@ class _ScreenNotesState extends State<ScreenNotes> {
           //         case 2:
           //           // setState(() {
           //           //   // color_dark = Color(0xFFBF2BF1);
-                      //  color_dark = Color(0xFF6A0D8B);
+          //  color_dark = Color(0xFF000000);
           //           //   // colorTheme = 0xFF8C1414;
           //           // });
           //           print(value);
@@ -381,7 +389,11 @@ class _ScreenNotesState extends State<ScreenNotes> {
                         },
                         child: Text(
                           'ADD NEW NOTE'.tr,
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(
+                              color:
+                                  Notes.themeNotifier.value == ThemeMode.light
+                                      ? Colors.white
+                                      : Colors.black),
                         ),
                       ),
                     ),
@@ -647,9 +659,11 @@ class _ScreenNotesState extends State<ScreenNotes> {
               duration: Duration(milliseconds: 250),
               transition: Transition.rightToLeftWithFade);
         },
-        child: const Icon(
+        child: Icon(
           Icons.add,
-          color: Colors.white,
+          color: Notes.themeNotifier.value == ThemeMode.light
+              ? Colors.white
+              : Colors.black,
         ),
       ),
     );

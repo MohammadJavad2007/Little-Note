@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:notes/main.dart';
 
 import 'package:notes/models/person.dart';
 import 'package:hive/hive.dart';
@@ -411,7 +412,9 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
             },
             child: Text(
               'Save'.tr,
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: Notes.themeNotifier.value == ThemeMode.light
+              ? Colors.white
+              : Colors.black),
             ),
           ),
         ),

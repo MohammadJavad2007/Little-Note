@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
+import 'package:notes/main.dart';
 import 'package:notes/models/person.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 
@@ -212,7 +213,7 @@ class _ScreenAddNotesState extends State<ScreenAddNotes> {
                 TextFormField(
                   controller: _nameController,
                   textInputAction: TextInputAction.next,
-                  autofocus:true,
+                  autofocus: true,
                   validator: _fieldValidator,
                 ),
                 SizedBox(height: 24.0),
@@ -242,7 +243,10 @@ class _ScreenAddNotesState extends State<ScreenAddNotes> {
             },
             child: Text(
               'Save'.tr,
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(
+                  color: Notes.themeNotifier.value == ThemeMode.light
+                      ? Colors.white
+                      : Colors.black),
             ),
           ),
         ),
