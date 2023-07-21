@@ -2,6 +2,8 @@
 
 // import 'dart:math';
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -122,6 +124,11 @@ class _ScreenNotesState extends State<ScreenNotes> {
     // Get reference to an already opened box
     // Darkmode();
     contactBox = Hive.box('NoteBox');
+    if (Platform.isAndroid) {
+      SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+          systemNavigationBarColor: Colors.deepOrange,
+          systemNavigationBarIconBrightness: Brightness.light));
+    }
     // print(storage.getItem('darkMode'));
   }
 
