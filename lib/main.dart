@@ -44,6 +44,19 @@ MaterialColor themeColor = MaterialColor(
 );
 
 void main() async {
+  // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+  //     systemNavigationBarColor: Colors.transparent));
+//   //Setting SysemUIOverlay
+//   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+//       systemStatusBarContrastEnforced: true,
+//       systemNavigationBarColor: Colors.transparent,
+//       systemNavigationBarDividerColor: Colors.transparent,
+//       systemNavigationBarIconBrightness: Brightness.dark,
+//       statusBarIconBrightness: Brightness.dark));
+
+// //Setting SystmeUIMode
+//   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge,
+//       overlays: [SystemUiOverlay.top]);
   // SystemChrome.setSystemUIOverlayStyle(
   //   SystemUiOverlayStyle(
   //     systemNavigationBarColor: Notes.themeNotifier.value == ThemeMode.light
@@ -87,13 +100,29 @@ class _NotesState extends State<Notes> {
 
     if (prefs.getBool('repeat') == false) {
       Notes.themeNotifier.value = ThemeMode.dark;
+      if (Platform.isAndroid) {
+        SystemChrome.setSystemUIOverlayStyle(
+          SystemUiOverlayStyle(
+            systemNavigationBarColor: color_dark,
+            systemNavigationBarIconBrightness: Brightness.dark,
+            // systemNavigationBarDividerColor: null
+          ),
+        );
+      }
       // print('dark');
     } else {
       Notes.themeNotifier.value = ThemeMode.light;
       // print(getitem);
+      if (Platform.isAndroid) {
+        SystemChrome.setSystemUIOverlayStyle(
+          SystemUiOverlayStyle(
+            systemNavigationBarColor: color,
+            systemNavigationBarIconBrightness: Brightness.light,
+            // systemNavigationBarDividerColor: null
+          ),
+        );
+      }
     }
-
-    // ignore: unused_local_variable
   }
 
   final visit = "http://localhost/visit/visit-post.php";
