@@ -6,6 +6,8 @@ import 'package:notes/models/person.dart';
 import 'package:hive/hive.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 
+import 'ScreenNotes.dart';
+
 // import 'ScreenNotes.dart';
 
 class ScreenUpdateNotes extends StatefulWidget {
@@ -211,6 +213,45 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
       appBar: AppBar(
         title: Text('Update a note'.tr),
         actions: [
+          IconButton(
+            iconSize: 29,
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                      // ignore: unused_label
+                      title: Text(
+                        'Are you sure you want to delete your text?'.tr,
+                        style: TextStyle(fontSize: 15),
+                      ),
+                      // content: Center(),
+                      // ignore: unused_label
+                      actions: <Widget>[
+                        TextButton(
+                          child: Text("Cancle".tr),
+                          onPressed: () {
+                            Get.back();
+                          },
+                        ),
+                        TextButton(
+                          style: TextButton.styleFrom(
+                            foregroundColor: Colors.red,
+                          ),
+                          onPressed: () {
+                            // _deleteInfo(widget.index);
+                            _countryController.text = '';
+                            _nameController.text = '';
+                            Get.back();
+                          },
+                          child: Text('Delete'.tr),
+                        ),
+                      ]);
+                },
+              );
+            },
+            icon: Icon(Icons.delete_sweep),
+          ),
           Padding(
             padding: const EdgeInsets.only(left: 8, right: 8),
             child: IconButton(
@@ -322,6 +363,7 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
                 Text('Title'.tr),
                 TextFormField(
                   controller: _nameController,
+                  textInputAction: TextInputAction.next,
                   validator: _fieldValidator,
                 ),
                 SizedBox(height: 24.0),

@@ -22,13 +22,10 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'models/Install.dart';
 import 'models/lang.dart';
 
-Color color_dark = Color.fromRGBO(39, 9, 207, 1);
-Color color_background = Color.fromARGB(255, 46, 22, 199);
-Color color_background_dark = Color.fromARGB(255, 34, 34, 34);
+Color color_dark = Color(0xFFBF2BF1);
 Color color_dark_AppBer = Color(0xFF3D3D3D);
-// Color color_dark_AppBer = Color(0xFF3D3D3D);
 
-int colorTheme = 0xFF20148C;
+int colorTheme = 0xFF6A0D8B;
 Color color = Color(colorTheme);
 MaterialColor themeColor = MaterialColor(
   colorTheme,
@@ -47,7 +44,6 @@ MaterialColor themeColor = MaterialColor(
 );
 
 void main() async {
-  // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle( systemNavigationBarColor: color ),);
   // Initialize hiv
   await Hive.initFlutter();
   // Registering the adapter

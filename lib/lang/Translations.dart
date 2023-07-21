@@ -21,9 +21,9 @@ class Languages extends Translations {
           'Delete': '삭제',
           'Write Your First Note': '첫 메모 작성',
           'ADD NEW NOTE': '새 메모 추가',
-          'Persian': '페르시아 인',
-          'English': '영어',
-          'Korean': '한국인',
+          // 'Persian': '페르시아 인',
+          // 'English': '영어',
+          // 'Korean': '한국인',
           'January': '일월',
           'February': '이월',
           'March': '삼월',
@@ -36,6 +36,8 @@ class Languages extends Translations {
           'October': '시월',
           'November': '십일월',
           'December': '십이월',
+          'Are you sure you want to delete your text?':
+              '텍스트를 삭제하시겠습니까?',
         },
         'en_US': {
           'Notes': 'Notes',
@@ -56,9 +58,9 @@ class Languages extends Translations {
           'Delete': 'Delete',
           'Write Your First Note': 'Write Your First Note',
           'ADD NEW NOTE': 'ADD NEW NOTE',
-          'Persian': 'Persian',
-          'English': 'English',
-          'Korean': 'Korean',
+          // 'Persian': 'Persian',
+          // 'English': 'English',
+          // 'Korean': 'Korean',
           // Date language
           'January': 'January',
           'February': 'February',
@@ -72,6 +74,8 @@ class Languages extends Translations {
           'October': 'October',
           'November': 'November',
           'December': 'December',
+          'Are you sure you want to delete your text?':
+              'Are you sure you want to delete your text?',
         },
         'fa_IR': {
           'Notes': 'یادداشت ها',
@@ -92,9 +96,9 @@ class Languages extends Translations {
           'Delete': 'حذف',
           'Write Your First Note': 'اولین یادداشت خود را بنویسید',
           'ADD NEW NOTE': 'یادداشت جدید',
-          'Persian': 'فارسی',
-          'English': 'انگلیسی',
-          'Korean': 'کره ایی',
+          // 'Persian': 'فارسی',
+          // 'English': 'انگلیسی',
+          // 'Korean': 'کره ایی',
           'January': 'دی',
           'February': 'بهمن',
           'March': 'اسفند',
@@ -107,6 +111,8 @@ class Languages extends Translations {
           'October': 'مهر',
           'November': 'آبان',
           'December': 'آذر',
+          'Are you sure you want to delete your text?':
+              'آیا واقعا می خواهید متن خود را پاک کنید؟',
         },
       };
 }

@@ -212,6 +212,7 @@ class _ScreenAddNotesState extends State<ScreenAddNotes> {
                 TextFormField(
                   controller: _nameController,
                   textInputAction: TextInputAction.next,
+                  autofocus:true,
                   validator: _fieldValidator,
                 ),
                 SizedBox(height: 24.0),

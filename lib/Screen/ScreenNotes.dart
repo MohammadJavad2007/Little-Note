@@ -62,6 +62,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 // }
 
 // ignore: must_be_immutable
+late final Box contactBox;
+_deleteInfo(int index) {
+  contactBox.deleteAt(index);
+}
+
 class ScreenNotes extends StatefulWidget {
   ScreenNotes({super.key});
   // SharedPreferences prefs() async {
@@ -85,7 +90,7 @@ class _ScreenNotesState extends State<ScreenNotes> {
       await prefs.setBool('repeat', true);
       // widget.darkmode = true;
       if (Platform.isAndroid) {
-        SystemChrome.setSystemUIOverlayStyle( SystemUiOverlayStyle(
+        SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
             systemNavigationBarColor: color,
             systemNavigationBarIconBrightness: Brightness.light));
       }
@@ -95,14 +100,12 @@ class _ScreenNotesState extends State<ScreenNotes> {
       await prefs.setBool('repeat', false);
       // print(toggleStorage);
       if (Platform.isAndroid) {
-        SystemChrome.setSystemUIOverlayStyle( SystemUiOverlayStyle(
+        SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
             systemNavigationBarColor: color_dark,
             systemNavigationBarIconBrightness: Brightness.light));
       }
     }
   }
-
-  late final Box contactBox;
 
   // Darkmode() async {
   //   final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -123,10 +126,6 @@ class _ScreenNotesState extends State<ScreenNotes> {
   //   );
   // }
 
-  _deleteInfo(int index) {
-    contactBox.deleteAt(index);
-  }
-
   // bool _isGridMode = false;
   @override
   void initState() {
@@ -134,11 +133,17 @@ class _ScreenNotesState extends State<ScreenNotes> {
     // Get reference to an already opened box
     // Darkmode();
     contactBox = Hive.box('NoteBox');
-    if (Platform.isAndroid) {
-      SystemChrome.setSystemUIOverlayStyle( SystemUiOverlayStyle(
-          systemNavigationBarColor: color,
-          systemNavigationBarIconBrightness: Brightness.light));
-    }
+    // if (Notes.themeNotifier.value == ThemeMode.dark) {
+    //   if (Platform.isAndroid) {
+    //     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    //         systemNavigationBarColor: color,
+    //         systemNavigationBarIconBrightness: Brightness.light));
+    //   }
+    // } else {
+    //   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    //         systemNavigationBarColor: color_dark,
+    //         systemNavigationBarIconBrightness: Brightness.dark));
+    // }
     // print(storage.getItem('darkMode'));
   }
 
@@ -156,14 +161,23 @@ class _ScreenNotesState extends State<ScreenNotes> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Scaffold(
-        appBar: AppBar(
-          systemOverlayStyle: const SystemUiOverlayStyle(
-            statusBarColor: Color.fromARGB(0, 0, 0, 0), // <-- SEE HERE
+      appBar: AppBar(
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: Color.fromARGB(0, 0, 0, 0), // <-- SEE HERE
+        ),
+        title: Text('Notes'.tr),
+        actions: [
+          IconButton(
+            icon: Icon(
+              Notes.themeNotifier.value == ThemeMode.light
+                  ? Icons.dark_mode
+                  : Icons.light_mode,
+            ),
+            onPressed: toggle,
           ),
-          title: Text('Notes'.tr),
-          actions: [
-            PopupMenuButton<int>(
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 4),
+            child: PopupMenuButton<int>(
               icon: Icon(Icons.translate),
               tooltip: '',
               itemBuilder: (context) => [
@@ -209,324 +223,433 @@ class _ScreenNotesState extends State<ScreenNotes> {
                 }
               },
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: IconButton(
-                icon: Icon(
-                  Notes.themeNotifier.value == ThemeMode.light
-                      ? Icons.dark_mode
-                      : Icons.light_mode,
-                ),
-                onPressed: toggle,
-              ),
-            ),
-          ],
-        ),
-        // body
-        body: Padding(
-          padding: const EdgeInsets.only(top: 5),
-          child: ValueListenableBuilder(
-            valueListenable: contactBox.listenable(),
-            builder: (context, Box box, widget) {
-              if (box.isEmpty) {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Center(
-                      child: Icon(
-                        Icons.note_add,
-                        size: 60,
-                      ),
+          ),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 3),
+          //   child: PopupMenuButton<int>(
+          //     icon: Icon(Icons.colorize),
+          //     iconSize: 28,
+          //     tooltip: '',
+          //     itemBuilder: (context) => [
+          //       // PopupMenuItem 1
+          //       PopupMenuItem(
+          //         value: 1,
+          //         // row with 2 children
+          //         child: Row(
+          //           children: [
+          //             Text("blue"),
+          //           ],
+          //         ),
+          //       ),
+          //       // PopupMenuItem 2
+          //       PopupMenuItem(
+          //         value: 2,
+          //         // row with two children
+          //         child: Row(
+          //           children: [
+          //             Text("red"),
+          //           ],
+          //         ),
+          //       ),
+          //       PopupMenuItem(
+          //         value: 3,
+          //         // row with two children
+          //         child: Row(
+          //           children: [
+          //             Text("green"),
+          //           ],
+          //         ),
+          //       ),
+          //       PopupMenuItem(
+          //         value: 4,
+          //         // row with two children
+          //         child: Row(
+          //           children: [
+          //             Text("pink"),
+          //           ],
+          //         ),
+          //       ),
+          //       PopupMenuItem(
+          //         value: 5,
+          //         // row with two children
+          //         child: Row(
+          //           children: [
+          //             Text("purple"),
+          //           ],
+          //         ),
+          //       ),
+          //       PopupMenuItem(
+          //         value: 6,
+          //         // row with two children
+          //         child: Row(
+          //           children: [
+          //             Text("Yellow"),
+          //           ],
+          //         ),
+          //       ),
+          //       PopupMenuItem(
+          //         value: 7,
+          //         // row with two children
+          //         child: Row(
+          //           children: [
+          //             Text("brown"),
+          //           ],
+          //         ),
+          //       ),
+          //       PopupMenuItem(
+          //         value: 8,
+          //         // row with two children
+          //         child: Row(
+          //           children: [
+          //             Text("black"),
+          //           ],
+          //         ),
+          //       ),
+          //     ],
+          //     onSelected: (value) {
+          //       switch (value) {
+          //         case 1:
+          //           // color_dark = Color(0xFF2B2BF1);
+          //           // colorTheme = 0xFF20148C;
+          //           Get.back();
+          //           break;
+          //         case 2:
+          //           // setState(() {
+          //           //   // color_dark = Color(0xFFBF2BF1);
+                      //  color_dark = Color(0xFF6A0D8B);
+          //           //   // colorTheme = 0xFF8C1414;
+          //           // });
+          //           print(value);
+          //           Get.back();
+          //           break;
+          //         case 3:
+          //           Get.back();
+          //           break;
+          //         case 4:
+          //           Get.back();
+          //           break;
+          //         case 5:
+          //           Get.back();
+          //           break;
+          //         case 6:
+          //           Get.back();
+          //           break;
+          //         case 7:
+          //           Get.back();
+          //           break;
+          //         case 8:
+          //           Get.back();
+          //           break;
+          //       }
+          //     },
+          //   ),
+          // ),
+        ],
+      ),
+      // body
+      body: Padding(
+        padding: const EdgeInsets.only(top: 5),
+        child: ValueListenableBuilder(
+          valueListenable: contactBox.listenable(),
+          builder: (context, Box box, widget) {
+            if (box.isEmpty) {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Center(
+                    child: Icon(
+                      Icons.note_add,
+                      size: 60,
                     ),
-                    Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text('Write Your First Note'.tr),
-                      ),
-                    ),
-                    Padding(
+                  ),
+                  Center(
+                    child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Center(
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Get.to(() => ScreenAddNotes(),
-                                duration: Duration(milliseconds: 250),
-                                transition: Transition.rightToLeftWithFade);
-                          },
-                          child: Text(
-                            'ADD NEW NOTE'.tr,
-                            style: TextStyle(color: Colors.white),
-                          ),
+                      child: Text('Write Your First Note'.tr),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Center(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Get.to(() => ScreenAddNotes(),
+                              duration: Duration(milliseconds: 250),
+                              transition: Transition.rightToLeftWithFade);
+                        },
+                        child: Text(
+                          'ADD NEW NOTE'.tr,
+                          style: TextStyle(color: Colors.white),
                         ),
                       ),
                     ),
-                  ],
-                );
-              } else {
-                return ListView.builder(
-                  physics: BouncingScrollPhysics(),
-                  itemCount: box.length,
-                  itemBuilder: (context, index) {
-                    var currentBox = box;
-                    var personData = currentBox.getAt(index)!;
-                    // ignore: unused_local_variable
-                    int month = 1;
-                    switch (personData.dateTime.toString().split(' ')[0]) {
-                      case 'January':
-                        month = 1;
-                      // return 'January';
-                      case 'February':
-                        month = 2;
-                      // return 'February';
-                      case 'March':
-                        month = 3;
-                      // return 'March';
-                      case 'April':
-                        month = 4;
-                      // return 'April';
-                      case 'May':
-                        month = 5;
-                      // return 'May';
-                      case 'June':
-                        month = 6;
-                      // return 'June';
-                      case 'July':
-                        month = 7;
-                      // return 'July';
-                      case 'August':
-                        month = 8;
-                      // return 'August';
-                      case 'September':
-                        month = 9;
-                      // return 'September';
-                      case 'October':
-                        month = 10;
-                      // return 'October';
-                      case 'November':
-                        month = 11;
-                      // return 'November';
-                      case 'December':
-                        month = 12;
-                      // return 'December';
-                    }
-                    final year = 'Notes'.tr == 'یادداشت ها'
-                        ? DateTime(
-                            int.parse(
-                                personData.dateTime.toString().split(' ')[2]),
-                            month,
-                            int.parse(
-                                personData.dateTime.toString().split(' ')[1]),
-                            int.parse(
-                                personData.dateTime.toString().split(' ')[3]),
-                            int.parse(
-                                personData.dateTime.toString().split(' ')[5]),
-                          ).toJalali().year
-                        : DateTime(
-                            int.parse(
-                                personData.dateTime.toString().split(' ')[2]),
-                            month,
-                            int.parse(
-                                personData.dateTime.toString().split(' ')[1]),
-                            int.parse(
-                                personData.dateTime.toString().split(' ')[3]),
-                            int.parse(
-                                personData.dateTime.toString().split(' ')[5]),
-                          ).year;
-                    final day = 'Notes'.tr == 'یادداشت ها'
-                        ? DateTime(
-                            int.parse(
-                                personData.dateTime.toString().split(' ')[2]),
-                            month,
-                            int.parse(
-                                personData.dateTime.toString().split(' ')[1]),
-                            int.parse(
-                                personData.dateTime.toString().split(' ')[3]),
-                            int.parse(
-                                personData.dateTime.toString().split(' ')[5]),
-                          ).toJalali().day
-                        : DateTime(
-                            int.parse(
-                                personData.dateTime.toString().split(' ')[2]),
-                            month,
-                            int.parse(
-                                personData.dateTime.toString().split(' ')[1]),
-                            int.parse(
-                                personData.dateTime.toString().split(' ')[3]),
-                            int.parse(
-                                personData.dateTime.toString().split(' ')[5]),
-                          ).day;
-                    final hour = 'Notes'.tr == 'یادداشت ها'
-                        ? DateTime(
-                            int.parse(
-                                personData.dateTime.toString().split(' ')[2]),
-                            month,
-                            int.parse(
-                                personData.dateTime.toString().split(' ')[1]),
-                            int.parse(
-                                personData.dateTime.toString().split(' ')[3]),
-                            int.parse(
-                                personData.dateTime.toString().split(' ')[5]),
-                          ).toJalali().hour
-                        : DateTime(
-                            int.parse(
-                                personData.dateTime.toString().split(' ')[2]),
-                            month,
-                            int.parse(
-                                personData.dateTime.toString().split(' ')[1]),
-                            int.parse(
-                                personData.dateTime.toString().split(' ')[3]),
-                            int.parse(
-                                personData.dateTime.toString().split(' ')[5]),
-                          ).hour;
-                    final minute = 'Notes'.tr == 'یادداشت ها'
-                        ? DateTime(
-                            int.parse(
-                                personData.dateTime.toString().split(' ')[2]),
-                            month,
-                            int.parse(
-                                personData.dateTime.toString().split(' ')[1]),
-                            int.parse(
-                                personData.dateTime.toString().split(' ')[3]),
-                            int.parse(
-                                personData.dateTime.toString().split(' ')[5]),
-                          ).toJalali().minute
-                        : DateTime(
-                            int.parse(
-                                personData.dateTime.toString().split(' ')[2]),
-                            month,
-                            int.parse(
-                                personData.dateTime.toString().split(' ')[1]),
-                            int.parse(
-                                personData.dateTime.toString().split(' ')[3]),
-                            int.parse(
-                                personData.dateTime.toString().split(' ')[5]),
-                          ).minute;
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 5, horizontal: 10),
-                      child: AnimatedContainer(
-                        duration: Duration(seconds: 1),
-                        curve: Curves.bounceIn,
-                        decoration: BoxDecoration(
-                          color: Color.fromARGB(57, 187, 187, 187),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: InkWell(
-                          onTap: () {
-                            Get.to(
-                              () => ScreenUpdateNotes(
-                                index: index,
-                                person: personData,
+                  ),
+                ],
+              );
+            } else {
+              return ListView.builder(
+                physics: BouncingScrollPhysics(),
+                itemCount: box.length,
+                itemBuilder: (context, index) {
+                  var currentBox = box;
+                  var personData = currentBox.getAt(index)!;
+                  // ignore: unused_local_variable
+                  int month = 1;
+                  switch (personData.dateTime.toString().split(' ')[0]) {
+                    case 'January':
+                      month = 1;
+                    // return 'January';
+                    case 'February':
+                      month = 2;
+                    // return 'February';
+                    case 'March':
+                      month = 3;
+                    // return 'March';
+                    case 'April':
+                      month = 4;
+                    // return 'April';
+                    case 'May':
+                      month = 5;
+                    // return 'May';
+                    case 'June':
+                      month = 6;
+                    // return 'June';
+                    case 'July':
+                      month = 7;
+                    // return 'July';
+                    case 'August':
+                      month = 8;
+                    // return 'August';
+                    case 'September':
+                      month = 9;
+                    // return 'September';
+                    case 'October':
+                      month = 10;
+                    // return 'October';
+                    case 'November':
+                      month = 11;
+                    // return 'November';
+                    case 'December':
+                      month = 12;
+                    // return 'December';
+                  }
+                  final year = 'Notes'.tr == 'یادداشت ها'
+                      ? DateTime(
+                          int.parse(
+                              personData.dateTime.toString().split(' ')[2]),
+                          month,
+                          int.parse(
+                              personData.dateTime.toString().split(' ')[1]),
+                          int.parse(
+                              personData.dateTime.toString().split(' ')[3]),
+                          int.parse(
+                              personData.dateTime.toString().split(' ')[5]),
+                        ).toJalali().year
+                      : DateTime(
+                          int.parse(
+                              personData.dateTime.toString().split(' ')[2]),
+                          month,
+                          int.parse(
+                              personData.dateTime.toString().split(' ')[1]),
+                          int.parse(
+                              personData.dateTime.toString().split(' ')[3]),
+                          int.parse(
+                              personData.dateTime.toString().split(' ')[5]),
+                        ).year;
+                  final day = 'Notes'.tr == 'یادداشت ها'
+                      ? DateTime(
+                          int.parse(
+                              personData.dateTime.toString().split(' ')[2]),
+                          month,
+                          int.parse(
+                              personData.dateTime.toString().split(' ')[1]),
+                          int.parse(
+                              personData.dateTime.toString().split(' ')[3]),
+                          int.parse(
+                              personData.dateTime.toString().split(' ')[5]),
+                        ).toJalali().day
+                      : DateTime(
+                          int.parse(
+                              personData.dateTime.toString().split(' ')[2]),
+                          month,
+                          int.parse(
+                              personData.dateTime.toString().split(' ')[1]),
+                          int.parse(
+                              personData.dateTime.toString().split(' ')[3]),
+                          int.parse(
+                              personData.dateTime.toString().split(' ')[5]),
+                        ).day;
+                  final hour = 'Notes'.tr == 'یادداشت ها'
+                      ? DateTime(
+                          int.parse(
+                              personData.dateTime.toString().split(' ')[2]),
+                          month,
+                          int.parse(
+                              personData.dateTime.toString().split(' ')[1]),
+                          int.parse(
+                              personData.dateTime.toString().split(' ')[3]),
+                          int.parse(
+                              personData.dateTime.toString().split(' ')[5]),
+                        ).toJalali().hour
+                      : DateTime(
+                          int.parse(
+                              personData.dateTime.toString().split(' ')[2]),
+                          month,
+                          int.parse(
+                              personData.dateTime.toString().split(' ')[1]),
+                          int.parse(
+                              personData.dateTime.toString().split(' ')[3]),
+                          int.parse(
+                              personData.dateTime.toString().split(' ')[5]),
+                        ).hour;
+                  final minute = 'Notes'.tr == 'یادداشت ها'
+                      ? DateTime(
+                          int.parse(
+                              personData.dateTime.toString().split(' ')[2]),
+                          month,
+                          int.parse(
+                              personData.dateTime.toString().split(' ')[1]),
+                          int.parse(
+                              personData.dateTime.toString().split(' ')[3]),
+                          int.parse(
+                              personData.dateTime.toString().split(' ')[5]),
+                        ).toJalali().minute
+                      : DateTime(
+                          int.parse(
+                              personData.dateTime.toString().split(' ')[2]),
+                          month,
+                          int.parse(
+                              personData.dateTime.toString().split(' ')[1]),
+                          int.parse(
+                              personData.dateTime.toString().split(' ')[3]),
+                          int.parse(
+                              personData.dateTime.toString().split(' ')[5]),
+                        ).minute;
+                  return Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                    child: AnimatedContainer(
+                      duration: Duration(seconds: 1),
+                      curve: Curves.bounceIn,
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(57, 145, 145, 145),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: InkWell(
+                        onTap: () {
+                          Get.to(
+                            () => ScreenUpdateNotes(
+                              index: index,
+                              person: personData,
+                            ),
+                            duration: const Duration(milliseconds: 250),
+                            transition: Transition.rightToLeftWithFade,
+                          );
+                        },
+                        child: Column(
+                          children: [
+                            ListTile(
+                              title: Text(
+                                personData.name,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
-                              duration: const Duration(milliseconds: 250),
-                              transition: Transition.rightToLeftWithFade,
-                            );
-                          },
-                          child: Column(
-                            children: [
-                              ListTile(
-                                title: Text(
-                                  personData.name,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                                subtitle: Text(
-                                  personData.country,
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                                trailing: IconButton(
-                                  onPressed: () {
-                                    showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return AlertDialog(
-                                            // ignore: unused_label
-                                            title: Text(
-                                              'Do you really want to delete the note?'
-                                                  .tr,
-                                              style: TextStyle(fontSize: 15),
+                              subtitle: Text(
+                                personData.country,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              trailing: IconButton(
+                                onPressed: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                          // ignore: unused_label
+                                          title: Text(
+                                            'Do you really want to delete the note?'
+                                                .tr,
+                                            style: TextStyle(fontSize: 15),
+                                          ),
+                                          // content: Center(),
+                                          // ignore: unused_label
+                                          actions: <Widget>[
+                                            TextButton(
+                                              child: Text("Cancle".tr),
+                                              onPressed: () {
+                                                Get.back();
+                                              },
                                             ),
-                                            // content: Center(),
-                                            // ignore: unused_label
-                                            actions: <Widget>[
-                                              TextButton(
-                                                child: Text("Cancle".tr),
-                                                onPressed: () {
-                                                  Get.back();
-                                                },
+                                            TextButton(
+                                              style: TextButton.styleFrom(
+                                                foregroundColor: Colors.red,
                                               ),
-                                              TextButton(
-                                                style: TextButton.styleFrom(
-                                                  foregroundColor: Colors.red,
-                                                ),
-                                                onPressed: () {
-                                                  _deleteInfo(index);
-                                                  Get.back();
-                                                },
-                                                child: Text('Delete'.tr),
-                                              ),
-                                            ]);
-                                      },
-                                    );
-                                  },
-                                  icon: Icon(
-                                    Icons.delete,
-                                    color: Colors.red,
-                                  ),
+                                              onPressed: () {
+                                                _deleteInfo(index);
+                                                Get.back();
+                                              },
+                                              child: Text('Delete'.tr),
+                                            ),
+                                          ]);
+                                    },
+                                  );
+                                },
+                                icon: Icon(
+                                  Icons.delete,
+                                  color: Colors.red,
                                 ),
                               ),
-                              Divider(),
-                              Container(
-                                alignment: Alignment.topRight,
-                                padding: EdgeInsets.only(bottom: 15),
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 15),
-                                  child: Text(
-                                    'Notes'.tr == 'یادداشت ها'
-                                        ? '${hour > 9 ? hour : '0' + hour.toString()}:${minute > 9 ? minute : '0' + minute.toString()}  ,${year}  ,${day > 9 ? day : '0' + day.toString()}  ,${personData.dateTime.toString().split(' ')[0].tr}'
-                                        : '${personData.dateTime.toString().split(' ')[0].tr},  ${day > 9 ? day : '0' + day.toString()},  ${year},  ${hour > 9 ? hour : '0' + hour.toString()}:${minute > 9 ? minute : '0' + minute.toString()}',
-                                    key: UniqueKey(),
-                                    style: TextStyle(fontSize: 15),
-                                  ),
+                            ),
+                            Divider(),
+                            Container(
+                              alignment: Alignment.topRight,
+                              padding: EdgeInsets.only(bottom: 15),
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 15),
+                                child: Text(
+                                  'Notes'.tr == 'یادداشت ها'
+                                      ? '${hour > 9 ? hour : '0' + hour.toString()}:${minute > 9 ? minute : '0' + minute.toString()}  ,${year}  ,${day > 9 ? day : '0' + day.toString()}  ,${personData.dateTime.toString().split(' ')[0].tr}'
+                                      : '${personData.dateTime.toString().split(' ')[0].tr},  ${day > 9 ? day : '0' + day.toString()},  ${year},  ${hour > 9 ? hour : '0' + hour.toString()}:${minute > 9 ? minute : '0' + minute.toString()}',
+                                  key: UniqueKey(),
+                                  style: TextStyle(fontSize: 15),
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
-                    );
-                  },
-                );
-              }
-            },
-          ),
-        ),
-        extendBodyBehindAppBar: false,
-        extendBody: true,
-        resizeToAvoidBottomInset: false,
-        bottomNavigationBar: BottomAppBar(
-          shape: CircularNotchedRectangle(),
-          notchMargin: 8,
-          // color: Theme.of(context).colorScheme.primary,
-          child: Container(
-            height: 60,
-          ),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Get.to(() => ScreenAddNotes(),
-                duration: Duration(milliseconds: 250),
-                transition: Transition.rightToLeftWithFade);
+                    ),
+                  );
+                },
+              );
+            }
           },
-          child: const Icon(
-            Icons.add,
-            color: Colors.white,
-          ),
+        ),
+      ),
+      extendBodyBehindAppBar: false,
+      extendBody: true,
+      resizeToAvoidBottomInset: false,
+      bottomNavigationBar: BottomAppBar(
+        shape: CircularNotchedRectangle(),
+        notchMargin: 8,
+        // color: Theme.of(context).colorScheme.primary,
+        child: Container(
+          height: 60,
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Get.to(() => ScreenAddNotes(),
+              duration: Duration(milliseconds: 250),
+              transition: Transition.rightToLeftWithFade);
+        },
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
         ),
       ),
     );
