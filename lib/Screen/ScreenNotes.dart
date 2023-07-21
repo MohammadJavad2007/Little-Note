@@ -212,6 +212,20 @@ class _ScreenNotesState extends State<ScreenNotes> {
                     children: [Text("한국인")],
                   ),
                 ),
+                PopupMenuItem(
+                  value: 4,
+                  // row with two children
+                  child: Row(
+                    children: [Text("普通话")],
+                  ),
+                ),
+                PopupMenuItem(
+                  value: 5,
+                  // row with two children
+                  child: Row(
+                    children: [Text("Español")],
+                  ),
+                ),
               ],
               onSelected: (value) {
                 switch (value) {
@@ -226,7 +240,14 @@ class _ScreenNotesState extends State<ScreenNotes> {
                   case 3:
                     Get.updateLocale(const Locale('ko'));
                     Hive.box('Lang').putAt(0, Lang(lang: 'ko', country: 'KR'));
-
+                    break;
+                  case 4:
+                    Get.updateLocale(const Locale('zh'));
+                    Hive.box('Lang').putAt(0, Lang(lang: 'zh', country: 'CN'));
+                    break;
+                  case 5:
+                    Get.updateLocale(const Locale('es'));
+                    Hive.box('Lang').putAt(0, Lang(lang: 'es', country: 'ES'));
                     break;
                 }
               },

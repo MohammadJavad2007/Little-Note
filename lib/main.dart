@@ -204,7 +204,7 @@ class _NotesState extends State<Notes> {
           translations: Languages(),
           locale: Hive.box('Lang').getAt(0).lang == ''
               ? Get.deviceLocale
-              : Locale(Hive.box('Lang').getAt(0).lang, ''),
+              : Locale(Hive.box('Lang').getAt(0).lang, Hive.box('Lang').getAt(0).country),
           fallbackLocale: Locale('en', 'US'),
           // supportedLocales: [Locale('fa', 'IR'), Locale('en', 'US')],
           title: 'Notes',
