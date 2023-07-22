@@ -22,7 +22,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'models/Install.dart';
 import 'models/lang.dart';
 
-Color color_dark = const Color.fromARGB(255, 68, 93, 237);
+Color color_dark = Color(0xFF445DED);
 Color color_dark_AppBer = Color(0xFF3D3D3D);
 
 int colorTheme = 0xFF3043B0;
