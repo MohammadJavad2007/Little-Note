@@ -22,10 +22,10 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'models/Install.dart';
 import 'models/lang.dart';
 
-Color color_dark = Color(0xFF445DED);
+Color color_dark = Color.fromARGB(255, 74, 100, 247);
 Color color_dark_AppBer = Color(0xFF3D3D3D);
 
-int colorTheme = 0xFF3043B0;
+int colorTheme = 0xFF283CA9;
 // int colorTheme = 0xFF718355;
 Color color = Color(colorTheme);
 MaterialColor themeColor = MaterialColor(
@@ -141,7 +141,6 @@ class _NotesState extends State<Notes> {
         ),
       );
       // final jsonData = response.body;
-      print('visit = ${response.body}');
     } on TimeoutException {
     } on SocketException {
     } on Error {}
@@ -164,7 +163,6 @@ class _NotesState extends State<Notes> {
             <String, dynamic>{'install': hashcode},
           ),
         );
-        print('install = ${response.body}');
       } on TimeoutException {
       } on SocketException {
       } on Error {}
@@ -187,7 +185,6 @@ class _NotesState extends State<Notes> {
     // ignore: unused_local_variable
     Visit();
     Installer();
-    print(j.toGregorian().year.toString());
     super.initState();
   }
 

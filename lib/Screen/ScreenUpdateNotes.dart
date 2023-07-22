@@ -359,6 +359,7 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
         child: Form(
           key: _personFormKey,
           child: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

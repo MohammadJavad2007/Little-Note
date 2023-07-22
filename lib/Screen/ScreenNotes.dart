@@ -388,7 +388,7 @@ class _ScreenNotesState extends State<ScreenNotes> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  Center(
+                  const Center(
                     child: Icon(
                       Icons.note_add,
                       size: 60,
@@ -568,7 +568,7 @@ class _ScreenNotesState extends State<ScreenNotes> {
                       duration: Duration(seconds: 1),
                       curve: Curves.bounceIn,
                       decoration: BoxDecoration(
-                        color: Color.fromARGB(57, 145, 145, 145),
+                        color: Color.fromARGB(36, 146, 146, 146),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: InkWell(
