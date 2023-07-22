@@ -671,7 +671,7 @@ class _ScreenNotesState extends State<ScreenNotes> {
         notchMargin: 8,
         // color: Theme.of(context).colorScheme.primary,
         child: Container(
-          height: 60,
+          height: 50,
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

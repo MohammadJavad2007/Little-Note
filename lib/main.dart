@@ -22,10 +22,11 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'models/Install.dart';
 import 'models/lang.dart';
 
-Color color_dark = Color(0xFFFFFFFF);
+Color color_dark = const Color.fromARGB(255, 68, 93, 237);
 Color color_dark_AppBer = Color(0xFF3D3D3D);
 
-int colorTheme = 0xFF000000;
+int colorTheme = 0xFF3043B0;
+// int colorTheme = 0xFF718355;
 Color color = Color(colorTheme);
 MaterialColor themeColor = MaterialColor(
   colorTheme,
@@ -196,6 +197,7 @@ class _NotesState extends State<Notes> {
       valueListenable: Notes.themeNotifier,
       builder: (_, ThemeMode currentMode, __) {
         return GetMaterialApp(
+          debugShowCheckedModeBanner: false,
           localizationsDelegates: [
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
