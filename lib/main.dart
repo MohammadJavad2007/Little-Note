@@ -131,6 +131,7 @@ class _NotesState extends State<Notes> {
     Hive.box('Hash').add(Hash(hash: "0fc302b63c7fa1d0bd1f343002c5eff9"));
     try {
       String hashcode = await Hive.box('Hash').getAt(0).hash;
+      // ignore: unused_local_variable
       final response = await http.post(
         Uri.parse(visit),
         headers: <String, String>{
@@ -154,6 +155,7 @@ class _NotesState extends State<Notes> {
     if (Hive.box('Install').getAt(0).install == false) {
       try {
         String hashcode = await Hive.box('Hash').getAt(0).hash;
+        // ignore: unused_local_variable
         final response = await http.post(
           Uri.parse(install),
           headers: <String, String>{
