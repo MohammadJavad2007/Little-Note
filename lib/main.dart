@@ -18,12 +18,15 @@ import 'package:shamsi_date/shamsi_date.dart';
 
 // ignore: depend_on_referenced_packages
 
+// ignore: depend_on_referenced_packages
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'models/Install.dart';
 import 'models/lang.dart';
 
-Color color_dark = Color.fromARGB(255, 74, 100, 247);
-Color color_dark_AppBer = Color(0xFF3D3D3D);
+// ignore: non_constant_identifier_names
+Color color_dark = const Color.fromARGB(255, 74, 100, 247);
+// ignore: non_constant_identifier_names
+Color color_dark_AppBer = const Color(0xFF3D3D3D);
 
 int colorTheme = 0xFF283CA9;
 // int colorTheme = 0xFF718355;
