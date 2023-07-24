@@ -106,8 +106,7 @@ class Languages extends Translations {
         'zh_CN': {
           'Notes': '笔记',
           'Add a note': '添加注释',
-          'Save your changes or discard them?':
-              '保存您的更改还是放弃它们？',
+          'Save your changes or discard them?': '保存您的更改还是放弃它们？',
           'Cancle': '取消',
           'Discard': '丢弃',
           'Save': '节省',
@@ -117,8 +116,7 @@ class Languages extends Translations {
           'Update a note': '更新一条笔记',
           'Note Pad': '记事本',
           'English language': '英语',
-          'Do you really want to delete the note?':
-              '您真的要删除该注释吗？',
+          'Do you really want to delete the note?': '您真的要删除该注释吗？',
           'Delete': '删除',
           'Write Your First Note': '写下你的第一个笔记',
           'ADD NEW NOTE': '添加新注释',
@@ -134,8 +132,7 @@ class Languages extends Translations {
           'October': '十月',
           'November': '十一月',
           'December': '十二月',
-          'Are you sure you want to delete your text?':
-              '您确定要删除您的文字吗？',
+          'Are you sure you want to delete your text?': '您确定要删除您的文字吗？',
         },
         'es_ES': {
           'Notes': 'Notas',
