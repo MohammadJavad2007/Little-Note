@@ -62,11 +62,7 @@ class _ScreenAddNotesState extends State<ScreenAddNotes> {
     }
     return '';
   }
-
-  //  void dateTime() {
-  // return date;
-  // }
-
+  
   String? _fieldValidator(String? value) {
     if (value == null || value.isEmpty) {
       return 'Field can\'t be empty'.tr;

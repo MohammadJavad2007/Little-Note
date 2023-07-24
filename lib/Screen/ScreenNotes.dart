@@ -116,44 +116,10 @@ class _ScreenNotesState extends State<ScreenNotes> {
     }
   }
 
-  // Darkmode() async {
-  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   // bool? getitem = widget.storage.getItem('themedata');
-  //   WidgetsBinding.instance.addPostFrameCallback(
-  //     (_) => setState(
-  //       () {
-  //         // await prefs.setBool('repeat', false);
-  //         if (prefs.getBool('repeat') == false) {
-  //           Notes.themeNotifier.value = ThemeMode.dark;
-  //           // print('dark');
-  //         } else {
-  //           Notes.themeNotifier.value = ThemeMode.light;
-  //           // print(getitem);
-  //         }
-  //       },
-  //     ),
-  //   );
-  // }
-
-  // bool _isGridMode = false;
   @override
   void initState() {
     super.initState();
-    // Get reference to an already opened box
-    // Darkmode();
     contactBox = Hive.box('NoteBox');
-    // if (Notes.themeNotifier.value == ThemeMode.dark) {
-    //   if (Platform.isAndroid) {
-    //     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    //         systemNavigationBarColor: color,
-    //         systemNavigationBarIconBrightness: Brightness.light));
-    //   }
-    // } else {
-    //   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    //         systemNavigationBarColor: color_dark,
-    //         systemNavigationBarIconBrightness: Brightness.dark));
-    // }
-    // print(storage.getItem('darkMode'));
   }
 
   double value = 0;
