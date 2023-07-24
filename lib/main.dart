@@ -45,27 +45,6 @@ MaterialColor themeColor = MaterialColor(
 );
 
 void main() async {
-  // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-  //     systemNavigationBarColor: Colors.transparent));
-//   //Setting SysemUIOverlay
-//   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-//       systemStatusBarContrastEnforced: true,
-//       systemNavigationBarColor: Colors.transparent,
-//       systemNavigationBarDividerColor: Colors.transparent,
-//       systemNavigationBarIconBrightness: Brightness.dark,
-//       statusBarIconBrightness: Brightness.dark));
-
-// //Setting SystmeUIMode
-//   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge,
-//       overlays: [SystemUiOverlay.top]);
-  // SystemChrome.setSystemUIOverlayStyle(
-  //   SystemUiOverlayStyle(
-  //     systemNavigationBarColor: Notes.themeNotifier.value == ThemeMode.light
-  //                                     ? color_dark
-  //                                     : color,
-  //     systemNavigationBarIconBrightness: Brightness.dark,
-  //   ),
-  // );
   // Initialize hiv
   await Hive.initFlutter();
   // Registering the adapter
@@ -205,7 +184,8 @@ class _NotesState extends State<Notes> {
           translations: Languages(),
           locale: Hive.box('Lang').getAt(0).lang == ''
               ? Get.deviceLocale
-              : Locale(Hive.box('Lang').getAt(0).lang, Hive.box('Lang').getAt(0).country),
+              : Locale(Hive.box('Lang').getAt(0).lang,
+                  Hive.box('Lang').getAt(0).country),
           fallbackLocale: Locale('en', 'US'),
           // supportedLocales: [Locale('fa', 'IR'), Locale('en', 'US')],
           title: 'Notes',

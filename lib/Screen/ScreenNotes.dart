@@ -1,6 +1,3 @@
-// ignore_for_file: file_names
-
-// import 'dart:math';
 
 import 'dart:io';
 
@@ -8,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-// import 'package:localstorage/localstorage.dart';
 import 'package:notes/Screen/ScreenAddNotes.dart';
 import 'package:notes/Screen/ScreenUpdateNotes.dart';
 import 'package:notes/main.dart';
@@ -16,51 +12,6 @@ import 'package:notes/models/lang.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
-// import 'package:notes/models/person.dart';
-// import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
-
-// class MyHomePage extends GetView<MyDrawerController> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return GetBuilder<MyDrawerController>(
-//       builder: (_) => ZoomDrawer(
-//         controller: _.zoomDrawerController,
-//         style: DrawerStyle.defaultStyle,
-//         menuScreen: MenuScreen(),
-//         mainScreen: ScreenNotes(),
-//         borderRadius: 24.0,
-//         showShadow: true,
-//         angle: 0.0,
-//         drawerShadowsBackgroundColor: Color.fromARGB(69, 158, 158, 158),
-//         menuBackgroundColor: Theme.of(context).primaryColor,
-//         slideWidth: MediaQuery.of(context).size.width * .50,
-//         openCurve: Curves.linear,
-//         closeCurve: Curves.ease,
-//       ),
-//     );
-//   }
-// }
-
-// class MenuScreen extends GetView<MyDrawerController> {
-//   const MenuScreen({Key? key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       color: Theme.of(context).primaryColor,
-//     );
-//   }
-// }
-
-// class MyDrawerController extends GetxController {
-//   final zoomDrawerController = ZoomDrawerController();
-
-//   void toggleDrawer() {
-//     print("Toggle drawer");
-//     zoomDrawerController.toggle?.call();
-//     update();
-//   }
-// }
 
 // ignore: must_be_immutable
 late final Box contactBox;
@@ -125,9 +76,8 @@ class _ScreenNotesState extends State<ScreenNotes> {
   double value = 0;
   int x = 0;
 
+  // ignore: unused_element
   void _hide() {
-    // This will hide the bottom system navigation bar
-    // Only the status bar on the top will show up
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: [SystemUiOverlay.top]);
   }
@@ -153,11 +103,11 @@ class _ScreenNotesState extends State<ScreenNotes> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 4),
             child: PopupMenuButton<int>(
-              icon: Icon(Icons.translate),
+              icon: const Icon(Icons.translate),
               tooltip: '',
               itemBuilder: (context) => [
                 // PopupMenuItem 1
-                PopupMenuItem(
+                const PopupMenuItem(
                   value: 1,
                   // row with 2 children
                   child: Row(
@@ -165,28 +115,28 @@ class _ScreenNotesState extends State<ScreenNotes> {
                   ),
                 ),
                 // PopupMenuItem 2
-                PopupMenuItem(
+                const PopupMenuItem(
                   value: 2,
                   // row with two children
                   child: Row(
                     children: [Text("English")],
                   ),
                 ),
-                PopupMenuItem(
+                const PopupMenuItem(
                   value: 3,
                   // row with two children
                   child: Row(
                     children: [Text("한국인")],
                   ),
                 ),
-                PopupMenuItem(
+                const PopupMenuItem(
                   value: 4,
                   // row with two children
                   child: Row(
                     children: [Text("普通话")],
                   ),
                 ),
-                PopupMenuItem(
+                const PopupMenuItem(
                   value: 5,
                   // row with two children
                   child: Row(
@@ -514,7 +464,7 @@ class _ScreenNotesState extends State<ScreenNotes> {
       extendBody: true,
       resizeToAvoidBottomInset: false,
       bottomNavigationBar: BottomAppBar(
-        shape: CircularNotchedRectangle(),
+        shape: const CircularNotchedRectangle(),
         notchMargin: 8,
         // color: Theme.of(context).colorScheme.primary,
         child: Container(
