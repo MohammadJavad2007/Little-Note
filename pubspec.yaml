@@ -64,6 +64,15 @@ flutter_icons:
   android: true
   ios: true
   image_path: "assets/icon/iconNote.png"
+  web:
+    generate: true
+    image_path: "assets/icon/iconNote.png"
+    background_color: "#000000"
+    theme_color: "#000000"
+  windows:
+    generate: true
+    image_path: "assets/icon/iconNote.png"
+    icon_size: 48 # min:48, max:256, default: 48
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

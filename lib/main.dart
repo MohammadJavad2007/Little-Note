@@ -63,12 +63,12 @@ void main() async {
   await Hive.openBox('Lang');
   Hive.box('Lang').add(Lang(lang: "", country: ""));
 
-  runApp(Notes());
+  runApp(const Notes());
 }
 
 // ignore: must_be_immutable
 class Notes extends StatefulWidget {
-  Notes({super.key});
+  const Notes({super.key});
   static final ValueNotifier<ThemeMode> themeNotifier =
       ValueNotifier(ThemeMode.dark);
 
@@ -78,6 +78,7 @@ class Notes extends StatefulWidget {
 
 class _NotesState extends State<Notes> {
   // dark mode
+  // ignore: non_constant_identifier_names
   Darkmode() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -109,6 +110,7 @@ class _NotesState extends State<Notes> {
   }
 
   final visit = "http://localhost/visit/visit-post.php";
+  // ignore: non_constant_identifier_names
   Visit() async {
     Hive.box('Hash').add(Hash(hash: "0fc302b63c7fa1d0bd1f343002c5eff9"));
     try {
