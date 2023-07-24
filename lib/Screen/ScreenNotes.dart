@@ -254,126 +254,6 @@ class _ScreenNotesState extends State<ScreenNotes> {
               },
             ),
           ),
-          // Padding(
-          //   padding: const EdgeInsets.symmetric(horizontal: 3),
-          //   child: PopupMenuButton<int>(
-          //     icon: Icon(Icons.colorize),
-          //     iconSize: 28,
-          //     tooltip: '',
-          //     itemBuilder: (context) => [
-          //       // PopupMenuItem 1
-          //       PopupMenuItem(
-          //         value: 1,
-          //         // row with 2 children
-          //         child: Row(
-          //           children: [
-          //             Text("blue"),
-          //           ],
-          //         ),
-          //       ),
-          //       // PopupMenuItem 2
-          //       PopupMenuItem(
-          //         value: 2,
-          //         // row with two children
-          //         child: Row(
-          //           children: [
-          //             Text("red"),
-          //           ],
-          //         ),
-          //       ),
-          //       PopupMenuItem(
-          //         value: 3,
-          //         // row with two children
-          //         child: Row(
-          //           children: [
-          //             Text("green"),
-          //           ],
-          //         ),
-          //       ),
-          //       PopupMenuItem(
-          //         value: 4,
-          //         // row with two children
-          //         child: Row(
-          //           children: [
-          //             Text("pink"),
-          //           ],
-          //         ),
-          //       ),
-          //       PopupMenuItem(
-          //         value: 5,
-          //         // row with two children
-          //         child: Row(
-          //           children: [
-          //             Text("purple"),
-          //           ],
-          //         ),
-          //       ),
-          //       PopupMenuItem(
-          //         value: 6,
-          //         // row with two children
-          //         child: Row(
-          //           children: [
-          //             Text("Yellow"),
-          //           ],
-          //         ),
-          //       ),
-          //       PopupMenuItem(
-          //         value: 7,
-          //         // row with two children
-          //         child: Row(
-          //           children: [
-          //             Text("brown"),
-          //           ],
-          //         ),
-          //       ),
-          //       PopupMenuItem(
-          //         value: 8,
-          //         // row with two children
-          //         child: Row(
-          //           children: [
-          //             Text("black"),
-          //           ],
-          //         ),
-          //       ),
-          //     ],
-          //     onSelected: (value) {
-          //       switch (value) {
-          //         case 1:
-          //           // color_dark = Color(0xFF2B2BF1);
-          //           // colorTheme = 0xFF20148C;
-          //           Get.back();
-          //           break;
-          //         case 2:
-          //           // setState(() {
-          //           //   // color_dark = Color(0xFFBF2BF1);
-          //  color_dark = Color(0xFF000000);
-          //           //   // colorTheme = 0xFF8C1414;
-          //           // });
-          //           print(value);
-          //           Get.back();
-          //           break;
-          //         case 3:
-          //           Get.back();
-          //           break;
-          //         case 4:
-          //           Get.back();
-          //           break;
-          //         case 5:
-          //           Get.back();
-          //           break;
-          //         case 6:
-          //           Get.back();
-          //           break;
-          //         case 7:
-          //           Get.back();
-          //           break;
-          //         case 8:
-          //           Get.back();
-          //           break;
-          //       }
-          //     },
-          //   ),
-          // ),
         ],
       ),
       // body
@@ -645,7 +525,8 @@ class _ScreenNotesState extends State<ScreenNotes> {
                                     const EdgeInsets.symmetric(horizontal: 15),
                                 child: Text(
                                   'Notes'.tr == 'یادداشت ها'
-                                      ? '${hour > 9 ? hour : '0' + hour.toString()}:${minute > 9 ? minute : '0' + minute.toString()}  ,${year}  ,${day > 9 ? day : '0' + day.toString()}  ,${personData.dateTime.toString().split(' ')[0].tr}'.toPersianDigit()
+                                      ? '${hour > 9 ? hour : '0' + hour.toString()}:${minute > 9 ? minute : '0' + minute.toString()}  ,${year}  ,${day > 9 ? day : '0' + day.toString()}  ,${personData.dateTime.toString().split(' ')[0].tr}'
+                                          .toPersianDigit()
                                       : '${personData.dateTime.toString().split(' ')[0].tr},  ${day > 9 ? day : '0' + day.toString()},  ${year},  ${hour > 9 ? hour : '0' + hour.toString()}:${minute > 9 ? minute : '0' + minute.toString()}',
                                   key: UniqueKey(),
                                   style: TextStyle(fontSize: 15),
