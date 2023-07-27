@@ -560,71 +560,71 @@ class _ScreenNotesState extends State<ScreenNotes> {
   }
 }
 
-class Search extends SearchDelegate {
-  @override
-  List<Widget> buildActions(BuildContext context) {
-    return <Widget>[
-      IconButton(
-        icon: Icon(Icons.close),
-        onPressed: () {
-          query = "";
-        },
-      ),
-    ];
-  }
+// class Search extends SearchDelegate {
+//   @override
+//   List<Widget> buildActions(BuildContext context) {
+//     return <Widget>[
+//       IconButton(
+//         icon: Icon(Icons.close),
+//         onPressed: () {
+//           query = "";
+//         },
+//       ),
+//     ];
+//   }
 
-  @override
-  Widget buildLeading(BuildContext context) {
-    return IconButton(
-      icon: Icon(Icons.arrow_back),
-      onPressed: () {
-        // Navigator.pop(context);
-        Get.back();
-      },
-    );
-  }
+//   @override
+//   Widget buildLeading(BuildContext context) {
+//     return IconButton(
+//       icon: Icon(Icons.arrow_back),
+//       onPressed: () {
+//         // Navigator.pop(context);
+//         Get.back();
+//       },
+//     );
+//   }
 
-  String selectedResult = "";
+//   String selectedResult = "";
 
-  @override
-  Widget buildResults(BuildContext context) {
-    // ignore: avoid_unnecessary_containers
-    return Container(
-      child: Center(
-        child: Text(selectedResult),
-      ),
-    );
-  }
+//   @override
+//   Widget buildResults(BuildContext context) {
+//     // ignore: avoid_unnecessary_containers
+//     return Container(
+//       child: Center(
+//         child: Text(selectedResult),
+//       ),
+//     );
+//   }
 
-  final List<String> listExample;
-  Search(this.listExample);
+//   final List<String> listExample;
+//   Search(this.listExample);
 
-  List<String> recentList = ["Note 3", "Note 2"];
+//   List<String> recentList = ["Note 3", "Note 2"];
 
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    List<String> suggestionList = [];
-    query.isEmpty
-        ? suggestionList = recentList //In the true case
-        : suggestionList.addAll(listExample.where(
-            // In the false case
-            (element) => element.contains(query),
-          ));
+//   @override
+//   Widget buildSuggestions(BuildContext context) {
+//     List<String> suggestionList = [];
+//     query.isEmpty
+//         ? suggestionList = recentList //In the true case
+//         : suggestionList.addAll(listExample.where(
+//             // In the false case
+//             (element) => element.contains(query),
+//           ));
 
-    return ListView.builder(
-      itemCount: suggestionList.length,
-      itemBuilder: (context, index) {
-        return ListTile(
-          title: Text(
-            suggestionList[index],
-          ),
-          leading: query.isEmpty ? const Icon(Icons.access_time) : SizedBox(),
-          onTap: () {
-            selectedResult = suggestionList[index];
-            showResults(context);
-          },
-        );
-      },
-    );
-  }
-}
+//     return ListView.builder(
+//       itemCount: suggestionList.length,
+//       itemBuilder: (context, index) {
+//         return ListTile(
+//           title: Text(
+//             suggestionList[index],
+//           ),
+//           leading: query.isEmpty ? const Icon(Icons.access_time) : SizedBox(),
+//           onTap: () {
+//             selectedResult = suggestionList[index];
+//             showResults(context);
+//           },
+//         );
+//       },
+//     );
+//   }
+// }
