@@ -35,8 +35,7 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
   // ignore: prefer_typing_uninitialized_variables
   late final _countryController;
   late final Box box;
-
-// month data time
+  
   var time = Jalali.now().toGregorian();
   String month() {
     switch (time.month) {
@@ -235,7 +234,6 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
                           foregroundColor: Colors.red,
                         ),
                         onPressed: () {
-                          // _deleteInfo(widget.index);
                           _countryController.text = '';
                           _nameController.text = '';
                           Get.back();

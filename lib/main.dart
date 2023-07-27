@@ -7,7 +7,6 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:notes/Screen/ScreenNotes.dart';
 
-// import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:notes/lang/Translations.dart';
 import 'package:notes/models/hash.dart';
@@ -15,8 +14,6 @@ import 'package:notes/models/person.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:shamsi_date/shamsi_date.dart';
-
-// ignore: depend_on_referenced_packages
 
 // ignore: depend_on_referenced_packages
 import 'package:flutter_localizations/flutter_localizations.dart';
