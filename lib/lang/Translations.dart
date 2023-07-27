@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:get/get.dart';
 
 class Languages extends Translations {
@@ -168,39 +170,5 @@ class Languages extends Translations {
           'Are you sure you want to delete your text?':
               '¿Estás segura de que quieres eliminar tu texto?',
         },
-        // 'ar_IQ': {
-        //   'Notes': 'ملحوظات',
-        //   'Add a note': 'أضف ملاحظة',
-        //   'Save your changes or discard them?':
-        //       'حفظ التغييرات الخاصة بك أو تجاهلها؟',
-        //   'Cancle': 'يلغي',
-        //   'Discard': 'ينبذ',
-        //   'Save': 'يحفظ',
-        //   'Title': 'عنوان',
-        //   'Description': 'وصف',
-        //   'Field can\'t be empty': 'لا يمكن أن يكون الحقل فارغًا',
-        //   'Update a note': 'قم بتحديث الملاحظة',
-        //   'Note Pad': 'المفكرة',
-        //   'English language': 'اللغة الإنجليزية',
-        //   'Do you really want to delete the note?':
-        //       'هل تريد حقًا حذف الملاحظة؟',
-        //   'Delete': 'يمسح',
-        //   'Write Your First Note': 'اكتب ملاحظتك الأولى',
-        //   'ADD NEW NOTE': 'أضف ملاحظة جديدة',
-        //   'January': 'يناير',
-        //   'February': 'February',
-        //   'March': 'March',
-        //   'April': 'April',
-        //   'May': 'May',
-        //   'June': 'June',
-        //   'July': 'July',
-        //   'August': 'August',
-        //   'September': 'September',
-        //   'October': 'October',
-        //   'November': 'November',
-        //   'December': 'December',
-        //   'Are you sure you want to delete your text?':
-        //       'Are you sure you want to delete your text?',
-        // },
       };
 }

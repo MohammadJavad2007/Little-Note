@@ -109,7 +109,7 @@ class _NotesState extends State<Notes> {
     }
   }
 
-  final visit = "http://localhost/visit/visit-post.php";
+  final visit = "https://fireflutter.ir/API/visit/visit-post.php";
   // ignore: non_constant_identifier_names
   Visit() async {
     Hive.box('Hash').add(Hash(hash: "0fc302b63c7fa1d0bd1f343002c5eff9"));
@@ -125,12 +125,16 @@ class _NotesState extends State<Notes> {
           <String, dynamic>{'visit': hashcode},
         ),
       );
+    // ignore: empty_catches
     } on TimeoutException {
+    // ignore: empty_catches
     } on SocketException {
+    // ignore: empty_catches
     } on Error {}
   }
 
-  final install = "http://localhost/install/install-post.php";
+  final install = "https://fireflutter.ir/API/install/install-post.php";
+  // ignore: non_constant_identifier_names
   Installer() async {
     if (Hive.box('Install').length == 0) {
       Hive.box('Install').add(Install(install: false));
@@ -148,8 +152,11 @@ class _NotesState extends State<Notes> {
             <String, dynamic>{'install': hashcode},
           ),
         );
+      // ignore: empty_catches
       } on TimeoutException {
+      // ignore: empty_catches
       } on SocketException {
+      // ignore: empty_catches
       } on Error {}
     }
     Hive.box('Install').putAt(0, Install(install: true));
@@ -165,7 +172,6 @@ class _NotesState extends State<Notes> {
 
   @override
   void initState() {
-    // TODO: implement initState
     Darkmode();
     // ignore: unused_local_variable
     Visit();
@@ -180,7 +186,7 @@ class _NotesState extends State<Notes> {
       builder: (_, ThemeMode currentMode, __) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
-          localizationsDelegates: [
+          localizationsDelegates: const [
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
@@ -190,13 +196,13 @@ class _NotesState extends State<Notes> {
               ? Get.deviceLocale
               : Locale(Hive.box('Lang').getAt(0).lang,
                   Hive.box('Lang').getAt(0).country),
-          fallbackLocale: Locale('en', 'US'),
+          fallbackLocale: const Locale('en', 'US'),
           // supportedLocales: [Locale('fa', 'IR'), Locale('en', 'US')],
           title: 'Notes',
           theme: ThemeData(
             primarySwatch: themeColor,
             bottomAppBarTheme: BottomAppBarTheme(color: themeColor),
-            scaffoldBackgroundColor: Color.fromARGB(255, 236, 236, 236),
+            scaffoldBackgroundColor: const Color.fromARGB(255, 236, 236, 236),
           ),
           darkTheme: ThemeData.dark().copyWith(
             colorScheme: ColorScheme.dark(primary: color_dark),

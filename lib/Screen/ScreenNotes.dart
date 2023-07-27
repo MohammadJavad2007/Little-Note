@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -20,11 +22,6 @@ _deleteInfo(int index) {
 
 class ScreenNotes extends StatefulWidget {
   ScreenNotes({super.key});
-  // SharedPreferences prefs() async {
-  //   return await SharedPreferences.getInstance();
-  // }
-
-  // bool? darkmode = LocalStorage('darkmode.json').getItem('themedata');
   final List<String> list = List.generate(10, (index) => "Note $index");
   @override
   State<ScreenNotes> createState() => _ScreenNotesState();
@@ -33,33 +30,25 @@ class ScreenNotes extends StatefulWidget {
 class _ScreenNotesState extends State<ScreenNotes> {
   toggle() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    // await prefs.setBool('repeat', true);
-    // bool? toggleStorage = await widget.prefs.s('repeat', true);
     if (prefs.getBool('repeat') == false) {
       Notes.themeNotifier.value = ThemeMode.light;
-      // print(toggleStorage);
       await prefs.setBool('repeat', true);
-      // widget.darkmode = true;
       if (Platform.isAndroid) {
         SystemChrome.setSystemUIOverlayStyle(
           SystemUiOverlayStyle(
             systemNavigationBarColor: color,
             systemNavigationBarIconBrightness: Brightness.light,
-            // systemNavigationBarDividerColor: null
           ),
         );
       }
     } else {
       Notes.themeNotifier.value = ThemeMode.dark;
-      // widget.darkmode = false;
       await prefs.setBool('repeat', false);
-      // print(toggleStorage);
       if (Platform.isAndroid) {
         SystemChrome.setSystemUIOverlayStyle(
           SystemUiOverlayStyle(
             systemNavigationBarColor: color_dark,
             systemNavigationBarIconBrightness: Brightness.dark,
-            // systemNavigationBarDividerColor: null
           ),
         );
       }
@@ -81,13 +70,12 @@ class _ScreenNotesState extends State<ScreenNotes> {
         overlays: [SystemUiOverlay.top]);
   }
 
-  // int sized = 100;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         systemOverlayStyle: const SystemUiOverlayStyle(
-          statusBarColor: Color.fromARGB(0, 0, 0, 0), // <-- SEE HERE
+          statusBarColor: Color.fromARGB(0, 0, 0, 0),
         ),
         title: Text('Notes'.tr),
         actions: [
@@ -105,46 +93,32 @@ class _ScreenNotesState extends State<ScreenNotes> {
               icon: const Icon(Icons.translate),
               tooltip: '',
               itemBuilder: (context) => [
-                // PopupMenuItem 1
                 const PopupMenuItem(
                   value: 1,
-                  // row with 2 children
                   child: Row(
                     children: [Text("فارسی")],
                   ),
                 ),
-                // const PopupMenuItem(
-                //   value: 6,
-                //   // row with 2 children
-                //   child: Row(
-                //     children: [Text("عربی")],
-                //   ),
-                // ),
-                // PopupMenuItem 2
                 const PopupMenuItem(
                   value: 2,
-                  // row with two children
                   child: Row(
                     children: [Text("English")],
                   ),
                 ),
                 const PopupMenuItem(
                   value: 5,
-                  // row with two children
                   child: Row(
                     children: [Text("Español")],
                   ),
                 ),
                 const PopupMenuItem(
                   value: 3,
-                  // row with two children
                   child: Row(
                     children: [Text("한국인")],
                   ),
                 ),
                 const PopupMenuItem(
                   value: 4,
-                  // row with two children
                   child: Row(
                     children: [Text("普通话")],
                   ),
@@ -172,10 +146,6 @@ class _ScreenNotesState extends State<ScreenNotes> {
                     Get.updateLocale(const Locale('es'));
                     Hive.box('Lang').putAt(0, Lang(lang: 'es', country: 'ES'));
                     break;
-                  // case 6:
-                  //   Get.updateLocale(const Locale('ar'));
-                  //   Hive.box('Lang').putAt(0, Lang(lang: 'ar', country: 'IQ'));
-                  //   break;
                 }
               },
             ),
@@ -211,8 +181,8 @@ class _ScreenNotesState extends State<ScreenNotes> {
                     child: Center(
                       child: ElevatedButton(
                         onPressed: () {
-                          Get.to(() => ScreenAddNotes(),
-                              duration: Duration(milliseconds: 250),
+                          Get.to(() => const ScreenAddNotes(),
+                              duration: const Duration(milliseconds: 250),
                               transition: Transition.rightToLeftWithFade);
                         },
                         child: Text(
@@ -230,50 +200,37 @@ class _ScreenNotesState extends State<ScreenNotes> {
               );
             } else {
               return ListView.builder(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 itemCount: box.length,
                 itemBuilder: (context, index) {
                   var currentBox = box;
                   var personData = currentBox.getAt(index)!;
-                  // ignore: unused_local_variable
                   int month = 1;
                   switch (personData.dateTime.toString().split(' ')[0]) {
                     case 'January':
                       month = 1;
-                    // return 'January';
                     case 'February':
                       month = 2;
-                    // return 'February';
                     case 'March':
                       month = 3;
-                    // return 'March';
                     case 'April':
                       month = 4;
-                    // return 'April';
                     case 'May':
                       month = 5;
-                    // return 'May';
                     case 'June':
                       month = 6;
-                    // return 'June';
                     case 'July':
                       month = 7;
-                    // return 'July';
                     case 'August':
                       month = 8;
-                    // return 'August';
                     case 'September':
                       month = 9;
-                    // return 'September';
                     case 'October':
                       month = 10;
-                    // return 'October';
                     case 'November':
                       month = 11;
-                    // return 'November';
                     case 'December':
                       month = 12;
-                    // return 'December';
                   }
                   final year = 'Notes'.tr == 'یادداشت ها'
                       ? DateTime(
@@ -298,6 +255,7 @@ class _ScreenNotesState extends State<ScreenNotes> {
                           int.parse(
                               personData.dateTime.toString().split(' ')[5]),
                         ).year;
+                  // ignore: no_leading_underscores_for_local_identifiers
                   final _month = 'Notes'.tr == 'یادداشت ها'
                       ? DateTime(
                           int.parse(
@@ -321,44 +279,6 @@ class _ScreenNotesState extends State<ScreenNotes> {
                           int.parse(
                               personData.dateTime.toString().split(' ')[5]),
                         ).month;
-                  // switch (_month) {
-                  //   case :
-                  //     month = 'January';
-                  //   // return 'January';
-                  //   case :
-                  //     month = 'February';
-                  //   // return 'February';
-                  //   case :
-                  //     month = 'March';
-                  //   // return 'March';
-                  //   case :
-                  //     month = 'April';
-                  //   // return 'April';
-                  //   case :
-                  //     month = 'May';
-                  //   // return 'May';
-                  //   case :
-                  //     month = 'June';
-                  //   // return 'June';
-                  //   case :
-                  //     month = 'July';
-                  //   // return 'July';
-                  //   case :
-                  //     month = 'August';
-                  //   // return 'August';
-                  //   case :
-                  //     month = 'September';
-                  //   // return 'September';
-                  //   case :
-                  //     month = 'October';
-                  //   // return 'October';
-                  //   case :
-                  //     month = 'November';
-                  //   // return 'November';
-                  //   case :
-                  //     month = 'December';
-                  //   // return 'December';
-                  // }
                   final day = 'Notes'.tr == 'یادداشت ها'
                       ? DateTime(
                           int.parse(
@@ -432,10 +352,10 @@ class _ScreenNotesState extends State<ScreenNotes> {
                     padding:
                         const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                     child: AnimatedContainer(
-                      duration: Duration(seconds: 1),
+                      duration: const Duration(seconds: 1),
                       curve: Curves.bounceIn,
                       decoration: BoxDecoration(
-                        color: Color.fromARGB(36, 146, 146, 146),
+                        color: const Color.fromARGB(36, 146, 146, 146),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: InkWell(
@@ -468,55 +388,57 @@ class _ScreenNotesState extends State<ScreenNotes> {
                                     context: context,
                                     builder: (BuildContext context) {
                                       return AlertDialog(
-                                          // ignore: unused_label
-                                          title: Text(
-                                            'Do you really want to delete the note?'
-                                                .tr,
-                                            style: TextStyle(fontSize: 15),
+                                        // ignore: unused_label
+                                        title: Text(
+                                          'Do you really want to delete the note?'
+                                              .tr,
+                                          style: const TextStyle(fontSize: 15),
+                                        ),
+                                        // ignore: unused_label
+                                        actions: <Widget>[
+                                          TextButton(
+                                            child: Text("Cancle".tr),
+                                            onPressed: () {
+                                              Get.back();
+                                            },
                                           ),
-                                          // content: Center(),
-                                          // ignore: unused_label
-                                          actions: <Widget>[
-                                            TextButton(
-                                              child: Text("Cancle".tr),
-                                              onPressed: () {
-                                                Get.back();
-                                              },
+                                          TextButton(
+                                            style: TextButton.styleFrom(
+                                              foregroundColor: Colors.red,
                                             ),
-                                            TextButton(
-                                              style: TextButton.styleFrom(
-                                                foregroundColor: Colors.red,
-                                              ),
-                                              onPressed: () {
-                                                _deleteInfo(index);
-                                                Get.back();
-                                              },
-                                              child: Text('Delete'.tr),
-                                            ),
-                                          ]);
+                                            onPressed: () {
+                                              _deleteInfo(index);
+                                              Get.back();
+                                            },
+                                            child: Text('Delete'.tr),
+                                          ),
+                                        ],
+                                      );
                                     },
                                   );
                                 },
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.delete,
                                   color: Colors.red,
                                 ),
                               ),
                             ),
-                            Divider(),
+                            const Divider(),
                             Container(
                               alignment: Alignment.topRight,
-                              padding: EdgeInsets.only(bottom: 15),
+                              padding: const EdgeInsets.only(bottom: 15),
                               child: Padding(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 15),
                                 child: Text(
                                   'Notes'.tr == 'یادداشت ها'
+                                      // ignore: prefer_interpolation_to_compose_strings, unnecessary_brace_in_string_interps
                                       ? '${hour > 9 ? hour : '0' + hour.toString()}:${minute > 9 ? minute : '0' + minute.toString()}  ,${year}  ,${day > 9 ? day : '0' + day.toString()}  ,${_month.toString().tr}'
                                           .toPersianDigit()
+                                      // ignore: prefer_interpolation_to_compose_strings, unnecessary_brace_in_string_interps
                                       : '${_month.toString().tr},  ${day > 9 ? day : '0' + day.toString()},  ${year},  ${hour > 9 ? hour : '0' + hour.toString()}:${minute > 9 ? minute : '0' + minute.toString()}',
                                   key: UniqueKey(),
-                                  style: TextStyle(fontSize: 15),
+                                  style: const TextStyle(fontSize: 15),
                                 ),
                               ),
                             ),
@@ -537,7 +459,6 @@ class _ScreenNotesState extends State<ScreenNotes> {
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
         notchMargin: 8,
-        // color: Theme.of(context).colorScheme.primary,
         child: Container(
           height: 50,
         ),
@@ -545,8 +466,8 @@ class _ScreenNotesState extends State<ScreenNotes> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Get.to(() => ScreenAddNotes(),
-              duration: Duration(milliseconds: 250),
+          Get.to(() => const ScreenAddNotes(),
+              duration: const Duration(milliseconds: 250),
               transition: Transition.rightToLeftWithFade);
         },
         child: Icon(
@@ -559,72 +480,3 @@ class _ScreenNotesState extends State<ScreenNotes> {
     );
   }
 }
-
-// class Search extends SearchDelegate {
-//   @override
-//   List<Widget> buildActions(BuildContext context) {
-//     return <Widget>[
-//       IconButton(
-//         icon: Icon(Icons.close),
-//         onPressed: () {
-//           query = "";
-//         },
-//       ),
-//     ];
-//   }
-
-//   @override
-//   Widget buildLeading(BuildContext context) {
-//     return IconButton(
-//       icon: Icon(Icons.arrow_back),
-//       onPressed: () {
-//         // Navigator.pop(context);
-//         Get.back();
-//       },
-//     );
-//   }
-
-//   String selectedResult = "";
-
-//   @override
-//   Widget buildResults(BuildContext context) {
-//     // ignore: avoid_unnecessary_containers
-//     return Container(
-//       child: Center(
-//         child: Text(selectedResult),
-//       ),
-//     );
-//   }
-
-//   final List<String> listExample;
-//   Search(this.listExample);
-
-//   List<String> recentList = ["Note 3", "Note 2"];
-
-//   @override
-//   Widget buildSuggestions(BuildContext context) {
-//     List<String> suggestionList = [];
-//     query.isEmpty
-//         ? suggestionList = recentList //In the true case
-//         : suggestionList.addAll(listExample.where(
-//             // In the false case
-//             (element) => element.contains(query),
-//           ));
-
-//     return ListView.builder(
-//       itemCount: suggestionList.length,
-//       itemBuilder: (context, index) {
-//         return ListTile(
-//           title: Text(
-//             suggestionList[index],
-//           ),
-//           leading: query.isEmpty ? const Icon(Icons.access_time) : SizedBox(),
-//           onTap: () {
-//             selectedResult = suggestionList[index];
-//             showResults(context);
-//           },
-//         );
-//       },
-//     );
-//   }
-// }

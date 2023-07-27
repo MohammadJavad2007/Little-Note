@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -7,7 +9,10 @@ import 'package:notes/models/person.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 
 class ScreenAddNotes extends StatefulWidget {
+  const ScreenAddNotes({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _ScreenAddNotesState createState() => _ScreenAddNotesState();
 }
 
@@ -19,50 +24,37 @@ class _ScreenAddNotesState extends State<ScreenAddNotes> {
 
   late final Box box;
 
-  // data time
   var time = Jalali.now().toGregorian();
   String month() {
     switch (time.month) {
       case 1:
         return 'January';
-      // return 'January';
       case 2:
         return 'February';
-      // return 'February';
       case 3:
         return 'March';
-      // return 'March';
       case 4:
         return 'April';
-      // return 'April';
       case 5:
         return 'May';
-      // return 'May';
       case 6:
         return 'June';
-      // return 'June';
       case 7:
         return 'July';
-      // return 'July';
       case 8:
         return 'August';
-      // return 'August';
       case 9:
         return 'September';
-      // return 'September';
       case 10:
         return 'October';
-      // return 'October';
       case 11:
         return 'November';
-      // return 'November';
       case 12:
         return 'December';
-      // return 'December';
     }
     return '';
   }
-  
+
   String? _fieldValidator(String? value) {
     if (value == null || value.isEmpty) {
       return 'Field can\'t be empty'.tr;
@@ -87,12 +79,10 @@ class _ScreenAddNotesState extends State<ScreenAddNotes> {
   @override
   void initState() {
     super.initState();
-    // Get reference to an already opened box
     box = Hive.box('NoteBox');
-    // date.text;
   }
 
-  Icon copy = Icon(Icons.copy);
+  Icon copy = const Icon(Icons.copy);
 
   @override
   Widget build(BuildContext context) {
@@ -108,9 +98,8 @@ class _ScreenAddNotesState extends State<ScreenAddNotes> {
                       text:
                           '${_nameController.text}\n${_countryController.text}'));
                   setState(() {
-                    copy = Icon(Icons.task);
+                    copy = const Icon(Icons.task);
                   });
-                  // copied successfully
                 },
                 icon: copy),
           )
@@ -128,7 +117,7 @@ class _ScreenAddNotesState extends State<ScreenAddNotes> {
                     // ignore: unused_label
                     title: Text(
                       'Save your changes or discard them?'.tr,
-                      style: TextStyle(fontSize: 15),
+                      style: const TextStyle(fontSize: 15),
                     ),
                     // ignore: unused_label
                     actions: <Widget>[
@@ -163,7 +152,7 @@ class _ScreenAddNotesState extends State<ScreenAddNotes> {
                                     child: Text('Discard'.tr),
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 8,
                                 ),
                                 SizedBox(
@@ -194,7 +183,7 @@ class _ScreenAddNotesState extends State<ScreenAddNotes> {
               );
             }
           },
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
         ),
       ),
       body: Padding(
@@ -202,7 +191,7 @@ class _ScreenAddNotesState extends State<ScreenAddNotes> {
         child: Form(
           key: _personFormKey,
           child: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -213,7 +202,7 @@ class _ScreenAddNotesState extends State<ScreenAddNotes> {
                   autofocus: true,
                   validator: _fieldValidator,
                 ),
-                SizedBox(height: 24.0),
+                const SizedBox(height: 24.0),
                 Text('Description'.tr),
                 TextFormField(
                   keyboardType: TextInputType.multiline,
@@ -228,7 +217,7 @@ class _ScreenAddNotesState extends State<ScreenAddNotes> {
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.fromLTRB(17.0, 0.0, 17.0, 20.0),
-        child: Container(
+        child: SizedBox(
           width: double.maxFinite,
           height: 50,
           child: ElevatedButton(
