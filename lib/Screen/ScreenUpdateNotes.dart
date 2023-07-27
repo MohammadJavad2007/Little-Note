@@ -166,6 +166,21 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
             int.parse(_dateController.text.toString().split(' ')[3]),
             int.parse(_dateController.text.toString().split(' ')[5]),
           ).year;
+    final _month = 'Notes'.tr == 'یادداشت ها'
+        ? DateTime(
+            int.parse(_dateController.text.toString().split(' ')[2]),
+            month,
+            int.parse(_dateController.text.toString().split(' ')[1]),
+            int.parse(_dateController.text.toString().split(' ')[3]),
+            int.parse(_dateController.text.toString().split(' ')[5]),
+          ).toJalali().month
+        : DateTime(
+            int.parse(_dateController.text.toString().split(' ')[2]),
+            month,
+            int.parse(_dateController.text.toString().split(' ')[1]),
+            int.parse(_dateController.text.toString().split(' ')[3]),
+            int.parse(_dateController.text.toString().split(' ')[5]),
+          ).month;
     final day = 'Notes'.tr == 'یادداشت ها'
         ? DateTime(
             int.parse(_dateController.text.toString().split(' ')[2]),
@@ -382,8 +397,9 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
                   alignment: Alignment.centerRight,
                   child: Text(
                     'Notes'.tr == 'یادداشت ها'
-                        ? '${hour > 9 ? hour : '0' + hour.toString()}:${minute > 9 ? minute : '0' + minute.toString()}  ,${year}  ,${day > 9 ? day : '0' + day.toString()}  ,${_dateController.text.toString().split(' ')[0].tr}'.toPersianDigit()
-                        : '${_dateController.text.toString().split(' ')[0].tr},  ${day > 9 ? day : '0' + day.toString()},  ${year},  ${hour > 9 ? hour : '0' + hour.toString()}:${minute > 9 ? minute : '0' + minute.toString()}',
+                        ? '${hour > 9 ? hour : '0' + hour.toString()}:${minute > 9 ? minute : '0' + minute.toString()}  ,${year}  ,${day > 9 ? day : '0' + day.toString()}  ,${_month.toString().tr}'
+                            .toPersianDigit()
+                        : '${_month.toString().tr},  ${day > 9 ? day : '0' + day.toString()},  ${year},  ${hour > 9 ? hour : '0' + hour.toString()}:${minute > 9 ? minute : '0' + minute.toString()}',
                     key: UniqueKey(),
                     style: TextStyle(fontSize: 15),
                   ),
@@ -414,9 +430,10 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
             },
             child: Text(
               'Save'.tr,
-              style: TextStyle(color: Notes.themeNotifier.value == ThemeMode.light
-              ? Colors.white
-              : Colors.black),
+              style: TextStyle(
+                  color: Notes.themeNotifier.value == ThemeMode.light
+                      ? Colors.white
+                      : Colors.black),
             ),
           ),
         ),

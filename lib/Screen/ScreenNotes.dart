@@ -1,4 +1,3 @@
-
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -114,12 +113,26 @@ class _ScreenNotesState extends State<ScreenNotes> {
                     children: [Text("فارسی")],
                   ),
                 ),
+                // const PopupMenuItem(
+                //   value: 6,
+                //   // row with 2 children
+                //   child: Row(
+                //     children: [Text("عربی")],
+                //   ),
+                // ),
                 // PopupMenuItem 2
                 const PopupMenuItem(
                   value: 2,
                   // row with two children
                   child: Row(
                     children: [Text("English")],
+                  ),
+                ),
+                const PopupMenuItem(
+                  value: 5,
+                  // row with two children
+                  child: Row(
+                    children: [Text("Español")],
                   ),
                 ),
                 const PopupMenuItem(
@@ -134,13 +147,6 @@ class _ScreenNotesState extends State<ScreenNotes> {
                   // row with two children
                   child: Row(
                     children: [Text("普通话")],
-                  ),
-                ),
-                const PopupMenuItem(
-                  value: 5,
-                  // row with two children
-                  child: Row(
-                    children: [Text("Español")],
                   ),
                 ),
               ],
@@ -166,6 +172,10 @@ class _ScreenNotesState extends State<ScreenNotes> {
                     Get.updateLocale(const Locale('es'));
                     Hive.box('Lang').putAt(0, Lang(lang: 'es', country: 'ES'));
                     break;
+                  // case 6:
+                  //   Get.updateLocale(const Locale('ar'));
+                  //   Hive.box('Lang').putAt(0, Lang(lang: 'ar', country: 'IQ'));
+                  //   break;
                 }
               },
             ),
@@ -288,6 +298,67 @@ class _ScreenNotesState extends State<ScreenNotes> {
                           int.parse(
                               personData.dateTime.toString().split(' ')[5]),
                         ).year;
+                  final _month = 'Notes'.tr == 'یادداشت ها'
+                      ? DateTime(
+                          int.parse(
+                              personData.dateTime.toString().split(' ')[2]),
+                          month,
+                          int.parse(
+                              personData.dateTime.toString().split(' ')[1]),
+                          int.parse(
+                              personData.dateTime.toString().split(' ')[3]),
+                          int.parse(
+                              personData.dateTime.toString().split(' ')[5]),
+                        ).toJalali().month
+                      : DateTime(
+                          int.parse(
+                              personData.dateTime.toString().split(' ')[2]),
+                          month,
+                          int.parse(
+                              personData.dateTime.toString().split(' ')[1]),
+                          int.parse(
+                              personData.dateTime.toString().split(' ')[3]),
+                          int.parse(
+                              personData.dateTime.toString().split(' ')[5]),
+                        ).month;
+                  // switch (_month) {
+                  //   case :
+                  //     month = 'January';
+                  //   // return 'January';
+                  //   case :
+                  //     month = 'February';
+                  //   // return 'February';
+                  //   case :
+                  //     month = 'March';
+                  //   // return 'March';
+                  //   case :
+                  //     month = 'April';
+                  //   // return 'April';
+                  //   case :
+                  //     month = 'May';
+                  //   // return 'May';
+                  //   case :
+                  //     month = 'June';
+                  //   // return 'June';
+                  //   case :
+                  //     month = 'July';
+                  //   // return 'July';
+                  //   case :
+                  //     month = 'August';
+                  //   // return 'August';
+                  //   case :
+                  //     month = 'September';
+                  //   // return 'September';
+                  //   case :
+                  //     month = 'October';
+                  //   // return 'October';
+                  //   case :
+                  //     month = 'November';
+                  //   // return 'November';
+                  //   case :
+                  //     month = 'December';
+                  //   // return 'December';
+                  // }
                   final day = 'Notes'.tr == 'یادداشت ها'
                       ? DateTime(
                           int.parse(
@@ -441,9 +512,9 @@ class _ScreenNotesState extends State<ScreenNotes> {
                                     const EdgeInsets.symmetric(horizontal: 15),
                                 child: Text(
                                   'Notes'.tr == 'یادداشت ها'
-                                      ? '${hour > 9 ? hour : '0' + hour.toString()}:${minute > 9 ? minute : '0' + minute.toString()}  ,${year}  ,${day > 9 ? day : '0' + day.toString()}  ,${personData.dateTime.toString().split(' ')[0].tr}'
+                                      ? '${hour > 9 ? hour : '0' + hour.toString()}:${minute > 9 ? minute : '0' + minute.toString()}  ,${year}  ,${day > 9 ? day : '0' + day.toString()}  ,${_month.toString().tr}'
                                           .toPersianDigit()
-                                      : '${personData.dateTime.toString().split(' ')[0].tr},  ${day > 9 ? day : '0' + day.toString()},  ${year},  ${hour > 9 ? hour : '0' + hour.toString()}:${minute > 9 ? minute : '0' + minute.toString()}',
+                                      : '${_month.toString().tr},  ${day > 9 ? day : '0' + day.toString()},  ${year},  ${hour > 9 ? hour : '0' + hour.toString()}:${minute > 9 ? minute : '0' + minute.toString()}',
                                   key: UniqueKey(),
                                   style: TextStyle(fontSize: 15),
                                 ),
