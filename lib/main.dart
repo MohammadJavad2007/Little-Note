@@ -125,7 +125,6 @@ class _NotesState extends State<Notes> {
           <String, dynamic>{'visit': hashcode},
         ),
       );
-      // final jsonData = response.body;
     } on TimeoutException {
     } on SocketException {
     } on Error {}
