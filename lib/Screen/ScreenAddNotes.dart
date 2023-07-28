@@ -187,7 +187,7 @@ class _ScreenAddNotesState extends State<ScreenAddNotes> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.only(top: 0, left: 13, right: 13, bottom: 13),
         child: Form(
           key: _personFormKey,
           child: SingleChildScrollView(
@@ -195,6 +195,9 @@ class _ScreenAddNotesState extends State<ScreenAddNotes> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const SizedBox(
+                  height: 13,
+                ),
                 Text('Title'.tr),
                 TextFormField(
                   controller: _nameController,

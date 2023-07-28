@@ -75,14 +75,14 @@ class Languages extends Translations {
           'Notes': 'یادداشت ها',
           'Add a note': 'یک یادداشت اضافه کنید',
           'Save your changes or discard them?':
-              'تغییرات خود را ذخیره کنید یا از آنها صرف نظر کنید؟',
+              'تغییرات را ذخیره یا پاک می کنید؟',
           'Cancle': 'لغو',
           'Discard': 'پاک',
           'Save': 'ذخیره',
           'Title': 'عنوان',
           'Description': 'متن',
-          'Field can\'t be empty': 'فیلد نمی تواند خالی باشد',
-          'Update a note': 'یک یادداشت را به روز کنید',
+          'Field can\'t be empty': 'مقدار نمی تواند خالی باشد',
+          'Update a note': 'یادداشت را ویرایش کنید',
           'Note Pad': 'دفترچه یادداشت',
           'English language': 'زبان فارسی',
           'Do you really want to delete the note?':

@@ -35,7 +35,7 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
   // ignore: prefer_typing_uninitialized_variables
   late final _countryController;
   late final Box box;
-  
+
   var time = Jalali.now().toGregorian();
   String month() {
     switch (time.month) {
@@ -347,7 +347,7 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.only(top: 0, left: 13, right: 13, bottom: 13),
         child: Form(
           key: _personFormKey,
           child: SingleChildScrollView(
@@ -355,6 +355,9 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const SizedBox(
+                  height: 13,
+                ),
                 Text('Title'.tr),
                 TextFormField(
                   controller: _nameController,
@@ -369,7 +372,7 @@ class _ScreenUpdateNotesState extends State<ScreenUpdateNotes> {
                   controller: _countryController,
                   validator: _fieldValidator,
                 ),
-                const SizedBox(height: 24.0),
+                const SizedBox(height: 14.0),
                 Container(
                   alignment: Alignment.centerRight,
                   child: Text(
