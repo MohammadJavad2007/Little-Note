@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
-import 'package:notes/main.dart';
-import 'package:notes/models/person.dart';
+import 'package:little_note/main.dart';
+import 'package:little_note/models/person.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 
 class ScreenAddNotes extends StatefulWidget {

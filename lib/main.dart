@@ -5,12 +5,12 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:notes/Screen/ScreenNotes.dart';
+import 'package:little_note/Screen/ScreenNotes.dart';
 
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:notes/lang/Translations.dart';
-import 'package:notes/models/hash.dart';
-import 'package:notes/models/person.dart';
+import 'package:little_note/lang/Translations.dart';
+import 'package:little_note/models/hash.dart';
+import 'package:little_note/models/person.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:shamsi_date/shamsi_date.dart';

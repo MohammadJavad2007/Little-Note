@@ -5,10 +5,10 @@
 // 'flutter create' template.
 
 // The application's name. By default this is also the title of the Flutter window.
-PRODUCT_NAME = notes
+PRODUCT_NAME = Little Note;
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.example.notes
+PRODUCT_BUNDLE_IDENTIFIER = ir.fireflutter.little_note;
 
 // The copyright displayed in application information
 PRODUCT_COPYRIGHT = Copyright © 2023 com.example. All rights reserved.
