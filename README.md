@@ -17,6 +17,8 @@
   - Beautiful design and high speed
   - No ads
 
-And at the end, you will see a photo of the output of the mobile application.
+And at the end, you will see a photo of the output of the mobile application. <br />
+
 ![alt text](https://github.com/MohammadJavad2007/Little-Note/blob/main/assets/Screenshot_2023-08-01-21-31-02-173_com.example.notes.jpg)
+![alt text](https://github.com/MohammadJavad2007/Little-Note/blob/main/assets/Screenshot_2023-08-01-21-31-07-143_com.example.notes.jpg)
     
