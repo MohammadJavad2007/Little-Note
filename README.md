@@ -1,3 +1,1 @@
-## notes
-
-Notepad app with Flutter
+## Little Note
