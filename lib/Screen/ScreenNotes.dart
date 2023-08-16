@@ -188,10 +188,10 @@ class _ScreenNotesState extends State<ScreenNotes> {
                         child: Text(
                           'ADD NEW NOTE'.tr,
                           style: TextStyle(
-                              color:
-                                  Notes.themeNotifier.value == ThemeMode.light
-                                      ? Colors.white
-                                      : Colors.black),
+                            color: Notes.themeNotifier.value == ThemeMode.light
+                                ? Colors.white
+                                : Colors.black,
+                          ),
                         ),
                       ),
                     ),
